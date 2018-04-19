@@ -12,7 +12,7 @@ public class Cliente {
 	private String telefono;
 	private String domicilio;
 	private LocalDate fechaAltaServicio;
-	//private Categoria categoria;
+	private Categoria categoria;
 	private Collection<Dispositivo> dispositivos = new HashSet<Dispositivo>();
 	
 	
