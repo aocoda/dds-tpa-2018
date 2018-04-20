@@ -8,7 +8,7 @@ import java.util.Set;
 import org.junit.Test;
 
 public class ClienteTest {
-	//Comentario para ver si se configuro bien la consola
+
 	private Cliente cliente;
 	private Set<Dispositivo> dispositivos = new HashSet<Dispositivo>();
 	
