@@ -1,19 +1,24 @@
 package dominio;
-import org.joda.time.DateTime;
-import org.joda.time.Months;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
 
 
 public class Admin {
-	DateTime fechaAlta; 
-	String nombre;
-	String apellido;
-	Admin(String nombre, String apellido){
-	this.nombre = nombre;
-	this.apellido = apellido;
-	this.fechaAlta = DateTime.now();
+	
+	private LocalDate fechaAltaSistema; 
+	private String nombreCompleto;
+	private String apellido;
+	private String domicilio;
+	
+	public Admin(String nombre, String apellido, String domicilio, LocalDate fecha){
+		this.nombreCompleto = nombre;
+		this.apellido = apellido;
+		this.domicilio = nombre;
+		this.fechaAltaSistema = fecha;
 	}
 	
-	int antiguedad(){
-		return 	Months.monthsBetween(fechaAlta, DateTime.now()).getMonths();
+	public int antiguedad(){
+		return fechaAltaSistema.until(LocalDate.now()).getMonths();
 	}
 }
