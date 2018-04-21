@@ -1,7 +1,5 @@
 package dominio;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashSet;
 
 
 public class Admin {
