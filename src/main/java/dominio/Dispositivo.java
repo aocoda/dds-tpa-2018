@@ -1,15 +1,16 @@
 package dominio;
 
 public class Dispositivo {
-	public String nombreGenerico;
-	public double ConsumoPorMes;
-	public boolean estaEncendido;
 	
-	Dispositivo(String nombre,double consumo,boolean encendido){
-		this.nombreGenerico = nombre;
-		this.ConsumoPorMes = consumo;
-		this.estaEncendido = encendido;
+	private String nombreGenerico;
+	private double consumoPorMes;
+	private boolean estaEncendido;
+	
+	public Dispositivo(String nombreGenerico, double consumoPorMes, boolean estaEncendido) {
 		
+		this.nombreGenerico = nombreGenerico;
+		this.consumoPorMes = consumoPorMes;
+		this.estaEncendido = estaEncendido;
 	}
 
 	public String getNombreGenerico() {
@@ -17,13 +18,10 @@ public class Dispositivo {
 	}
 
 	public double getConsumoPorMes() {
-		return ConsumoPorMes;
+		return consumoPorMes;
 	}
 
-	public boolean isEstaEncendido() {
+	public boolean estaEncendido() {
 		return estaEncendido;
 	}
-
-	
-	
 }
