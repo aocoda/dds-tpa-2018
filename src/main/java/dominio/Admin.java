@@ -1,6 +1,6 @@
 package dominio;
-import java.time.LocalDate;
 
+import java.time.LocalDate;
 
 public class Admin {
 	
@@ -9,7 +9,8 @@ public class Admin {
 	private String apellido;
 	private String domicilio;
 	
-	public Admin(String nombre, String apellido, String domicilio, LocalDate fecha){
+	public Admin(String nombre, String apellido, String domicilio, LocalDate fecha) {
+		
 		this.nombreCompleto = nombre;
 		this.apellido = apellido;
 		this.domicilio = nombre;
@@ -17,6 +18,7 @@ public class Admin {
 	}
 	
 	public int antiguedad(){
+		
 		return fechaAltaSistema.until(LocalDate.now()).getMonths();
 	}
 }
