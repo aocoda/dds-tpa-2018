@@ -10,6 +10,6 @@ public class R9 extends Categoria {
 	
 	public boolean leCorresponde(Cliente unCliente) {
 		
-		return unCliente.consumo() > 1400;
+		return unCliente.consumoMensual() > 1400;
 	}
 }
