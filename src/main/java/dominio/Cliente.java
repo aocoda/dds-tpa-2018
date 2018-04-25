@@ -19,13 +19,14 @@ public class Cliente {
 	
 	
 	public Cliente(String nombre, Documento documento, String telefono, String domicilio,
-			LocalDate fechaAltaServicio, Collection<Dispositivo> dispositivos) {
+			LocalDate fechaAltaServicio, Categoria categoria, Collection<Dispositivo> dispositivos) {
 		
 		this.nombreCompleto = nombre;
 		this.documento = documento;
 		this.telefono = telefono;
 		this.domicilio = domicilio;
 		this.fechaAltaServicio = fechaAltaServicio;
+		this.categoria = categoria;
 		this.dispositivos = dispositivos;
 	}
 

@@ -12,16 +12,17 @@ public class ClienteTest {
 	private Cliente cliente;
 	private Set<Dispositivo> dispositivos = new HashSet<Dispositivo>();
 	
-	public Cliente construirClienteTest(Set<Dispositivo> dispositivos) {
+	public Cliente construirClienteTest(Categoria categoria, Set<Dispositivo> dispositivos) {
 		
-		return new Cliente(null , null, null, null, null, dispositivos);
+		return new Cliente(null , null, null, null, null, categoria, dispositivos);
 	}	
 
 	//ExisteDispositivoEncendido
 	@Test
 	public void cuandoLaListaDeDispositivosEstaVacia_ExisteDispositivoEncendido_DebeDarFalso() {
 		
-		cliente = construirClienteTest(dispositivos);			
+		cliente = construirClienteTest(null, dispositivos);			
+		
 		assertFalse(cliente.existeDispositivoEncendido());
 	}
 	
@@ -29,7 +30,9 @@ public class ClienteTest {
 	public void cuandoLaListaDeDispositivosTieneUnSoloElementoEncendido_ExisteDispositivoEncendido_DebeDarTrue() {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, true));
-		cliente = construirClienteTest(dispositivos);	
+		
+		cliente = construirClienteTest(null, dispositivos);	
+		
 		assertTrue(cliente.existeDispositivoEncendido());
 	}
 	
@@ -38,7 +41,8 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, true));
 		dispositivos.add(new Dispositivo("Televisor", 300, false));
-		cliente = construirClienteTest(dispositivos);		
+		
+		cliente = construirClienteTest(null, dispositivos);		
 		
 		assertTrue(cliente.existeDispositivoEncendido());
 	}
@@ -49,7 +53,8 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, false));
 		dispositivos.add(new Dispositivo("Televisor", 300, false));
-		cliente = construirClienteTest(dispositivos);	
+		
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(0, cliente.cantidadDispositivosEncendidos());
 	}
@@ -59,7 +64,8 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, false));
 		dispositivos.add(new Dispositivo("Televisor", 300, true));
-		cliente = construirClienteTest(dispositivos);	
+		
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(1, cliente.cantidadDispositivosEncendidos());
 	}
@@ -67,7 +73,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoLaListaDeDispositivosEstaVacia_CantidadDeDipositivosEncendidos_DebeDarCero() {
 		
-		cliente = construirClienteTest(dispositivos);	
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(0, cliente.cantidadDispositivosEncendidos());
 	}
@@ -78,7 +84,8 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, true));
 		dispositivos.add(new Dispositivo("Televisor", 300, true));
-		cliente = construirClienteTest(dispositivos);	
+		
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(0, cliente.cantidadDispositivosApagados());
 	}
@@ -88,7 +95,8 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, false));
 		dispositivos.add(new Dispositivo("Televisor", 300, true));
-		cliente = construirClienteTest(dispositivos);	
+		
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(1, cliente.cantidadDispositivosApagados());
 	}
@@ -96,7 +104,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoLaListaDeDispositivosEstaVacia_CantidadDipositivosApagados_DebeDarCero() {
 		
-		cliente = construirClienteTest(dispositivos);	
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(0, cliente.cantidadDispositivosApagados());
 	}
@@ -105,7 +113,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoLaListaDeDispositivosEstaVacia_ConsumoMensual_DebeDarCero() {
 	
-		cliente = construirClienteTest(dispositivos);	
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(0, cliente.consumoMensual(), 0);
 	}
@@ -114,7 +122,8 @@ public class ClienteTest {
 	public void cuandoUnDispositivoQueConsumeCuatrocientos_ConsumoMensual_DebeDarCuatrocientos() {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, true));
-		cliente = construirClienteTest(dispositivos);	
+		
+		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(400, cliente.consumoMensual(), 0);
 	}

@@ -15,7 +15,7 @@ public class CategoriaTest {
 
 	public Cliente construirClienteTest(Set<Dispositivo> dispositivos) {
 		
-		return new Cliente(null , null, null, null, null, dispositivos);
+		return new Cliente(null , null, null, null, null, null, dispositivos);
 	}
 	
 	@Test
@@ -25,7 +25,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertEquals(507.38, new R5().estimadoAPagar(cliente), 0d);
+		assertEquals(507.38, new R5().estimadoAPagar(cliente), 0);
 	}
 
 	@Test
@@ -33,10 +33,9 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertEquals(18.76, new R1().estimadoAPagar(cliente), 0d);
-		
-		
+		assertEquals(18.76, new R1().estimadoAPagar(cliente), 0);
 	}
+	
 	@Test
 	public void unClienteConConsumoMenorA150CorrespondeALaCategoriaR1() {
 		
@@ -55,7 +54,6 @@ public class CategoriaTest {
 		cliente = construirClienteTest(dispositivos);
 		
 		assertTrue(new R2().leCorresponde(cliente));
-		 
 	}
 	
 	@Test
@@ -66,7 +64,6 @@ public class CategoriaTest {
 		cliente = construirClienteTest(dispositivos);
 		
 		assertTrue(new R3().leCorresponde(cliente));
-		 
 	}
 	
 	@Test
@@ -76,8 +73,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R4().leCorresponde(cliente));
-		 
+		assertTrue(new R4().leCorresponde(cliente)); 
 	}
 	
 	@Test
@@ -87,8 +83,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R5().leCorresponde(cliente));
-		 
+		assertTrue(new R5().leCorresponde(cliente)); 
 	}
 	
 	@Test
@@ -98,8 +93,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R6().leCorresponde(cliente));
-		 
+		assertTrue(new R6().leCorresponde(cliente)); 
 	}
 	
 	@Test
@@ -110,7 +104,6 @@ public class CategoriaTest {
 		cliente = construirClienteTest(dispositivos);
 		
 		assertTrue(new R7().leCorresponde(cliente));
-		 
 	}
 	
 	@Test
@@ -121,7 +114,6 @@ public class CategoriaTest {
 		cliente = construirClienteTest(dispositivos);
 		
 		assertTrue(new R8().leCorresponde(cliente));
-		 
 	}
 	
 	@Test
@@ -132,6 +124,5 @@ public class CategoriaTest {
 		cliente = construirClienteTest(dispositivos);
 		
 		assertTrue(new R9().leCorresponde(cliente));
-		 
 	}
 }
