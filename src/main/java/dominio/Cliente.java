@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 
+import repositorios.RepositorioCategorias;
+
 public class Cliente {
 	
 	private String nombreCompleto;
@@ -60,6 +62,15 @@ public class Cliente {
 		return dispositivos
 				.stream()
 				.reduce(0d, (a,d) -> a + d.getConsumoPorMes(), Double::sum);
+	}
+	
+	public void recategorizar() {
 		
+		RepositorioCategorias.getInstancia().getAllInstances().forEach(categoria -> {
+			
+			if(categoria.leCorresponde(this))
+				
+				this.categoria = categoria;
+		});
 	}
 }
