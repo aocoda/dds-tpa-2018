@@ -143,7 +143,7 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, true));
 		
-		Categoria categoriaVieja = new R1();
+		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
 		
 		RepositorioCategorias.getInstancia().agregar(categoriaVieja);
 		
@@ -159,8 +159,8 @@ public class ClienteTest {
 		
 		dispositivos.add(new Dispositivo("Heladera", 400, true));
 		
-		Categoria categoriaVieja = new R1();
-		Categoria categoriaQueLeCorresponde = new R3();
+		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
+		Categoria categoriaQueLeCorresponde = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
 		
 		RepositorioCategorias.getInstancia().agregar(categoriaQueLeCorresponde);
 		

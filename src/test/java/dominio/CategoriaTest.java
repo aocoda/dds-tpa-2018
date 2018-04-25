@@ -12,6 +12,16 @@ public class CategoriaTest {
 	private Cliente cliente;
 	private Set<Dispositivo> dispositivos = new HashSet<Dispositivo>();
 	
+	private Categoria R1 = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
+	private Categoria R2 = new Categoria(SubtipoCategoria.R2, 35.32, 0.644, 150, 325);
+	private Categoria R3 = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
+	private Categoria R4 = new Categoria(SubtipoCategoria.R4, 71.74, 0.738, 400, 450);
+	private Categoria R5 = new Categoria(SubtipoCategoria.R5, 110.38, 0.794, 450, 500);
+	private Categoria R6 = new Categoria(SubtipoCategoria.R6, 220.75, 0.832, 500,600);
+	private Categoria R7 = new Categoria(SubtipoCategoria.R7, 443.59, 0.851, 600, 700);
+	private Categoria R8 = new Categoria(SubtipoCategoria.R8, 545.96, 0.851, 700, 1400);
+	private Categoria R9 = new Categoria(SubtipoCategoria.R9, 887.19, 0.851, 1400, Double.MAX_VALUE);
+	
 
 	public Cliente construirClienteTest(Set<Dispositivo> dispositivos) {
 		
@@ -25,7 +35,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertEquals(507.38, new R5().estimadoAPagar(cliente), 0);
+		assertEquals(507.38, R5.estimadoAPagar(cliente), 0);
 	}
 
 	@Test
@@ -33,7 +43,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertEquals(18.76, new R1().estimadoAPagar(cliente), 0);
+		assertEquals(18.76, R1.estimadoAPagar(cliente), 0);
 	}
 	
 	@Test
@@ -43,7 +53,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R1().leCorresponde(cliente));
+		assertTrue(R1.leCorresponde(cliente));
 	}
 	
 	@Test
@@ -53,7 +63,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R2().leCorresponde(cliente));
+		assertTrue(R2.leCorresponde(cliente));
 	}
 	
 	@Test
@@ -63,7 +73,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R3().leCorresponde(cliente));
+		assertTrue(R3.leCorresponde(cliente));
 	}
 	
 	@Test
@@ -73,7 +83,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R4().leCorresponde(cliente)); 
+		assertTrue(R4.leCorresponde(cliente)); 
 	}
 	
 	@Test
@@ -83,7 +93,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R5().leCorresponde(cliente)); 
+		assertTrue(R5.leCorresponde(cliente)); 
 	}
 	
 	@Test
@@ -93,7 +103,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R6().leCorresponde(cliente)); 
+		assertTrue(R6.leCorresponde(cliente)); 
 	}
 	
 	@Test
@@ -103,7 +113,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R7().leCorresponde(cliente));
+		assertTrue(R7.leCorresponde(cliente));
 	}
 	
 	@Test
@@ -113,7 +123,7 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R8().leCorresponde(cliente));
+		assertTrue(R8.leCorresponde(cliente));
 	}
 	
 	@Test
@@ -123,6 +133,6 @@ public class CategoriaTest {
 		
 		cliente = construirClienteTest(dispositivos);
 		
-		assertTrue(new R9().leCorresponde(cliente));
+		assertTrue(R9.leCorresponde(cliente));
 	}
 }
