@@ -20,5 +20,10 @@ abstract class RepositorioGenerico<E> {
 	public void borrar(E unElemento) {
 		
 		elementos.remove(unElemento);
-	}	
+	}
+	
+	public void eliminarTodos() {
+		
+		elementos.clear();
+	}
 }

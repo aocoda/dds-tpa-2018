@@ -5,12 +5,21 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.After;
 import org.junit.Test;
+
+import repositorios.RepositorioCategorias;
 
 public class ClienteTest {
 
 	private Cliente cliente;
 	private Set<Dispositivo> dispositivos = new HashSet<Dispositivo>();
+	
+	@After
+	public void tearDown() {
+		
+		RepositorioCategorias.getInstancia().eliminarTodos();
+	}
 	
 	public Cliente construirClienteTest(Categoria categoria, Set<Dispositivo> dispositivos) {
 		
@@ -126,5 +135,39 @@ public class ClienteTest {
 		cliente = construirClienteTest(null, dispositivos);	
 		
 		assertEquals(400, cliente.consumoMensual(), 0);
+	}
+	
+	//Recategorizar
+	@Test
+	public void cuandoUnClienteSeIntentaRecategorizarYNoHayNingunaCategoríaQueLeCorrespondaLeQuedaLaCategoriaAnterior() {
+		
+		dispositivos.add(new Dispositivo("Heladera", 400, true));
+		
+		Categoria categoriaVieja = new R1();
+		
+		RepositorioCategorias.getInstancia().agregar(categoriaVieja);
+		
+		cliente = construirClienteTest(categoriaVieja, dispositivos);	
+		
+		cliente.recategorizar();
+		
+		assertEquals(categoriaVieja, cliente.getCategoria());
+	}
+	
+	@Test
+	public void cuandoUnClienteSeIntentaRecategorizarYExisteCategoríaQueLeCorrespondaSeRecategorizaConExito() {
+		
+		dispositivos.add(new Dispositivo("Heladera", 400, true));
+		
+		Categoria categoriaVieja = new R1();
+		Categoria categoriaQueLeCorresponde = new R3();
+		
+		RepositorioCategorias.getInstancia().agregar(categoriaQueLeCorresponde);
+		
+		cliente = construirClienteTest(categoriaVieja, dispositivos);	
+		
+		cliente.recategorizar();
+		
+		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
 	}
 }

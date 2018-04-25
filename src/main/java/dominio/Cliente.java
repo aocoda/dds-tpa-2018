@@ -74,4 +74,9 @@ public class Cliente {
 				this.categoria = categoria;
 		});
 	}
+
+	public Categoria getCategoria() {
+		
+		return categoria;
+	}
 }
