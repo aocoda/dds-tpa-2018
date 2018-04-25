@@ -1,6 +1,6 @@
 package dominio;
 
-abstract class Categoria {
+public abstract class Categoria {
 	
 	protected double cargoFijoMensual;
 	protected double cargoVariable;
