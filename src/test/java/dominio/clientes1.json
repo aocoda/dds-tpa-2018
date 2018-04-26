@@ -1,0 +1,51 @@
+[
+		
+		{
+			"nombreCompleto": "Juan Perez",
+			"documento": {
+				"tipo": "DNI",
+				"numero": 12345678
+			},
+			"categoria": "R1",
+			"dispositivos": [
+
+				{
+					"nombreGenerico": "Heladera",
+					"consumoPorMes": 400
+				}
+
+			]
+		},
+		{
+			"nombre": "pablo Perez",
+			"documento": {
+				"tipo": "LC",
+				"numero": 87654321
+			},
+			"categoria": "R2",
+			"dispositivos": [
+
+				{
+					"nombreGenerico": "Heladera",
+					"consumoPorMes": 400
+				}
+
+			]
+		},
+		{
+			"nombre": "German Gallici",
+			"documento": {
+				"tipo": "DNI",
+				"numero": 38444069
+			},
+			"categoria": "R1",
+			"dispositivos": [
+
+				{
+					"nombreGenerico": "Heladera",
+					"consumoPorMes": 400
+				}
+
+			]
+		}
+]
