@@ -1,8 +1,7 @@
 package dominio;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -17,21 +16,29 @@ public class ImportadorTest {
 	@Test
 	public void test() throws IOException {
 		
-		String categorias = new BuscadorJson().buscarRecurso("C:\\\\users\\german\\desktop\\categorias1.json");
-		String clientes = new BuscadorJson().buscarRecurso("C:\\\\users\\german\\desktop\\clientes1.json");
+		List<String> categorias = new BuscadorJson()
+				.buscarRecurso("C:\\\\users\\ggallici\\desktop\\categorias1.json")
+				.getAsList();
+		
+		List<String> clientes = new BuscadorJson()
+				.buscarRecurso("C:\\\\users\\ggallici\\desktop\\clientes1.json")
+				.getAsList();
+		
 		
 		RepositorioCategorias rcat = RepositorioCategorias.getInstancia();
 		RepositorioClientes rclie = RepositorioClientes.getInstancia();
 		
-		new ParserCategorias().parsear(categorias).forEach(c -> {
+		
+		categorias.forEach(c -> {
 			
-			rcat.agregar(c);
+			rcat.agregar(new ParserCategorias().parsear(c));
 		});
 		
-		new ParserClientes().parsear(clientes).forEach(c -> {
+		clientes.forEach(c -> {
 			
-			rclie.agregar(c);
+			rclie.agregar(new ParserClientes().parsear(c));
 		});
+		
 		
 		System.out.println(rcat.getAllInstances().size());
 		System.out.println(rclie.getAllInstances().size());
@@ -40,8 +47,6 @@ public class ImportadorTest {
 		rclie.getAllInstances().forEach(c -> {
 			
 			System.out.println(c.getCategoria());
-		});
-						
+		});				
 	}
-
 }
