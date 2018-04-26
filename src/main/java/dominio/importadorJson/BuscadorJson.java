@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class BuscadorJson implements BuscadorRecursos {
 
@@ -33,6 +38,9 @@ public class BuscadorJson implements BuscadorRecursos {
 	@Override
 	public List<String> getAsList() {
 		
-		return null;
+		return StreamSupport
+				.stream(new JsonParser().parse(recurso).getAsJsonArray().spliterator(), false)
+				.map(JsonElement::toString)
+				.collect(Collectors.toList());
 	}
 }
