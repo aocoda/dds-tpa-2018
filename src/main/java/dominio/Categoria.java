@@ -27,4 +27,9 @@ public class Categoria {
 	
 		return unCliente.consumoMensual() > consumoDesde && unCliente.consumoMensual() <= consumoHasta;
 	}
+	
+	public SubtipoCategoria getSubtipoCategoria() {
+		
+		return subtipoCategoria;
+	}
 }
