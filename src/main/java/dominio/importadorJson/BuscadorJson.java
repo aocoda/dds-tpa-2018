@@ -9,6 +9,9 @@ import java.util.stream.StreamSupport;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+
+import dominio.excepciones.RecursoInvalidoException;
 
 public class BuscadorJson implements BuscadorRecursos {
 
@@ -25,7 +28,7 @@ public class BuscadorJson implements BuscadorRecursos {
 		} 
 		catch (IOException e) {
 			
-			throw new RuntimeException();
+			throw new RecursoInvalidoException("Path invalido o archivo corrupto", e);
 		}
 	}
 
@@ -37,10 +40,17 @@ public class BuscadorJson implements BuscadorRecursos {
 
 	@Override
 	public List<String> getAsList() {
-		
-		return StreamSupport
-				.stream(new JsonParser().parse(recurso).getAsJsonArray().spliterator(), false)
-				.map(JsonElement::toString)
-				.collect(Collectors.toList());
+
+		try {
+			
+			return StreamSupport
+					.stream(new JsonParser().parse(recurso).getAsJsonArray().spliterator(), false)
+					.map(JsonElement::toString)
+					.collect(Collectors.toList());
+		} 
+		catch (JsonSyntaxException e) {
+
+			throw new RecursoInvalidoException("El recurso json no es del tipo lista", e);
+		}
 	}
 }
