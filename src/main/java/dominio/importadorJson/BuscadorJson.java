@@ -48,7 +48,7 @@ public class BuscadorJson implements BuscadorRecursos {
 					.map(JsonElement::toString)
 					.collect(Collectors.toList());
 		} 
-		catch (JsonSyntaxException e) {
+		catch (JsonSyntaxException | IllegalStateException e) {
 
 			throw new RecursoInvalidoException("El recurso json no es del tipo lista", e);
 		}
