@@ -25,7 +25,7 @@ public class CategoriaTest {
 
 	public Cliente construirClienteTest(Set<Dispositivo> dispositivos) {
 		
-		return new Cliente(null , null, null, null, null, null, dispositivos);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivos);
 	}
 	
 	@Test

@@ -5,13 +5,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import repositorios.RepositorioCategorias;
-
 public class Cliente {
 	
 	private String nombreCompleto;
 	private String apellido;
-	private Documento documento;
+	private TipoDocumento tipoDocumento;
+	private int numeroDocumento;
 	private String telefono;
 	private String domicilio;
 	private LocalDate fechaAltaServicio;
@@ -19,11 +18,12 @@ public class Cliente {
 	private Collection<Dispositivo> dispositivos = new HashSet<Dispositivo>();
 	
 	
-	public Cliente(String nombre, Documento documento, String telefono, String domicilio,
-			LocalDate fechaAltaServicio, Categoria categoria, Collection<Dispositivo> dispositivos) {
-		
-		this.nombreCompleto = nombre;
-		this.documento = documento;
+	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
+			String domicilio, LocalDate fechaAltaServicio, Categoria categoria, Collection<Dispositivo> dispositivos) {
+
+		this.nombreCompleto = nombreCompleto;
+		this.tipoDocumento = tipoDocumento;
+		this.numeroDocumento = numeroDocumento;
 		this.telefono = telefono;
 		this.domicilio = domicilio;
 		this.fechaAltaServicio = fechaAltaServicio;
