@@ -13,18 +13,13 @@ import com.google.gson.JsonSyntaxException;
 
 import dominio.excepciones.RecursoInvalidoException;
 
-public class BuscadorJson implements BuscadorRecursos {
+public class BuscadorJson {
 
-	private String recurso;
-
-	@Override
-	public BuscadorRecursos buscarRecurso(String url) {
+	public List<String> buscarRecurso(String url) {
 		
 		try {
 			
-			recurso = new String(Files.readAllBytes(Paths.get(url)));
-			
-			return this;
+			return getAsList(new String(Files.readAllBytes(Paths.get(url))));
 		} 
 		catch (IOException e) {
 			
@@ -32,14 +27,10 @@ public class BuscadorJson implements BuscadorRecursos {
 		}
 	}
 
-	@Override
-	public String getAsString() {
-		
-		return recurso;
-	}
-
-	@Override
-	public List<String> getAsList() {
+	/*
+	 * Método solo para test
+	 */
+	public List<String> getAsList(String recurso) {
 
 		try {
 			
