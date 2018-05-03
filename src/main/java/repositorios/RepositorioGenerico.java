@@ -21,9 +21,4 @@ abstract class RepositorioGenerico<E> {
 		
 		elementos.remove(unElemento);
 	}
-	
-	public void eliminarTodos() {
-		
-		elementos.clear();
-	}
 }
