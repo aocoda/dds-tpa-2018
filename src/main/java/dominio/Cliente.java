@@ -2,20 +2,18 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 public class Cliente {
 	
 	private String nombreCompleto;
-	private String apellido;
 	private TipoDocumento tipoDocumento;
 	private int numeroDocumento;
 	private String telefono;
 	private String domicilio;
 	private LocalDate fechaAltaServicio;
 	private Categoria categoria;
-	private Collection<Dispositivo> dispositivos = new HashSet<Dispositivo>();
+	private Collection<Dispositivo> dispositivos;
 	
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
