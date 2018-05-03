@@ -4,20 +4,18 @@ import java.time.LocalDate;
 
 public class Admin {
 	
-	private LocalDate fechaAltaSistema; 
 	private String nombreCompleto;
-	private String apellido;
 	private String domicilio;
+	private LocalDate fechaAltaSistema; 
 	
-	public Admin(String nombre, String apellido, String domicilio, LocalDate fecha) {
+	public Admin(String nombreCompleto, String domicilio, LocalDate fechaAltaSistema) {
 		
-		this.nombreCompleto = nombre;
-		this.apellido = apellido;
-		this.domicilio = nombre;
-		this.fechaAltaSistema = fecha;
+		this.nombreCompleto = nombreCompleto;
+		this.domicilio = domicilio;
+		this.fechaAltaSistema = fechaAltaSistema;
 	}
 	
-	public int antiguedad(){
+	public int antiguedad() {
 		
 		return fechaAltaSistema.until(LocalDate.now()).getMonths();
 	}
