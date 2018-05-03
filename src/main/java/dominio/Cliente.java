@@ -3,6 +3,7 @@ package dominio;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import repositorios.RepositorioCategorias;
 
@@ -62,17 +63,17 @@ public class Cliente {
 		
 		return dispositivos
 				.stream()
-				.reduce(0d, (a,d) -> a + d.getConsumoPorMes(), Double::sum);
+				.mapToDouble(dispositivo -> dispositivo.getConsumoPorMes())
+				.sum();
 	}
 	
-	public void recategorizar() {
+	public void recategorizar(Set<Categoria> categorias) {
 		
-		RepositorioCategorias.getInstancia().getAllInstances().forEach(categoria -> {
-			
-			if(categoria.leCorresponde(this))
-				
-				this.categoria = categoria;
-		});
+		categorias
+		.stream()
+		.filter(categoria -> categoria.leCorresponde(this))
+		.findFirst()
+		.ifPresent(categoria -> this.categoria = categoria);
 	}
 
 	public Categoria getCategoria() {

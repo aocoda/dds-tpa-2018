@@ -4,22 +4,16 @@ import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.junit.After;
 import org.junit.Test;
-
-import repositorios.RepositorioCategorias;
 
 public class ClienteTest {
 
 	private Cliente cliente;
 	private Set<Dispositivo> dispositivos = new HashSet<Dispositivo>();
 	
-	@After
-	public void tearDown() {
-		
-		RepositorioCategorias.getInstancia().eliminarTodos();
-	}
 	
 	public Cliente construirClienteTest(Categoria categoria, Set<Dispositivo> dispositivos) {
 		
@@ -145,11 +139,12 @@ public class ClienteTest {
 		
 		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
 		
-		RepositorioCategorias.getInstancia().agregar(categoriaVieja);
+		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
 		
 		cliente = construirClienteTest(categoriaVieja, dispositivos);	
 		
-		cliente.recategorizar();
+		
+		cliente.recategorizar(categorias);
 		
 		assertEquals(categoriaVieja, cliente.getCategoria());
 	}
@@ -162,11 +157,12 @@ public class ClienteTest {
 		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
 		Categoria categoriaQueLeCorresponde = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
 		
-		RepositorioCategorias.getInstancia().agregar(categoriaQueLeCorresponde);
+		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
 		
 		cliente = construirClienteTest(categoriaVieja, dispositivos);	
 		
-		cliente.recategorizar();
+		
+		cliente.recategorizar(categorias);
 		
 		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
 	}
