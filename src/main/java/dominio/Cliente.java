@@ -2,7 +2,6 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Set;
 
 public class Cliente {
 	
@@ -65,7 +64,7 @@ public class Cliente {
 				.sum();
 	}
 	
-	public void recategorizar(Set<Categoria> categorias) {
+	public void recategorizar(Collection<Categoria> categorias) {
 		
 		categorias
 		.stream()
