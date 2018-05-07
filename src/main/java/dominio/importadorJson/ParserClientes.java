@@ -1,5 +1,7 @@
 package dominio.importadorJson;
 
+import java.time.LocalDate;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -15,7 +17,10 @@ public class ParserClientes  implements Parser<Cliente> {
 		
 		try {
 			
-			Gson gson = new GsonBuilder().registerTypeAdapter(Categoria.class, new DeserializadorCategoria()).create();
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDate.class, new DeserializadorFecha())
+					.registerTypeAdapter(Categoria.class, new DeserializadorCategoria())
+					.create();
 
 			return gson.fromJson(recurso, Cliente.class);
 		}
