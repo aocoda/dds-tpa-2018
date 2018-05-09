@@ -1,23 +1,22 @@
 package dominio.importadorJson;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import dominio.Categoria;
-import dominio.excepciones.ParserException;
 
-public class ParserCategorias implements Parser<Categoria> {
+public class ParserCategorias extends ParserJson<Categoria> {
 	
+	private Gson parser = new Gson();
+
 	@Override
-	public Categoria parsear(String recurso) {
+	protected Gson getGsonParser() {
 		
-		try {
-			
-			return new Gson().fromJson(recurso, Categoria.class);
-		}
-		catch(JsonSyntaxException e) {
-			
-			throw new ParserException("Ocurrio un error durante el parseo: " + e.getMessage(), e.getCause());
-		}
+		return parser;
+	}
+
+	@Override
+	protected Class<Categoria> getParserClass() {
+		
+		return Categoria.class;
 	}
 }

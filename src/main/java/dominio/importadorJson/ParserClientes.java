@@ -4,37 +4,32 @@ import java.time.LocalDate;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 
 import dominio.Categoria;
 import dominio.Cliente;
-import dominio.excepciones.ParserException;
 import repositorios.RepositorioCategorias;
 
-public class ParserClientes  implements Parser<Cliente> {
+public class ParserClientes extends ParserJson<Cliente> {
 
-	private RepositorioCategorias repositorioCategorias;
+	private Gson parser;
 	
 	public ParserClientes(RepositorioCategorias repositorioCategorias) {
 		
-		this.repositorioCategorias = repositorioCategorias;
+		this.parser = new GsonBuilder()
+				.registerTypeAdapter(LocalDate.class, new DeserializadorFecha())
+				.registerTypeAdapter(Categoria.class, new DeserializadorCategoria(repositorioCategorias))
+				.create();
 	}
 
 	@Override
-	public Cliente parsear(String recurso) {
+	protected Gson getGsonParser() {
 		
-		try {
-			
-			Gson gson = new GsonBuilder()
-					.registerTypeAdapter(LocalDate.class, new DeserializadorFecha())
-					.registerTypeAdapter(Categoria.class, new DeserializadorCategoria(repositorioCategorias))
-					.create();
+		return parser;
+	}
 
-			return gson.fromJson(recurso, Cliente.class);
-		}
-		catch (JsonSyntaxException e) {
-
-			throw new ParserException("Ocurrio un error durante el parseo: " + e.getMessage(), e.getCause());
-		}
+	@Override
+	protected Class<Cliente> getParserClass() {
+		
+		return Cliente.class;
 	}
 }

@@ -10,7 +10,7 @@ import java.util.Collections;
 import org.junit.Test;
 
 import dominio.excepciones.ParserException;
-import dominio.importadorJson.Parser;
+import dominio.importadorJson.ParserJson;
 import dominio.importadorJson.ParserCategorias;
 import dominio.importadorJson.ParserClientes;
 import repositorios.RepositorioCategorias;
@@ -19,8 +19,8 @@ public class ParsersJsonTest {
 
 	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();
 	
-	private Parser<Categoria> parserCategorias = new ParserCategorias();
-	private Parser<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
+	private ParserJson<Categoria> parserCategorias = new ParserCategorias();
+	private ParserJson<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
 	
 	
 	
