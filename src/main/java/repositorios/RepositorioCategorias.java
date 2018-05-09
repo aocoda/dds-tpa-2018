@@ -5,18 +5,7 @@ import java.util.Optional;
 import dominio.Categoria;
 import dominio.SubtipoCategoria;
 
-public class RepositorioCategorias extends RepositorioGenerico<Categoria>{
-
-	private static RepositorioCategorias instancia;
-
-	public static RepositorioCategorias getInstancia() 
-	{
-		if(instancia == null) {
-            
-			instancia = new RepositorioCategorias();
-        }
-		return instancia;
-    }
+public class RepositorioCategorias extends RepositorioGenerico<Categoria> {
 	
 	public Optional<Categoria> getPorSubcategoria(String subcategoria) {
 		

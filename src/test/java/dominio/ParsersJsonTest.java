@@ -17,8 +17,12 @@ import repositorios.RepositorioCategorias;
 
 public class ParsersJsonTest {
 
+	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();
+	
 	private Parser<Categoria> parserCategorias = new ParserCategorias();
-	private Parser<Cliente> parserClientes = new ParserClientes();
+	private Parser<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
+	
+	
 	
 	//CATEGORIAS
 	@Test
@@ -124,13 +128,11 @@ public class ParsersJsonTest {
 		
 		Categoria R1 = new Categoria(SubtipoCategoria.R1, 0, 0, 0, 0);
 		
-		RepositorioCategorias.getInstancia().agregar(R1);
+		repositorioCategorias.agregar(R1);
 		
 		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, R1, null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
-		
-		RepositorioCategorias.getInstancia().borrar(R1);
 	}
 	
 	@Test

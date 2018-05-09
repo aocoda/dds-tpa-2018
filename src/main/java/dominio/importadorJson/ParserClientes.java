@@ -9,8 +9,16 @@ import com.google.gson.JsonSyntaxException;
 import dominio.Categoria;
 import dominio.Cliente;
 import dominio.excepciones.ParserException;
+import repositorios.RepositorioCategorias;
 
 public class ParserClientes  implements Parser<Cliente> {
+
+	private RepositorioCategorias repositorioCategorias;
+	
+	public ParserClientes(RepositorioCategorias repositorioCategorias) {
+		
+		this.repositorioCategorias = repositorioCategorias;
+	}
 
 	@Override
 	public Cliente parsear(String recurso) {
@@ -19,7 +27,7 @@ public class ParserClientes  implements Parser<Cliente> {
 			
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LocalDate.class, new DeserializadorFecha())
-					.registerTypeAdapter(Categoria.class, new DeserializadorCategoria())
+					.registerTypeAdapter(Categoria.class, new DeserializadorCategoria(repositorioCategorias))
 					.create();
 
 			return gson.fromJson(recurso, Cliente.class);
