@@ -158,23 +158,23 @@ public class ClienteTest {
 		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
 	}
 	
-	/*	Estos metodos están asociados al consumo	
+	
 	//ConsumoMensual
 	@Test
-	public void cuandoLaListaDeDispositivosEstaVacia_ConsumoMensual_DebeDarCero() {
+	public void cuandoLaListaDeDispositivosEstandarEstaVacia_ConsumoMensual_DebeDarCero() {
 	
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null, dispositivosEstandar, null);
 		
 		assertEquals(0, cliente.consumoMensual(), 0);
 	}
 	
 	@Test
-	public void cuandoUnDispositivoQueConsumeCuatrocientos_ConsumoMensual_DebeDarCuatrocientos() {
+	public void cuandoUnDispositivoEstandarQueConsumeCuatrocientos_ConsumoMensual_DebeDarCuatrocientos() {
 		
-		dispositivos.add(new Dispositivo("Heladera", 400, true));
+		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 400));
 		
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null, dispositivosEstandar, null);
 		
 		assertEquals(400, cliente.consumoMensual(), 0);
-	}*/
+	}
 }
