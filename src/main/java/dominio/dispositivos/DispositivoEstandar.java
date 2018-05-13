@@ -1,16 +1,14 @@
-package dominio;
+package dominio.dispositivos;
 
 public class DispositivoEstandar {
 	
 	private String nombreGenerico;
 	private double consumoPorMes;
-	private boolean estaEncendido;
 	
-	public DispositivoEstandar(String nombreGenerico, double consumoPorMes, boolean estaEncendido) {
+	public DispositivoEstandar(String nombreGenerico, double consumoPorMes) {
 		
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorMes = consumoPorMes;
-		this.estaEncendido = estaEncendido;
 	}
 
 	public String getNombreGenerico() {
@@ -20,8 +18,8 @@ public class DispositivoEstandar {
 	public double getConsumoPorMes() {
 		return consumoPorMes;
 	}
-
+/* no sé si este metodo debe existir y arrojar algún error o si simplemente borrarlo
 	public boolean estaEncendido() {
 		return estaEncendido;
-	}
+	}*/
 }
