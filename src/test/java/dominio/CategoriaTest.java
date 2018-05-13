@@ -7,10 +7,12 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import dominio.dispositivos.DispositivoEstandar;
+
 public class CategoriaTest {
 	
 	private Cliente cliente;
-	private Set<Dispositivo> dispositivos = new HashSet<Dispositivo>();
+	private Set<DispositivoEstandar> dispositivos = new HashSet<DispositivoEstandar>();
 	
 	private Categoria R1 = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
 	private Categoria R2 = new Categoria(SubtipoCategoria.R2, 35.32, 0.644, 150, 325);
@@ -23,15 +25,15 @@ public class CategoriaTest {
 	private Categoria R9 = new Categoria(SubtipoCategoria.R9, 887.19, 0.851, 1400, Double.MAX_VALUE);
 	
 
-	public Cliente construirClienteTest(Set<Dispositivo> dispositivos) {
+	public Cliente construirClienteTest(Set<DispositivoEstandar> dispositivos) {
 		
-		return new Cliente(null, null, 0, null, null, null, null, dispositivos);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivos, null);
 	}
 	
 	@Test
 	public void unClienteConConsumoIgualA500YCategoriaR5ObtieneEstimadoAPagarQueCorresponde() {
 		
-		dispositivos.add(new Dispositivo("Home Theater", 500, false));
+		dispositivos.add(new DispositivoEstandar("Home Theater", 500));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -49,7 +51,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMenorA150CorrespondeALaCategoriaR1() {
 		
-		dispositivos.add(new Dispositivo("Heladera", 120, false));
+		dispositivos.add(new DispositivoEstandar("Heladera", 120));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -59,7 +61,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA150YMenorOIgualA325CorrespondeALaCategoriaR2() {
 		
-		dispositivos.add(new Dispositivo("Microondas", 250, false));
+		dispositivos.add(new DispositivoEstandar("Microondas", 250));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -69,7 +71,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA325YMenorOIgualA400CorrespondeALaCategoriaR3() {
 		
-		dispositivos.add(new Dispositivo("Lavarropas", 400, false));
+		dispositivos.add(new DispositivoEstandar("Lavarropas", 400));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -79,7 +81,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA400YMenorOIgualA450CorrespondeALaCategoriaR4() {
 		
-		dispositivos.add(new Dispositivo("Televisor", 430, false));
+		dispositivos.add(new DispositivoEstandar("Televisor", 430));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -89,7 +91,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA450YMenorOIgualA500CorrespondeALaCategoriaR5() {
 		
-		dispositivos.add(new Dispositivo("Ventilador", 480, false));
+		dispositivos.add(new DispositivoEstandar("Ventilador", 480));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -99,7 +101,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA500YMenorOIgualA600CorrespondeALaCategoriaR6() {
 		
-		dispositivos.add(new Dispositivo("Lavavajillas", 600, false));
+		dispositivos.add(new DispositivoEstandar("Lavavajillas", 600));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -109,7 +111,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA600YMenorOIgualA700CorrespondeALaCategoriaR7() {
 		
-		dispositivos.add(new Dispositivo("Plancha", 690, false));
+		dispositivos.add(new DispositivoEstandar("Plancha", 690));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -119,7 +121,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA700YMenorOIgualA1400CorrespondeALaCategoriaR8() {
 		
-		dispositivos.add(new Dispositivo("Secarropa", 1000, false));
+		dispositivos.add(new DispositivoEstandar("Secarropa", 1000));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -129,7 +131,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA1400CorrespondeALaCategoriaR9() {
 		
-		dispositivos.add(new Dispositivo("Monitor", 1600, false));
+		dispositivos.add(new DispositivoEstandar("Monitor", 1600));
 		
 		cliente = construirClienteTest(dispositivos);
 		
