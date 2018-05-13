@@ -6,30 +6,10 @@ public class DispositivoInteligente {
 
 	private Collection<Consumo> historialConsumo;
 	private double consumoPorHora;
-	private EstadoDispositivo modoDeOperacion; // el nombre puede cambiar
+	private EstadoDispositivo modoDeOperacion = new Apagado(); // lo inicie en apagado
 
 	public double getConsumo(Periodo unPeriodo) {
-
-		return historialConsumo.stream().filter(consumo -> unPeriodo.contiene(consumo.getPeriodo()))
-				.mapToDouble(consumo -> consumo.getConsumo(consumoPorHora)).sum();
-	}
-
-	public double getConsumo(double nHoras) {
-
-		int contador = 0;
-
-		// ordenar las fechas del historial primero
-
-		for (Consumo consumo : historialConsumo) {
-
-			double cantidadHorasEncendido = consumo.getPeriodo().cantidadDeHoras();
-
-			if (cantidadHorasEncendido < nHoras)
-				contador++;
-		}
-
-		return historialConsumo.stream().limit(contador).mapToDouble(consumo -> consumo.getConsumo(consumoPorHora))
-				.sum();
+// ... hace lo suyo ...
 	}
 
 	public void cambiarEstado(EstadoDispositivo nuevoModo) {
