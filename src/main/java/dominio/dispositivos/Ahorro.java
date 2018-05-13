@@ -1,4 +1,6 @@
 package dominio.dispositivos;
+import DispositivoInteligente;
+import EstadoDispositivo;
 
 public class Ahorro implements EstadoDispositivo {
 
