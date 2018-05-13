@@ -48,4 +48,8 @@ public class DispositivoInteligente {
 		modoDeOperacion.modoAhorro(this);
 	}
 
+	public boolean estaEncendido() {
+		return modoDeOperacion.estaEncendido();
+	}
+
 }
