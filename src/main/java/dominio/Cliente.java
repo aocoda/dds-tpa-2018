@@ -2,6 +2,7 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import dominio.dispositivos.DispositivoInteligente;;
 
 public class Cliente {
 	
@@ -12,11 +13,15 @@ public class Cliente {
 	private String domicilio;
 	private LocalDate fechaAltaServicio;
 	private Categoria categoria;
-	private Collection<Dispositivo> dispositivos;
+	private Collection<DispositivoEstandar> dispositivosEstandar;
+	private Collection<DispositivoInteligente> dispositivosInteligentes;
 	
 	
-	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
-			String domicilio, LocalDate fechaAltaServicio, Categoria categoria, Collection<Dispositivo> dispositivos) {
+	
+	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento,
+			String telefono, String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
+			Collection<DispositivoEstandar> dispositivosEstandar, 
+			Collection<DispositivoInteligente> dispositivosInteligentes) {
 
 		this.nombreCompleto = nombreCompleto;
 		this.tipoDocumento = tipoDocumento;
@@ -25,19 +30,20 @@ public class Cliente {
 		this.domicilio = domicilio;
 		this.fechaAltaServicio = fechaAltaServicio;
 		this.categoria = categoria;
-		this.dispositivos = dispositivos;
+		this.dispositivosEstandar = dispositivosEstandar;
+		this.dispositivosInteligentes = dispositivosInteligentes;
 	}
 
 	public boolean existeDispositivoEncendido() {
 		
-		return dispositivos
+		return dispositivosInteligentes
 				.stream()
 				.anyMatch(dispositivo -> dispositivo.estaEncendido());
 	}
 	
 	public long cantidadDispositivosEncendidos() {
 		
-		return dispositivos
+		return dispositivosInteligentes
 				.stream()
 				.filter(dispositivo -> dispositivo.estaEncendido())
 				.count();
@@ -45,7 +51,7 @@ public class Cliente {
 	
 	public long cantidadDispositivosApagados() {
 		
-		return dispositivos
+		return dispositivosInteligentes
 				.stream()
 				.filter(dispositivo -> !dispositivo.estaEncendido())
 				.count();
@@ -53,16 +59,16 @@ public class Cliente {
 	
 	public long cantidadDispositivos() {
 		
-		return dispositivos.size();
+		return dispositivosInteligentes.size() + dispositivosEstandar.size();
 	}
 	
 	public double consumoMensual() {
 		
-		return dispositivos
+		return dispositivosEstandar
 				.stream()
 				.mapToDouble(dispositivo -> dispositivo.getConsumoPorMes())
 				.sum();
-	}
+	} // quedo con la lógica del tp 0
 	
 	public void recategorizar(Collection<Categoria> categorias) {
 		
