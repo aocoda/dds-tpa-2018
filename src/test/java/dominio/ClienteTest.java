@@ -121,9 +121,44 @@ public class ClienteTest {
 		
 		assertEquals(0, cliente.cantidadDispositivosApagados());
 	}
-}	
+
+	//Recategorizar
+	@Test
+	public void cuandoUnClienteSeIntentaRecategorizarYNoHayNingunaCategoriaQueLeCorrespondaLeQuedaLaCategoriaAnterior() {
+		
+		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 400));
+		
+		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
+		
+		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
+		
+		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, null);	
+		
+		
+		cliente.recategorizar(categorias);
+		
+		assertEquals(categoriaVieja, cliente.getCategoria());
+	}
 	
-/*	Estos metodos están asociados al consumo	
+	@Test
+	public void cuandoUnClienteSeIntentaRecategorizarYExisteCategoriaQueLeCorrespondaSeRecategorizaConExito() {
+		
+		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 400));
+		
+		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
+		Categoria categoriaQueLeCorresponde = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
+		
+		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
+		
+		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, null);	
+		
+		
+		cliente.recategorizar(categorias);
+		
+		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
+	}
+	
+	/*	Estos metodos están asociados al consumo	
 	//ConsumoMensual
 	@Test
 	public void cuandoLaListaDeDispositivosEstaVacia_ConsumoMensual_DebeDarCero() {
@@ -141,40 +176,5 @@ public class ClienteTest {
 		cliente = construirClienteTest(null, null, dispositivosInteligentes);
 		
 		assertEquals(400, cliente.consumoMensual(), 0);
-	}
-
-	//Recategorizar
-	@Test
-	public void cuandoUnClienteSeIntentaRecategorizarYNoHayNingunaCategor�aQueLeCorrespondaLeQuedaLaCategoriaAnterior() {
-		
-		dispositivos.add(new Dispositivo("Heladera", 400, true));
-		
-		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
-		
-		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
-		
-		cliente = construirClienteTest(categoriaVieja, null, dispositivosInteligentes);	
-		
-		
-		cliente.recategorizar(categorias);
-		
-		assertEquals(categoriaVieja, cliente.getCategoria());
-	}
-	
-	@Test
-	public void cuandoUnClienteSeIntentaRecategorizarYExisteCategor�aQueLeCorrespondaSeRecategorizaConExito() {
-		
-		dispositivos.add(new Dispositivo("Heladera", 400, true));
-		
-		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
-		Categoria categoriaQueLeCorresponde = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
-		
-		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
-		
-		cliente = construirClienteTest(categoriaVieja, null, dispositivosInteligentes);	
-		
-		
-		cliente.recategorizar(categorias);
-		
-		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
 	}*/
+}

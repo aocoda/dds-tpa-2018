@@ -2,6 +2,7 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import dominio.dispositivos.DispositivoEstandar;
 import dominio.dispositivos.DispositivoInteligente;;
 
 public class Cliente {
@@ -18,9 +19,9 @@ public class Cliente {
 	
 	
 	
-	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento,
-			String telefono, String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
-			Collection<DispositivoEstandar> dispositivosEstandar, 
+	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
+			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
+			Collection<DispositivoEstandar> dispositivosEstandar,
 			Collection<DispositivoInteligente> dispositivosInteligentes) {
 
 		this.nombreCompleto = nombreCompleto;

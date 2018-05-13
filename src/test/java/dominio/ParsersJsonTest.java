@@ -9,6 +9,8 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import dominio.dispositivos.DispositivoEstandar;
+import dominio.dispositivos.DispositivoInteligente;
 import dominio.excepciones.ParserException;
 import dominio.importadorJson.ParserJson;
 import dominio.importadorJson.ParserCategorias;
@@ -77,7 +79,7 @@ public class ParsersJsonTest {
 		
 		String clienteTest = "{ \"tipoDocumento\": \"LC\" }";
 				
-		Cliente clienteEsperado = new Cliente(null, TipoDocumento.LC, 0, null, null, null, null, null);
+		Cliente clienteEsperado = new Cliente(null, TipoDocumento.LC, 0, null, null, null, null, null, null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
@@ -85,9 +87,9 @@ public class ParsersJsonTest {
 	@Test
 	public void SiElClienteJsonTieneUnaListaDeDispositivosVacia_SeCreaUnClienteConUnaListaVaciaYLosDemasValoresPorDefectoCeroONull() {
 		
-		String clienteTest = "{ \"dispositivos\": [ ] }";
+		String clienteTest = "{ \"dispositivosEstandar\": [ ] }";
 				
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, Collections.emptyList());
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, Collections.emptyList(), null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
@@ -95,7 +97,7 @@ public class ParsersJsonTest {
 	@Test
 	public void SiElClienteJsonTieneUnaListaDeDispositivosConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
 		
-		String clienteTest = "{\"dispositivos\":"
+		String clienteTest = "{\"dispositivosEstandar\":"
 				+ "["
 					+ "{"
 						+ "\"nombreGenerico\": \"Heladera\","
@@ -104,9 +106,9 @@ public class ParsersJsonTest {
 				+ "]"
 			+ "}";
 		
-		Collection<Dispositivo> dispositivos = Collections.singletonList(new Dispositivo("Heladera", 400, false));
+		Collection<DispositivoEstandar> dispositivos = Collections.singletonList(new DispositivoEstandar("Heladera", 400));
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, dispositivos);
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, dispositivos, null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
@@ -116,7 +118,7 @@ public class ParsersJsonTest {
 		
 		String clienteTest = "{ \"categoria\": \"R1\" }";
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null);
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
@@ -130,7 +132,7 @@ public class ParsersJsonTest {
 		
 		repositorioCategorias.agregar(R1);
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, R1, null);
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, R1, null, null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
@@ -140,7 +142,7 @@ public class ParsersJsonTest {
 		
 		String clienteTest = "{ \"fechaAltaServicio\": \"2017-01-01\" }";
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, LocalDate.of(2017, 1, 1), null, null);
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, LocalDate.of(2017, 1, 1), null, null, null);
 		
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
