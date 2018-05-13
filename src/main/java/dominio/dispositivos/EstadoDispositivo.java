@@ -1,11 +1,19 @@
 package dominio.dispositivos;
-import DispositivoInteligente;
 
-public interface EstadoDispositivo {
-	public void encender(DispositivoInteligente dispositivo);
+abstract class EstadoDispositivo {
+	public void encender(DispositivoInteligente dispositivo) {
+		dispositivo.cambiarEstado(new Encendido());
+	};
+
+	public void apagar(DispositivoInteligente dispositivo) {
+		dispositivo.cambiarEstado(new Apagado());
+	}
 	
-	public void apagar(DispositivoInteligente dispositivo);
-	
-	public void modoAhorro(DispositivoInteligente dispositivo);
+	public void modoAhorro(DispositivoInteligente dispositivo) {
+		dispositivo.cambiarEstado(new Ahorro());
+	}
+
+	public boolean estaEncendido() {
+		return false;
+	}
 }
-
