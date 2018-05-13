@@ -1,8 +1,4 @@
 package dominio.dispositivos;
-import Apagado;
-import DispositivoInteligente;
-import Encendido;
-import EstadoDispositivo;
 
 public class Ahorro implements EstadoDispositivo {
 
