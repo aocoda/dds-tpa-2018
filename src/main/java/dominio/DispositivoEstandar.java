@@ -1,12 +1,12 @@
 package dominio;
 
-public class Dispositivo {
+public class DispositivoEstandar {
 	
 	private String nombreGenerico;
 	private double consumoPorMes;
 	private boolean estaEncendido;
 	
-	public Dispositivo(String nombreGenerico, double consumoPorMes, boolean estaEncendido) {
+	public DispositivoEstandar(String nombreGenerico, double consumoPorMes, boolean estaEncendido) {
 		
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorMes = consumoPorMes;
