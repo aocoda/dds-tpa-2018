@@ -1,16 +1,8 @@
 package dominio.dispositivos;
 
-import java.util.Collection;
-
 public class DispositivoInteligente {
 
-	private Collection<Consumo> historialConsumo;
-	private double consumoPorHora;
-	private EstadoDispositivo modoDeOperacion = new Apagado(); // lo inicie en apagado
-
-	public double getConsumo(Periodo unPeriodo) {
-// ... hace lo suyo ...
-	}
+	private EstadoDispositivo modoDeOperacion = new Apagado();
 
 	public void cambiarEstado(EstadoDispositivo nuevoModo) {
 		this.modoDeOperacion = nuevoModo;
