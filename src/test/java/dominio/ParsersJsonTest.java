@@ -9,8 +9,7 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import dominio.dispositivos.DispositivoEstandar;
-import dominio.dispositivos.DispositivoInteligente;
+import dominio.dispositivos.*;
 import dominio.excepciones.ParserException;
 import dominio.importadorJson.ParserJson;
 import dominio.importadorJson.ParserCategorias;
@@ -85,7 +84,7 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosVacia_SeCreaUnClienteConUnaListaVaciaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElClienteJsonTieneUnaListaDeDispositivosEstandarVacia_SeCreaUnClienteConUnaListaVaciaYLosDemasValoresPorDefectoCeroONull() {
 		
 		String clienteTest = "{ \"dispositivosEstandar\": [ ] }";
 				
@@ -95,7 +94,17 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesVacia_SeCreaUnClienteConUnaListaVaciaYLosDemasValoresPorDefectoCeroONull() {
+		
+		String clienteTest = "{ \"dispositivosInteligentes\": [ ] }";
+				
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, Collections.emptyList());
+		
+		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+	}
+	
+	@Test
+	public void SiElClienteJsonTieneUnaListaDeDispositivosEstandarConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
 		
 		String clienteTest = "{\"dispositivosEstandar\":"
 				+ "["
@@ -113,6 +122,24 @@ public class ParsersJsonTest {
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
 	
+	@Test
+	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
+		String clienteTest = "{\"dispositivosInteligentes\":"
+				+ "["
+					+ "{"
+						+ "\"nombreGenerico\": \"AireAcondicionado\","
+						+ "\"consumoPorHora\": 50"
+					+ "}"
+				+ "]"
+			+ "}";
+		
+		Collection<DispositivoInteligente> dispositivos = Collections.singletonList(new DispositivoInteligente("AireAcondicionado", 50, null));
+		
+		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, dispositivos);
+		
+		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+	}
+		
 	@Test
 	public void SiElClienteJsonTieneUnaCategoriaInexistenteEnElRepo_SeCreaUnClienteConCategoriaNullYLosDemasValoresPorDefectoCeroONull() {
 		
