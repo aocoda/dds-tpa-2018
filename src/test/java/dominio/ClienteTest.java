@@ -15,8 +15,8 @@ public class ClienteTest {
 	private Cliente cliente;
 	private Set<DispositivoEstandar> dispositivosEstandar = new HashSet<DispositivoEstandar>();
 	private Set<DispositivoInteligente> dispositivosInteligentes = new HashSet<DispositivoInteligente>();
-	private DispositivoInteligente heladera = new DispositivoInteligente();
-	private DispositivoInteligente televisor = new DispositivoInteligente();
+	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100, new Apagado());
+	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 50, new Apagado());
 	
 	public Cliente construirClienteTest(Categoria categoria, Set<DispositivoEstandar> dispositivosEstandar , Set<DispositivoInteligente> dispositivosInteligentes) {
 		

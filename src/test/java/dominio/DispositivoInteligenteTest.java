@@ -4,20 +4,20 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.dispositivos.DispositivoInteligente;
+import dominio.dispositivos.*;
 
 public class DispositivoInteligenteTest {
 
-	private DispositivoInteligente dispositivo = new DispositivoInteligente();
+	private DispositivoInteligente dispositivo = new DispositivoInteligente("Heladera", 100, new Apagado());
 
 	@Test
-	public void unEquipoEncendidoTieneQueEstarEncendido() {
+	public void unEquipoQueSeEnciendeTieneQueEstarEncendido() {
 		dispositivo.encender();
 		assertTrue(dispositivo.estaEncendido());
 	}
 
 	@Test
-	public void unEquipoDebeNoEstarEncendido() {
+	public void unEquipoApagadoDebeNoEstarEncendido() {
 		assertTrue(!(dispositivo.estaEncendido()));
 	}
 }

@@ -1,8 +1,29 @@
 package dominio.dispositivos;
 
 public class DispositivoInteligente {
+	
+	private String nombreGenerico;
+	private double consumoPorHora;
+	private EstadoDispositivo modoDeOperacion;
+	
+	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, EstadoDispositivo nuevoModo) {
 
-	private EstadoDispositivo modoDeOperacion = new Apagado();
+		this.nombreGenerico = nombreGenerico;
+		this.consumoPorHora = consumoPorHora;
+		this.modoDeOperacion = nuevoModo;
+	}
+
+	public String getNombreGenerico() {
+		return nombreGenerico;
+	}
+
+	public double getConsumoPorHora() {
+		return consumoPorHora;
+	}
+
+/*	public double getConsumo() {
+		// ...hace lo suyo...
+	}*/
 
 	public void cambiarEstado(EstadoDispositivo nuevoModo) {
 		this.modoDeOperacion = nuevoModo;
