@@ -1,5 +1,7 @@
 package dominio.dispositivos;
 
+import dominio.dispositivos.estados.*;
+
 public class DispositivoInteligente {
 	
 	private String nombreGenerico;

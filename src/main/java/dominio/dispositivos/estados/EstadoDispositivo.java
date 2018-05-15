@@ -1,6 +1,8 @@
-package dominio.dispositivos;
+package dominio.dispositivos.estados;
 
-abstract class EstadoDispositivo {
+import dominio.dispositivos.DispositivoInteligente;
+
+public abstract class EstadoDispositivo {
 	public void encender(DispositivoInteligente dispositivo) {
 		dispositivo.cambiarEstado(new Encendido());
 	};
