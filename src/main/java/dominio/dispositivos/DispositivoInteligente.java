@@ -22,6 +22,10 @@ public class DispositivoInteligente {
 	public double getConsumoPorHora() {
 		return consumoPorHora;
 	}
+	
+	public EstadoDispositivo getModo() {
+		return modoDeOperacion;
+	}
 
 /*	public double getConsumo() {
 		// ...hace lo suyo...
@@ -46,5 +50,8 @@ public class DispositivoInteligente {
 	public boolean estaEncendido() {
 		return modoDeOperacion.estaEncendido();
 	}
-
+	
+	public boolean estaApagado() {
+		return modoDeOperacion.estaApagado();
+	}
 }

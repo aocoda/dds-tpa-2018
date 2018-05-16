@@ -18,4 +18,8 @@ public abstract class EstadoDispositivo {
 	public boolean estaEncendido() {
 		return false;
 	}
+	
+	public boolean estaApagado() {
+		return false;
+	}
 }

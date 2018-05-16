@@ -6,5 +6,8 @@ public class Apagado extends EstadoDispositivo {
 
 	public void apagar(DispositivoInteligente dispositivo) {
 	}
-
+	
+	public boolean estaApagado() {
+		return true;
+	}
 }

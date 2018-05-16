@@ -65,11 +65,22 @@ public class Cliente {
 	
 	public double consumoMensual() {
 		
+		return this.consumoMensualDeDispositivosEstandar() + this.consumoMensualDeDispositivosInteligentes();
+	}
+	
+	private double consumoMensualDeDispositivosEstandar() {
 		return dispositivosEstandar
 				.stream()
 				.mapToDouble(dispositivo -> dispositivo.getConsumoDelMes())
 				.sum();
-	} // quedo con la lógica del tp 0
+	}
+	
+	private double consumoMensualDeDispositivosInteligentes() {
+/*		return dispositivosInteligentes
+				.stream()
+				.mapToDouble(dispositivo -> dispositivo.getConsumo())
+				.sum();*/ return 0;
+	}
 	
 	public void recategorizar(Collection<Categoria> categorias) {
 		
