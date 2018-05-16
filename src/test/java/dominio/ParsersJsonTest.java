@@ -110,12 +110,13 @@ public class ParsersJsonTest {
 				+ "["
 					+ "{"
 						+ "\"nombreGenerico\": \"Heladera\","
-						+ "\"consumoPorMes\": 400"
+						+ "\"consumoPorHora\": 400,"
+						+ "\"horasEstimadasDeUsoPorDia\": 1"
 					+ "}"
 				+ "]"
 			+ "}";
 		
-		Collection<DispositivoEstandar> dispositivos = Collections.singletonList(new DispositivoEstandar("Heladera", 400));
+		Collection<DispositivoEstandar> dispositivos = Collections.singletonList(new DispositivoEstandar("Heladera", 400,1));
 		
 		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, dispositivos, null);
 		

@@ -67,7 +67,7 @@ public class Cliente {
 		
 		return dispositivosEstandar
 				.stream()
-				.mapToDouble(dispositivo -> dispositivo.getConsumoPorMes())
+				.mapToDouble(dispositivo -> dispositivo.getConsumoDelMes())
 				.sum();
 	} // quedo con la lógica del tp 0
 	

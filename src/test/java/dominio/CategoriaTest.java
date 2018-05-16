@@ -33,7 +33,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoIgualA500YCategoriaR5ObtieneEstimadoAPagarQueCorresponde() {
 		
-		dispositivos.add(new DispositivoEstandar("Home Theater", 500));
+		dispositivos.add(new DispositivoEstandar("Home Theater", 500, 500));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -51,7 +51,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMenorA150CorrespondeALaCategoriaR1() {
 		
-		dispositivos.add(new DispositivoEstandar("Heladera", 120));
+		dispositivos.add(new DispositivoEstandar("Radio", 1,1));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -61,7 +61,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA150YMenorOIgualA325CorrespondeALaCategoriaR2() {
 		
-		dispositivos.add(new DispositivoEstandar("Microondas", 250));
+		dispositivos.add(new DispositivoEstandar("Microondas", 2,3));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -71,7 +71,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA325YMenorOIgualA400CorrespondeALaCategoriaR3() {
 		
-		dispositivos.add(new DispositivoEstandar("Lavarropas", 400));
+		dispositivos.add(new DispositivoEstandar("Lavarropas", 3,4));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -81,7 +81,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA400YMenorOIgualA450CorrespondeALaCategoriaR4() {
 		
-		dispositivos.add(new DispositivoEstandar("Televisor", 430));
+		dispositivos.add(new DispositivoEstandar("Televisor", 2.87, 5));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -91,7 +91,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA450YMenorOIgualA500CorrespondeALaCategoriaR5() {
 		
-		dispositivos.add(new DispositivoEstandar("Ventilador", 480));
+		dispositivos.add(new DispositivoEstandar("Ventilador", 3.3, 5));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -101,7 +101,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA500YMenorOIgualA600CorrespondeALaCategoriaR6() {
 		
-		dispositivos.add(new DispositivoEstandar("Lavavajillas", 600));
+		dispositivos.add(new DispositivoEstandar("Lavavajillas", 600,1));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -111,7 +111,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA600YMenorOIgualA700CorrespondeALaCategoriaR7() {
 		
-		dispositivos.add(new DispositivoEstandar("Plancha", 690));
+		dispositivos.add(new DispositivoEstandar("Plancha", 690,1));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -121,7 +121,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA700YMenorOIgualA1400CorrespondeALaCategoriaR8() {
 		
-		dispositivos.add(new DispositivoEstandar("Secarropa", 1000));
+		dispositivos.add(new DispositivoEstandar("Secarropa", 1000,1));
 		
 		cliente = construirClienteTest(dispositivos);
 		
@@ -131,7 +131,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoMayorA1400CorrespondeALaCategoriaR9() {
 		
-		dispositivos.add(new DispositivoEstandar("Monitor", 1600));
+		dispositivos.add(new DispositivoEstandar("Monitor", 10, 10));
 		
 		cliente = construirClienteTest(dispositivos);
 		
