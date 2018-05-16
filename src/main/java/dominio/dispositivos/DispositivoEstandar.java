@@ -9,24 +9,15 @@ public class DispositivoEstandar {
 	private double horasEstimadasDeUsoPorDia;
 
 	public DispositivoEstandar(String nombreGenerico, double consumoPorHora, double horasEstimadasDeUsoPorDia) {
+		
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorHora = consumoPorHora;
 		this.horasEstimadasDeUsoPorDia = horasEstimadasDeUsoPorDia;
 	}
 
-	public String getNombreGenerico() {
-		return nombreGenerico;
-	}
-
-	public double getConsumoPorHora() {
-		return consumoPorHora;
-	}
-
-	public double horasEstimadasDeUsoPorDia() {
-		return horasEstimadasDeUsoPorDia;
-	}
-
+	//ESTO NO SE SI IRIA ASI
 	public double getConsumoDelMes() {
+		
 		return horasEstimadasDeUsoPorDia * consumoPorHora * LocalDate.now().lengthOfMonth();
 	}
 }
