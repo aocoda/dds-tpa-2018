@@ -69,6 +69,7 @@ public class Cliente {
 	}
 	
 	private double consumoMensualDeDispositivosEstandar() {
+		
 		return dispositivosEstandar
 				.stream()
 				.mapToDouble(dispositivo -> dispositivo.getConsumoDelMes())
@@ -96,8 +97,12 @@ public class Cliente {
 		return categoria;
 	}
 	
-	public void transformar(DispositivoEstandar dispositivo, ModuloAdaptador adaptador) {
-		dispositivosEstandar.remove(dispositivo);
-		dispositivosInteligentes.add(adaptador.adaptar(dispositivo));
+	public void transformar(DispositivoEstandar dispositivoEstandar, ModuloAdaptador adaptador) {
+		
+		DispositivoInteligente dispositivoInteligente = adaptador.adaptar(dispositivoEstandar);
+		
+		dispositivosEstandar.remove(dispositivoEstandar);
+		
+		dispositivosInteligentes.add(dispositivoInteligente);
 	}
 }

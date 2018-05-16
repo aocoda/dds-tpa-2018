@@ -6,25 +6,28 @@ public class DispositivoInteligente {
 	
 	private String nombreGenerico;
 	private double consumoPorHora;
-	private EstadoDispositivo modoDeOperacion;
+	private EstadoDispositivo estadoDispositivo;
 	
-	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, EstadoDispositivo nuevoModo) {
+	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, EstadoDispositivo estadoDispositivo) {
 
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorHora = consumoPorHora;
-		this.modoDeOperacion = nuevoModo;
+		this.estadoDispositivo = estadoDispositivo;
 	}
 
 	public String getNombreGenerico() {
+		
 		return nombreGenerico;
 	}
 
 	public double getConsumoPorHora() {
+		
 		return consumoPorHora;
 	}
 	
 	public EstadoDispositivo getModo() {
-		return modoDeOperacion;
+		
+		return estadoDispositivo;
 	}
 
 /*	public double getConsumo() {
@@ -32,26 +35,32 @@ public class DispositivoInteligente {
 	}*/
 
 	public void cambiarEstado(EstadoDispositivo nuevoModo) {
-		this.modoDeOperacion = nuevoModo;
+		
+		this.estadoDispositivo = nuevoModo;
 	}
 
 	public void encender() {
-		modoDeOperacion.encender(this);
+		
+		estadoDispositivo.encender(this);
 	}
 
 	public void apagar() {
-		modoDeOperacion.apagar(this);
+		
+		estadoDispositivo.apagar(this);
 	}
 
 	public void modoAhorro() {
-		modoDeOperacion.modoAhorro(this);
+		
+		estadoDispositivo.modoAhorro(this);
 	}
 
 	public boolean estaEncendido() {
-		return modoDeOperacion.estaEncendido();
+		
+		return estadoDispositivo.estaEncendido();
 	}
 	
 	public boolean estaApagado() {
-		return modoDeOperacion.estaApagado();
+		
+		return estadoDispositivo.estaApagado();
 	}
 }

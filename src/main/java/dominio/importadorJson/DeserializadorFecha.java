@@ -14,6 +14,7 @@ public class DeserializadorFecha implements JsonDeserializer<LocalDate> {
 	public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
 		
 		try {
+			
 			return LocalDate.parse(json.getAsString());
 		}
 		catch (RuntimeException e) {
