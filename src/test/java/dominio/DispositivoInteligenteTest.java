@@ -4,49 +4,58 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.dispositivos.*;
-import dominio.dispositivos.estados.*;
+import dominio.dispositivos.DispositivoInteligente;
 
 public class DispositivoInteligenteTest {
 
-	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100, new Apagado());
-	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 100, new Encendido());
-	private DispositivoInteligente aireAcondicionado = new DispositivoInteligente("Aire Acondicionado", 100, new Ahorro());
+	private DispositivoInteligente dispositivoTest = new DispositivoInteligente("dispositivoTest", 100);
 
 	@Test
-	public void SiUnDispositivoEstaApagado_ySeLeDieraLaOrdenDeApagarse_noDeberaHacerNadaYPermancerApagado(){
-		heladera.apagar();
-		assertTrue(heladera.estaApagado());
+	public void SiUnDispositivoEstaApagado_ySeLeDieraLaOrdenDeApagarse_noDeberaHacerNadaYPermancerApagado() {
+		
+		dispositivoTest.apagar();
+		
+		assertTrue(dispositivoTest.estaApagado());
 	}
 	
 	@Test
-	public void SiUnDispositivoEstaEncendido_ySeLeDieraLaOrdenDeEncenderse_noDeberaHacerNadaYPermancerEncendido(){
-		televisor.encender();
-		assertTrue(televisor.estaEncendido());
+	public void SiUnDispositivoEstaEncendido_ySeLeDieraLaOrdenDeEncenderse_noDeberaHacerNadaYPermancerEncendido() {
+		
+		dispositivoTest.encender();
+		
+		assertTrue(dispositivoTest.estaEncendido());
 	}
 
 	@Test
 	public void darleLaOrdenDeApagarse_DebeApagarElEquipo() {
-		televisor.apagar();
-		assertTrue(televisor.estaApagado());
+		
+		dispositivoTest.apagar();
+		
+		assertTrue(dispositivoTest.estaApagado());
 	}
 	
 	@Test
 	public void darleLaOrdenDeEncender_DebeEncenderElEquipo() {
-		heladera.encender();
-		assertTrue(heladera.estaEncendido());
+		
+		dispositivoTest.encender();
+		
+		assertTrue(dispositivoTest.estaEncendido());
 	}
 	
 	@Test
 	public void unEquipoEnAhorroNoDebeEstarApagadoNiPrendido() {
-		aireAcondicionado.modoAhorro();
-		assertTrue(!(aireAcondicionado.estaApagado()));
-		assertTrue(!(aireAcondicionado.estaEncendido()));
+		
+		dispositivoTest.modoAhorro();
+		
+		assertTrue(!dispositivoTest.estaApagado());
+		assertTrue(!dispositivoTest.estaEncendido());
 	}
 	
 	@Test
 	public void unEquipoEnAhorro_DebeEncenderseSiSeLeDaLaOrdenDeEncenderse() {
-		aireAcondicionado.encender();
-		assertTrue(aireAcondicionado.estaEncendido());
+		
+		dispositivoTest.encender();
+		
+		assertTrue(dispositivoTest.estaEncendido());
 	}
 }

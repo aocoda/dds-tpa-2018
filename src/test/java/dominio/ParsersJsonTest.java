@@ -84,7 +84,7 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosEstandarVacia_SeCreaUnClienteConUnaListaVaciaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElClienteJsonTieneUnaListaDeDispositivosEstandarVacia_SeCreaUnClienteConUnaListaDeDispositivosEstandarVaciaYLosDemasValoresPorDefectoCeroONull() {
 		
 		String clienteTest = "{ \"dispositivosEstandar\": [ ] }";
 				
@@ -94,7 +94,7 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesVacia_SeCreaUnClienteConUnaListaVaciaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesVacia_SeCreaUnClienteConUnaListaDeDispositivosInteligentesVaciaYLosDemasValoresPorDefectoCeroONull() {
 		
 		String clienteTest = "{ \"dispositivosInteligentes\": [ ] }";
 				
@@ -123,6 +123,8 @@ public class ParsersJsonTest {
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
 	
+	//ESTE HABRIA QUE CAMBIARLO, DISPOSITIVO INTELIGENTE TIENE QUE SER ABSTRACTA X LO TANTO ACA HAY QUE USAR UN MOCK
+	//ACA TAMBIEN HAY QUE ARREGLAR QUE EN EL JSON NO TIENE QUE VENIRLE EL ESTADO, Y SE TIENE QUE DESERIALIZAR EN APAGADO POR DEFAULT
 	@Test
 	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
 		String clienteTest = "{\"dispositivosInteligentes\":"
@@ -134,7 +136,7 @@ public class ParsersJsonTest {
 				+ "]"
 			+ "}";
 		
-		Collection<DispositivoInteligente> dispositivos = Collections.singletonList(new DispositivoInteligente("AireAcondicionado", 50, null));
+		Collection<DispositivoInteligente> dispositivos = Collections.singletonList(new DispositivoInteligente("AireAcondicionado", 50));
 		
 		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, dispositivos);
 		

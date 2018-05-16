@@ -6,8 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import dominio.dispositivos.*;
-import dominio.dispositivos.estados.Apagado;
+
+import dominio.dispositivos.DispositivoEstandar;
+import dominio.dispositivos.DispositivoInteligente;
 
 import org.junit.Test;
 
@@ -16,8 +17,8 @@ public class ClienteTest {
 	private Cliente cliente;
 	private Set<DispositivoEstandar> dispositivosEstandar = new HashSet<DispositivoEstandar>();
 	private Set<DispositivoInteligente> dispositivosInteligentes = new HashSet<DispositivoInteligente>();
-	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100, new Apagado());
-	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 50, new Apagado());
+	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100);
+	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 50);
 	
 	public Cliente construirClienteTest(Categoria categoria, Set<DispositivoEstandar> dispositivosEstandar , Set<DispositivoInteligente> dispositivosInteligentes) {
 		

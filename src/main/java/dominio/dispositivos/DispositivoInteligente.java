@@ -6,37 +6,17 @@ public class DispositivoInteligente {
 	
 	private String nombreGenerico;
 	private double consumoPorHora;
-	private EstadoDispositivo estadoDispositivo;
+	private EstadoDispositivo estadoDispositivo = new Apagado();
 	
-	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, EstadoDispositivo estadoDispositivo) {
+	public DispositivoInteligente(String nombreGenerico, double consumoPorHora) {
 
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorHora = consumoPorHora;
-		this.estadoDispositivo = estadoDispositivo;
 	}
 
-	public String getNombreGenerico() {
+	public void cambiarEstado(EstadoDispositivo nuevoEstado) {
 		
-		return nombreGenerico;
-	}
-
-	public double getConsumoPorHora() {
-		
-		return consumoPorHora;
-	}
-	
-	public EstadoDispositivo getModo() {
-		
-		return estadoDispositivo;
-	}
-
-/*	public double getConsumo() {
-		// ...hace lo suyo...
-	}*/
-
-	public void cambiarEstado(EstadoDispositivo nuevoModo) {
-		
-		this.estadoDispositivo = nuevoModo;
+		this.estadoDispositivo = nuevoEstado;
 	}
 
 	public void encender() {
