@@ -54,7 +54,7 @@ public class Cliente {
 		
 		return dispositivosInteligentes
 				.stream()
-				.filter(dispositivo -> !dispositivo.estaEncendido())
+				.filter(dispositivo -> dispositivo.estaApagado())
 				.count();
 	}
 	
