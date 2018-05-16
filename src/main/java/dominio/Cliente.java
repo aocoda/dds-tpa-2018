@@ -2,8 +2,8 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import dominio.dispositivos.DispositivoEstandar;
-import dominio.dispositivos.DispositivoInteligente;;
+import dominio.dispositivos.*;
+import dominio.dispositivos.adaptadores.*;
 
 public class Cliente {
 	
@@ -83,5 +83,10 @@ public class Cliente {
 	public Categoria getCategoria() {
 		
 		return categoria;
+	}
+	
+	public void transformar(DispositivoEstandar dispositivo, ModuloAdaptador adaptador) {
+		dispositivosEstandar.remove(dispositivo);
+		dispositivosInteligentes.add(adaptador.adaptar(dispositivo));
 	}
 }
