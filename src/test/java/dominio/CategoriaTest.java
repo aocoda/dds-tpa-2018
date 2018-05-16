@@ -11,6 +11,10 @@ import dominio.dispositivos.DispositivoEstandar;
 
 public class CategoriaTest {
 	
+	//ACA HAY QUE HACER REFACTOR GROSO, SIMPLIFICAR LAS CATEGORIAS PARA PODER MANTENER MAS FACIL
+	//Y ADEMAS VER TEMA DEL CONSUMO MENSUAL DE UN CLIENTE PARA LOS MESES DE DISTINTOS DIAS
+	//SERIA ALGO DEL ESTILO: categoria.estimadoAPagar(unCliente, unMes)
+	
 	private Cliente cliente;
 	private Set<DispositivoEstandar> dispositivos = new HashSet<DispositivoEstandar>();
 	

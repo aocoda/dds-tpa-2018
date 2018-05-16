@@ -22,12 +22,12 @@ public class ClienteTest {
 	
 	public Cliente construirClienteTest(Categoria categoria, Set<DispositivoEstandar> dispositivosEstandar , Set<DispositivoInteligente> dispositivosInteligentes) {
 		
-		return new Cliente(null, null, 0, null, null, null, categoria,dispositivosEstandar, dispositivosInteligentes);
+		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes);
 	}	
 
 	//ExisteDispositivoEncendido
 	@Test
-	public void cuandoLaListaDeDispositivosEstaVacia_ExisteDispositivoEncendido_DebeDarFalso() {
+	public void cuandoLaListaDeDispositivosInteligentesEstaVacia_ExisteDispositivoEncendido_DebeDarFalso() {
 		
 		cliente = construirClienteTest(null, null, dispositivosInteligentes);			
 		
@@ -35,7 +35,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void cuandoLaListaDeDispositivosTieneUnSoloElementoEncendido_ExisteDispositivoEncendido_DebeDarTrue() {
+	public void cuandoLaListaDeDispositivosInteligentesTieneUnSoloElementoEncendido_ExisteDispositivoEncendido_DebeDarTrue() {
 
 		heladera.encender();
 
@@ -47,7 +47,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void cuandoLaListaDeDispositivosTieneDosElementos_ExisteDispositivoEncendido_DebeDarTrue() {
+	public void cuandoLaListaDeDispositivosInteligentesTieneUnElementoPrendidoYUnoApagado_ExisteDispositivoEncendido_DebeDarTrue() {
 
 		heladera.encender();
 		dispositivosInteligentes.add(heladera);
@@ -60,7 +60,7 @@ public class ClienteTest {
 	
 	//CantidadDeDispositivosEncendidos
 	@Test
-	public void cuandoLaCantidadDeDispositivosEncendidosEsCero_CantidadDeDipositivosEncendidos_DebeDarCero() {
+	public void cuandoLaListaDeDispositvosInteligentesTieneDosElementosApagados_CantidadDeDipositivosEncendidos_DebeDarCero() {
 		
 		dispositivosInteligentes.add(heladera);
 		dispositivosInteligentes.add(televisor);
@@ -71,7 +71,7 @@ public class ClienteTest {
 	}
 
 	@Test
-	public void cuandoLaCantidadDeDispositivosEncendidosEsUno_CantidadDeDipositivosEncendidos_DebeDarUno() {
+	public void cuandoLaListaDeDispositivosInteligentesTieneUnElementoEncendidoYUnoApagado_CantidadDeDipositivosEncendidos_DebeDarUno() {
 		
 		televisor.encender();
 		dispositivosInteligentes.add(heladera);
@@ -83,7 +83,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void cuandoLaListaDeDispositivosEstaVacia_CantidadDeDipositivosEncendidos_DebeDarCero() {
+	public void cuandoLaListaDeDispositivosInteligentesEstaVacia_CantidadDeDipositivosEncendidos_DebeDarCero() {
 		
 		cliente = construirClienteTest(null, null, dispositivosInteligentes);
 		
@@ -92,7 +92,7 @@ public class ClienteTest {
 	
 	//CantidadDeDispositivosApagados
 	@Test
-	public void cuandoLaCantidadDeDispositivosApagadosEsCero_CantidadDipositivosApagados_DebeDarCero() {
+	public void cuandoLaListaDeDispositvosInteligentesTieneDosElementosPrendidos_CantidadDipositivosApagados_DebeDarCero() {
 		
 		heladera.encender();
 		televisor.encender();
@@ -105,7 +105,7 @@ public class ClienteTest {
 	}
 
 	@Test
-	public void cuandoLaCantidadDeDispositivosApagadosEsUno_CantidadDipositivosApagados_DebeDarUno() {
+	public void cuandoLaListaDeDispositvosInteligentesTieneUnElementoPrendidoYUnoApagado_CantidadDipositivosApagados_DebeDarUno() {
 		
 		televisor.encender();
 		dispositivosInteligentes.add(heladera);
@@ -117,7 +117,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void cuandoLaListaDeDispositivosEstaVacia_CantidadDipositivosApagados_DebeDarCero() {
+	public void cuandoLaListaDeDispositivosInteligentesEstaVacia_CantidadDipositivosApagados_DebeDarCero() {
 		
 		cliente = construirClienteTest(null, null, dispositivosInteligentes);
 		
@@ -161,6 +161,8 @@ public class ClienteTest {
 	}
 	
 	
+	//ESTO HAY QUE VER SI VA, HAY QUE PROBAR TANTO INTELIGENTES COMO ESTANDARES Y EN DISTINTOS PERIODOS.
+	//QUE ES MENSUAL? EL MES PUEDE TENER 28, 29, 30, o 31 dias, lo que daria distintos consumos.
 	//ConsumoMensual
 	@Test
 	public void cuandoLaListaDeDispositivosEstandarEstaVacia_ConsumoMensual_DebeDarCero() {
@@ -171,7 +173,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void cuandoUnDispositivoEstandarQueConsumeCuatrocientos_ConsumoMensual_DebeDarCuatrocientos() {
+	public void cuandoLaListaDeDispositivosEstandarTieneUnElementoQueConsumeCuatrocientos_ConsumoMensual_DebeDarCuatrocientos() {
 		
 		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 40,10));
 		
