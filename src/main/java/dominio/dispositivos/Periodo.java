@@ -1,5 +1,62 @@
 package dominio.dispositivos;
 
-public class Periodo {
+import java.time.Duration;
+import java.time.LocalDateTime;
 
+public class Periodo implements Comparable<Periodo> {
+
+	private LocalDateTime fechaYHoraDeInicio;
+	private LocalDateTime fechaYHoraDeFin;
+
+	public Periodo(LocalDateTime fechaYHoraDeInicio, LocalDateTime fechaYHoraDeFin) {
+
+		this.fechaYHoraDeInicio = fechaYHoraDeInicio;
+		this.fechaYHoraDeFin = fechaYHoraDeFin;
+	}
+
+	public double cantidadDeHoras() {
+		
+		return Duration.between(fechaYHoraDeInicio, fechaYHoraDeFin).toMinutes() / 60;
+	}
+	
+	public boolean contiene(Periodo otroPeriodo) {
+		
+		return otroPeriodo.getFechaYHoraDeInicio().isBefore(fechaYHoraDeFin) 
+				&& otroPeriodo.getFechaYHoraDeFin().isAfter(fechaYHoraDeInicio);
+	}
+
+	public Periodo acotarSiEsPrimero(Periodo unPeriodo) {
+		
+		return new Periodo(unPeriodo.getFechaYHoraDeInicio(), fechaYHoraDeFin);
+	}
+	
+	public Periodo acotarSiEsUltimo(Periodo unPeriodo) {
+		
+		return new Periodo(fechaYHoraDeInicio, unPeriodo.getFechaYHoraDeFin());
+	}
+
+	public static Periodo deLasUltimas(double nHoras) {
+		
+		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
+		
+		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMinutes(Double.valueOf(nHoras * 60).longValue());
+		
+		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
+	}
+	
+	@Override
+	public int compareTo(Periodo otroPeriodo) {
+		
+		return fechaYHoraDeInicio.compareTo(otroPeriodo.getFechaYHoraDeInicio());
+	}
+	
+	public LocalDateTime getFechaYHoraDeFin() {
+		
+		return fechaYHoraDeFin;
+	}
+	
+	public LocalDateTime getFechaYHoraDeInicio() {
+		
+		return fechaYHoraDeInicio;
+	}
 }

@@ -18,7 +18,6 @@ public class Cliente {
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
 	
 	
-	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
 			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
 			Collection<DispositivoEstandar> dispositivosEstandar,
@@ -63,25 +62,25 @@ public class Cliente {
 		return dispositivosInteligentes.size() + dispositivosEstandar.size();
 	}
 	
-	public double consumoMensual() {
-		
-		return this.consumoMensualDeDispositivosEstandar() + this.consumoMensualDeDispositivosInteligentes();
-	}
+//	public double consumoMensual() {
+//		
+//		return this.consumoMensualDeDispositivosEstandar() + this.consumoMensualDeDispositivosInteligentes();
+//	}
 	
-	private double consumoMensualDeDispositivosEstandar() {
-		
-		return dispositivosEstandar
-				.stream()
-				.mapToDouble(dispositivo -> dispositivo.getConsumoDelMes())
-				.sum();
-	}
+//	private double consumoMensualDeDispositivosEstandar() {
+//		
+//		return dispositivosEstandar
+//				.stream()
+//				.mapToDouble(dispositivo -> dispositivo.getConsumoDelMes())
+//				.sum();
+//	}
 	
-	private double consumoMensualDeDispositivosInteligentes() {
-/*		return dispositivosInteligentes
-				.stream()
-				.mapToDouble(dispositivo -> dispositivo.getConsumo())
-				.sum();*/ return 0;
-	}
+//	private double consumoMensualDeDispositivosInteligentes() {
+///*		return dispositivosInteligentes
+//				.stream()
+//				.mapToDouble(dispositivo -> dispositivo.getConsumo())
+//				.sum();*/ return 0;
+//	}
 	
 	public void recategorizar(Collection<Categoria> categorias) {
 		

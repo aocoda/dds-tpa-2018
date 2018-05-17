@@ -1,7 +1,5 @@
 package dominio.dispositivos;
 
-import java.time.LocalDate;
-
 public class DispositivoEstandar {
 
 	private String nombreGenerico;
@@ -13,11 +11,5 @@ public class DispositivoEstandar {
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorHora = consumoPorHora;
 		this.horasEstimadasDeUsoPorDia = horasEstimadasDeUsoPorDia;
-	}
-
-	//ESTO NO SE SI IRIA ASI
-	public double getConsumoDelMes() {
-		
-		return horasEstimadasDeUsoPorDia * consumoPorHora * LocalDate.now().lengthOfMonth();
 	}
 }
