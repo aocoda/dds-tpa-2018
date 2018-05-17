@@ -2,143 +2,102 @@ package dominio;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Test;
 
 import dominio.dispositivos.DispositivoEstandar;
+import dominio.dispositivos.Periodo;
 
 public class CategoriaTest {
 	
-	//ACA HAY QUE HACER REFACTOR GROSO, SIMPLIFICAR LAS CATEGORIAS PARA PODER MANTENER MAS FACIL
-	//Y ADEMAS VER TEMA DEL CONSUMO MENSUAL DE UN CLIENTE PARA LOS MESES DE DISTINTOS DIAS
-	//SERIA ALGO DEL ESTILO: categoria.estimadoAPagar(unCliente, unMes)
-	
-	private Cliente cliente;
-	private Set<DispositivoEstandar> dispositivos = new HashSet<DispositivoEstandar>();
-	
-	private Categoria R1 = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
-	private Categoria R2 = new Categoria(SubtipoCategoria.R2, 35.32, 0.644, 150, 325);
-	private Categoria R3 = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
-	private Categoria R4 = new Categoria(SubtipoCategoria.R4, 71.74, 0.738, 400, 450);
-	private Categoria R5 = new Categoria(SubtipoCategoria.R5, 110.38, 0.794, 450, 500);
-	private Categoria R6 = new Categoria(SubtipoCategoria.R6, 220.75, 0.832, 500,600);
-	private Categoria R7 = new Categoria(SubtipoCategoria.R7, 443.59, 0.851, 600, 700);
-	private Categoria R8 = new Categoria(SubtipoCategoria.R8, 545.96, 0.851, 700, 1400);
-	private Categoria R9 = new Categoria(SubtipoCategoria.R9, 887.19, 0.851, 1400, Double.MAX_VALUE);
-	
+	private Cliente clienteTest;
+	private Categoria categoriaTest;	
+	private Collection<DispositivoEstandar> dispositivosEstandar = new HashSet<>();
+	private Periodo unMesDeTreita = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0), LocalDateTime.of(2018, 1, 31, 0, 0));
 
-	public Cliente construirClienteTest(Set<DispositivoEstandar> dispositivos) {
+	public Cliente construirClienteTest(Collection<DispositivoEstandar> dispositivosEstandar) {
 		
-		return new Cliente(null, null, 0, null, null, null, null, dispositivos, null);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new HashSet<>());
 	}
 	
 	@Test
-	public void unClienteConConsumoIgualA500YCategoriaR5ObtieneEstimadoAPagarQueCorresponde() {
+	public void conUnMesDe30DiasCargoFijoDe100CargoVariableDe2YClienteConConsumoDe100_ElEstimadoDebeSerDe6100() {
 		
-		dispositivos.add(new DispositivoEstandar("Home Theater", 500, 500));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 100, 1));
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 100, 2, 0, 0);
 		
-		assertEquals(507.38, R5.estimadoAPagar(cliente), 0);
+		//cargoFijo + (cantHoras * consumoPorHora * cantidadDeDiasDelPeriodo * cargoVariable)
+		double valorEsperado = 100 + (100 * 1 * 30 * 2);
+		
+		assertEquals(valorEsperado, categoriaTest.estimadoAPagar(clienteTest, unMesDeTreita), 0);
 	}
 
 	@Test
-	public void unClienteConConsumoCeroSoloPagaElCargoFijo() {
+	public void conUnClienteDeConsumoIgualA0_SeIgnoraElCargoVariableYElEstimadoDebeSerElCargoFijo() {
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 500, 100, 0, 0);
 		
-		assertEquals(18.76, R1.estimadoAPagar(cliente), 0);
+		assertEquals(500, categoriaTest.estimadoAPagar(clienteTest, unMesDeTreita), 0);
 	}
 	
 	@Test
-	public void unClienteConConsumoMenorA150CorrespondeALaCategoriaR1() {
+	public void conCargoFijoDe100CargoVariableDe0_SeIgnoraElConsumoDelClienteYElEstimadoDebeSerElCargoFijo() {
 		
-		dispositivos.add(new DispositivoEstandar("Radio", 1,1));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 999, 999));
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 100, 0, 0, 0);
 		
-		assertTrue(R1.leCorresponde(cliente));
+		assertEquals(100, categoriaTest.estimadoAPagar(clienteTest, unMesDeTreita), 0);
 	}
 	
 	@Test
-	public void unClienteConConsumoMayorA150YMenorOIgualA325CorrespondeALaCategoriaR2() {
+	public void unClienteConConsumoIgualA300_NoLeCorrespondeAUnaCategoriaDe300Hasta400() {
 		
-		dispositivos.add(new DispositivoEstandar("Microondas", 2,3));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1));
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 0, 0, 300, 400);
 		
-		assertTrue(R2.leCorresponde(cliente));
+		assertTrue(!categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
 	}
 	
 	@Test
-	public void unClienteConConsumoMayorA325YMenorOIgualA400CorrespondeALaCategoriaR3() {
+	public void unClienteConConsumoIgualA330_LeCorrespondeAUnaCategoriaDe329Hasta400() {
 		
-		dispositivos.add(new DispositivoEstandar("Lavarropas", 3,4));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1));
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 0, 0, 329, 400);
 		
-		assertTrue(R3.leCorresponde(cliente));
+		assertTrue(categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
 	}
 	
 	@Test
-	public void unClienteConConsumoMayorA400YMenorOIgualA450CorrespondeALaCategoriaR4() {
+	public void unClienteConConsumoIgualA300_NoLeCorrespondeAUnaCategoriaDe200Hasta299() {
 		
-		dispositivos.add(new DispositivoEstandar("Televisor", 2.87, 5));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1));
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 0, 0, 200, 299);
 		
-		assertTrue(R4.leCorresponde(cliente)); 
+		assertTrue(!categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
 	}
 	
 	@Test
-	public void unClienteConConsumoMayorA450YMenorOIgualA500CorrespondeALaCategoriaR5() {
+	public void unClienteConConsumoIgualA330_LeCorrespondeAUnaCategoriaDe200Hasta330() {
 		
-		dispositivos.add(new DispositivoEstandar("Ventilador", 3.3, 5));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1));
 		
-		cliente = construirClienteTest(dispositivos);
+		clienteTest = construirClienteTest(dispositivosEstandar);
+		categoriaTest = new Categoria(null, 0, 0, 200, 330);
 		
-		assertTrue(R5.leCorresponde(cliente)); 
-	}
-	
-	@Test
-	public void unClienteConConsumoMayorA500YMenorOIgualA600CorrespondeALaCategoriaR6() {
-		
-		dispositivos.add(new DispositivoEstandar("Lavavajillas", 600,1));
-		
-		cliente = construirClienteTest(dispositivos);
-		
-		assertTrue(R6.leCorresponde(cliente)); 
-	}
-	
-	@Test
-	public void unClienteConConsumoMayorA600YMenorOIgualA700CorrespondeALaCategoriaR7() {
-		
-		dispositivos.add(new DispositivoEstandar("Plancha", 690,1));
-		
-		cliente = construirClienteTest(dispositivos);
-		
-		assertTrue(R7.leCorresponde(cliente));
-	}
-	
-	@Test
-	public void unClienteConConsumoMayorA700YMenorOIgualA1400CorrespondeALaCategoriaR8() {
-		
-		dispositivos.add(new DispositivoEstandar("Secarropa", 1000,1));
-		
-		cliente = construirClienteTest(dispositivos);
-		
-		assertTrue(R8.leCorresponde(cliente));
-	}
-	
-	@Test
-	public void unClienteConConsumoMayorA1400CorrespondeALaCategoriaR9() {
-		
-		dispositivos.add(new DispositivoEstandar("Monitor", 10, 10));
-		
-		cliente = construirClienteTest(dispositivos);
-		
-		assertTrue(R9.leCorresponde(cliente));
+		assertTrue(categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
 	}
 }
