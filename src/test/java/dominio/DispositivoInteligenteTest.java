@@ -12,50 +12,50 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void SiUnDispositivoEstaApagado_ySeLeDieraLaOrdenDeApagarse_noDeberaHacerNadaYPermancerApagado() {
-		
+
 		dispositivoTest.apagar();
-		
+
 		assertTrue(dispositivoTest.estaApagado());
 	}
-	
+
 	@Test
 	public void SiUnDispositivoEstaEncendido_ySeLeDieraLaOrdenDeEncenderse_noDeberaHacerNadaYPermancerEncendido() {
-		
+
 		dispositivoTest.encender();
-		
+
 		assertTrue(dispositivoTest.estaEncendido());
 	}
 
 	@Test
 	public void darleLaOrdenDeApagarse_DebeApagarElEquipo() {
-		
+
 		dispositivoTest.apagar();
-		
+
 		assertTrue(dispositivoTest.estaApagado());
 	}
-	
+
 	@Test
 	public void darleLaOrdenDeEncender_DebeEncenderElEquipo() {
-		
+
 		dispositivoTest.encender();
-		
+
 		assertTrue(dispositivoTest.estaEncendido());
 	}
-	
+
 	@Test
 	public void unEquipoEnAhorroNoDebeEstarApagadoNiPrendido() {
-		
+
 		dispositivoTest.modoAhorro();
-		
+
 		assertTrue(!dispositivoTest.estaApagado());
 		assertTrue(!dispositivoTest.estaEncendido());
 	}
-	
+
 	@Test
 	public void unEquipoEnAhorro_DebeEncenderseSiSeLeDaLaOrdenDeEncenderse() {
-		
+
 		dispositivoTest.encender();
-		
+
 		assertTrue(dispositivoTest.estaEncendido());
 	}
 }

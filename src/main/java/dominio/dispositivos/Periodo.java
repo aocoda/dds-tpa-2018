@@ -30,16 +30,6 @@ public class Periodo implements Comparable<Periodo> {
 				&& otroPeriodo.getFechaYHoraDeFin().isAfter(fechaYHoraDeInicio);
 	}
 
-	public Periodo acotarSiEsPrimero(Periodo unPeriodo) {
-		
-		return new Periodo(unPeriodo.getFechaYHoraDeInicio(), fechaYHoraDeFin);
-	}
-	
-	public Periodo acotarSiEsUltimo(Periodo unPeriodo) {
-		
-		return new Periodo(fechaYHoraDeInicio, unPeriodo.getFechaYHoraDeFin());
-	}
-
 	public static Periodo deLasUltimasNHoras(double nHoras) {
 		
 		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();

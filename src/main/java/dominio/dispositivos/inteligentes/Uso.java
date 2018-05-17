@@ -1,11 +1,9 @@
 package dominio.dispositivos.inteligentes;
 
-import java.util.Collection;
-
-import dominio.dispositivos.Periodo;
+import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 
-public class Uso implements Comparable<Uso>, StreamUtils<Uso> {
+public class Uso implements Comparable<Uso>, PeriodoUtils {
 
 	private Periodo periodo;
 	private EstadoDispositivo estadoDispositivo;
@@ -17,30 +15,29 @@ public class Uso implements Comparable<Uso>, StreamUtils<Uso> {
 	}
 
 	public double consumo(double consumoPorHoraDelDispositivo) {
-		
+
 		return consumoPorHoraDelDispositivo * periodo.cantidadDeHoras();
 	}
 
-	public Uso acotarExtremos(Collection<Uso> usos, Periodo unPeriodo) {
-		
-		if(esElPrimeroDeLaLista(this, usos))
-			return new Uso(periodo.acotarSiEsPrimero(unPeriodo), estadoDispositivo);
-		
-		else if(esElUltimoDeLaLista(this, usos))
-			return new Uso(periodo.acotarSiEsUltimo(unPeriodo), estadoDispositivo);
-		
-		else
-			return this;
+	public Uso acotarExtremos(Periodo unPeriodo) {
+
+		return new Uso(new Periodo(maximo(periodo.getFechaYHoraDeInicio(), unPeriodo.getFechaYHoraDeInicio()),
+				minimo(periodo.getFechaYHoraDeFin(), unPeriodo.getFechaYHoraDeFin())), estadoDispositivo);
 	}
-	
+
 	@Override
 	public int compareTo(Uso otroUso) {
-		
+
 		return periodo.compareTo(otroUso.getPeriodo());
 	}
-	
+
 	public Periodo getPeriodo() {
-		
+
 		return periodo;
+	}
+
+	public EstadoDispositivo getModo() {
+
+		return estadoDispositivo;
 	}
 }
