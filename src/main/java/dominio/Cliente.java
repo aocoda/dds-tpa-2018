@@ -1,6 +1,7 @@
 package dominio;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import dominio.dispositivos.*;
 import dominio.dispositivos.adaptadores.*;
@@ -62,25 +63,19 @@ public class Cliente {
 		return dispositivosInteligentes.size() + dispositivosEstandar.size();
 	}
 	
-//	public double consumoMensual() {
-//		
-//		return this.consumoMensualDeDispositivosEstandar() + this.consumoMensualDeDispositivosInteligentes();
-//	}
+	public double consumoMensual() {
+		
+		Periodo mesCorriente = Periodo.deLosUltimos(1);
+		
+		return consumoDe(mesCorriente);
+	}
 	
-//	private double consumoMensualDeDispositivosEstandar() {
-//		
-//		return dispositivosEstandar
-//				.stream()
-//				.mapToDouble(dispositivo -> dispositivo.getConsumoDelMes())
-//				.sum();
-//	}
-	
-//	private double consumoMensualDeDispositivosInteligentes() {
-///*		return dispositivosInteligentes
-//				.stream()
-//				.mapToDouble(dispositivo -> dispositivo.getConsumo())
-//				.sum();*/ return 0;
-//	}
+	public double consumoDe(Periodo unPeriodo) {
+		
+		return dispositivosEstandar.stream().mapToDouble(de -> de.consumoEstimadoDe(unPeriodo)).sum() 
+				+
+				dispositivosInteligentes.stream().mapToDouble(di -> di.consumoDe(unPeriodo)).sum();
+	}
 	
 	public void recategorizar(Collection<Categoria> categorias) {
 		

@@ -19,6 +19,11 @@ public class Periodo implements Comparable<Periodo> {
 		return Duration.between(fechaYHoraDeInicio, fechaYHoraDeFin).toMinutes() / 60;
 	}
 	
+	public double cantidadDeDias() {
+		
+		return cantidadDeHoras() / 24;
+	}
+	
 	public boolean contiene(Periodo otroPeriodo) {
 		
 		return otroPeriodo.getFechaYHoraDeInicio().isBefore(fechaYHoraDeFin) 
@@ -40,6 +45,15 @@ public class Periodo implements Comparable<Periodo> {
 		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
 		
 		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMinutes(Double.valueOf(nHoras * 60).longValue());
+		
+		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
+	}
+	
+	public static Periodo deLosUltimos(int nMeses) {
+		
+		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
+		
+		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMonths(nMeses);
 		
 		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
 	}

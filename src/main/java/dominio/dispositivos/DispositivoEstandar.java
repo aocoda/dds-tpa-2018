@@ -12,4 +12,9 @@ public class DispositivoEstandar {
 		this.consumoPorHora = consumoPorHora;
 		this.horasEstimadasDeUsoPorDia = horasEstimadasDeUsoPorDia;
 	}
+	
+	public double consumoEstimadoDe(Periodo unPeriodo) {
+		
+		return unPeriodo.cantidadDeDias() * horasEstimadasDeUsoPorDia * consumoPorHora;
+	}
 }
