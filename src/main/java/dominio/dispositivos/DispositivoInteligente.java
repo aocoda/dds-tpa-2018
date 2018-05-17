@@ -31,7 +31,7 @@ public class DispositivoInteligente {
 	
 	public double consumoDeLasUltimas(double nHoras) {
 		
-		Periodo unPeriodo = Periodo.deLasUltimas(nHoras);
+		Periodo unPeriodo = Periodo.deLasUltimasNHoras(nHoras);
 		
 		return consumoDe(unPeriodo);
 	}

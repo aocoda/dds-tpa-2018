@@ -1,5 +1,7 @@
 package dominio;
 
+import dominio.dispositivos.Periodo;
+
 public class Categoria {
 	
 	private SubtipoCategoria subtipoCategoria;
@@ -20,12 +22,22 @@ public class Categoria {
 	
 	public double estimadoAPagar(Cliente unCliente) {
 		
-		return  cargoFijoMensual + unCliente.consumoMensual() * cargoVariable;
+		return  cargoFijoMensual + unCliente.consumoDelMesCorriente() * cargoVariable;
 	}
 
+	public double estimadoAPagar(Cliente unCliente, Periodo unPeriodo) {
+		
+		return  cargoFijoMensual + unCliente.consumoDe(unPeriodo) * cargoVariable;
+	}
+	
 	public boolean leCorresponde(Cliente unCliente) {
 	
-		return unCliente.consumoMensual() > consumoDesde && unCliente.consumoMensual() <= consumoHasta;
+		return unCliente.consumoDelMesCorriente() > consumoDesde && unCliente.consumoDelMesCorriente() <= consumoHasta;
+	}
+	
+	public boolean leCorresponde(Cliente unCliente, Periodo unPeriodo) {
+		
+		return unCliente.consumoDe(unPeriodo) > consumoDesde && unCliente.consumoDe(unPeriodo) <= consumoHasta;
 	}
 	
 	public SubtipoCategoria getSubtipoCategoria() {

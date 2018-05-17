@@ -63,9 +63,9 @@ public class Cliente {
 		return dispositivosInteligentes.size() + dispositivosEstandar.size();
 	}
 	
-	public double consumoMensual() {
+	public double consumoDelMesCorriente() {
 		
-		Periodo mesCorriente = Periodo.deLosUltimos(1);
+		Periodo mesCorriente = Periodo.deLosUltimosNMeses(1);
 		
 		return consumoDe(mesCorriente);
 	}

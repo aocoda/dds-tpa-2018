@@ -169,7 +169,7 @@ public class ClienteTest {
 	
 		cliente = construirClienteTest(null, dispositivosEstandar, null);
 		
-		assertEquals(0, cliente.consumoMensual(), 0);
+		assertEquals(0, cliente.consumoDelMesCorriente(), 0);
 	}
 	
 	@Test
@@ -179,6 +179,6 @@ public class ClienteTest {
 		
 		cliente = construirClienteTest(null, dispositivosEstandar, null);
 		
-		assertEquals(400, cliente.consumoMensual(), 0);
+		assertEquals(400, cliente.consumoDelMesCorriente(), 0);
 	}
 }

@@ -40,7 +40,7 @@ public class Periodo implements Comparable<Periodo> {
 		return new Periodo(fechaYHoraDeInicio, unPeriodo.getFechaYHoraDeFin());
 	}
 
-	public static Periodo deLasUltimas(double nHoras) {
+	public static Periodo deLasUltimasNHoras(double nHoras) {
 		
 		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
 		
@@ -49,7 +49,7 @@ public class Periodo implements Comparable<Periodo> {
 		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
 	}
 	
-	public static Periodo deLosUltimos(int nMeses) {
+	public static Periodo deLosUltimosNMeses(int nMeses) {
 		
 		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
 		
