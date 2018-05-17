@@ -1,6 +1,6 @@
 package dominio.dispositivos;
 
-import dominio.dispositivos.estados.*;
+import dominio.dispositivos.inteligentes.estados.*;
 
 public class DispositivoInteligente {
 	

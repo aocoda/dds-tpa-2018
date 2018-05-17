@@ -1,4 +1,4 @@
-package dominio.dispositivos.estados;
+package dominio.dispositivos.inteligentes.estados;
 
 import dominio.dispositivos.DispositivoInteligente;
 
