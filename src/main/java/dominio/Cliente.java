@@ -1,7 +1,6 @@
 package dominio;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import dominio.dispositivos.*;
 import dominio.dispositivos.adaptadores.*;
