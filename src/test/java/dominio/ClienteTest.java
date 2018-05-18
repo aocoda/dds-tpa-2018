@@ -165,27 +165,4 @@ public class ClienteTest {
 
 		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
 	}
-
-	// ESTO HAY QUE VER SI VA, HAY QUE PROBAR TANTO INTELIGENTES COMO ESTANDARES Y
-	// EN DISTINTOS PERIODOS.
-	// QUE ES MENSUAL? EL MES PUEDE TENER 28, 29, 30, o 31 dias, lo que daria
-	// distintos consumos.
-	// ConsumoMensual
-	@Test
-	public void cuandoLaListaDeDispositivosEstandarEstaVacia_ConsumoMensual_DebeDarCero() {
-
-		cliente = construirClienteTest(null, dispositivosEstandar, null);
-
-		assertEquals(0, cliente.consumoDelMesCorriente(), 0);
-	}
-
-	@Test
-	public void cuandoLaListaDeDispositivosEstandarTieneUnElementoQueConsumeCuatrocientos_ConsumoMensual_DebeDarCuatrocientos() {
-
-		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 40, 10));
-
-		cliente = construirClienteTest(null, dispositivosEstandar, null);
-
-		assertEquals(400, cliente.consumoDelMesCorriente(), 0);
-	}
 }
