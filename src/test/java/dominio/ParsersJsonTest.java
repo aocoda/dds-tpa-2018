@@ -12,6 +12,7 @@ import org.junit.Test;
 import dominio.dispositivos.*;
 import dominio.excepciones.ParserException;
 import dominio.importadorJson.ParserJson;
+import dominio.mocks.DispositivoMock;
 import dominio.importadorJson.ParserCategorias;
 import dominio.importadorJson.ParserClientes;
 import repositorios.RepositorioCategorias;
@@ -123,24 +124,22 @@ public class ParsersJsonTest {
 		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
 	}
 	
-	//ESTE HABRIA QUE CAMBIARLO, DISPOSITIVO INTELIGENTE TIENE QUE SER ABSTRACTA X LO TANTO ACA HAY QUE USAR UN MOCK
-	//ACA TAMBIEN HAY QUE ARREGLAR QUE EN EL JSON NO TIENE QUE VENIRLE EL ESTADO, Y SE TIENE QUE DESERIALIZAR EN APAGADO POR DEFAULT
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesConUnElementoDelTipoMock_SeCreaUnClienteConUnaListaConUnElementoDeEseTipo() {
+		
 		String clienteTest = "{\"dispositivosInteligentes\":"
 				+ "["
 					+ "{"
-						+ "\"nombreGenerico\": \"AireAcondicionado\","
-						+ "\"consumoPorHora\": 50"
+						+ "\"tipo\": \"dominio.mocks.DispositivoMock\","
+						+ "\"nombreGenerico\": \"Generico\","
+						+ "\"consumoPorHora\": 100"
 					+ "}"
 				+ "]"
 			+ "}";
 		
-		Collection<DispositivoInteligente> dispositivos = Collections.singletonList(new DispositivoInteligente("AireAcondicionado", 50));
+		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, dispositivos);
-		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(dispositivoObtenido).isInstanceOf(DispositivoMock.class);
 	}
 		
 	@Test
