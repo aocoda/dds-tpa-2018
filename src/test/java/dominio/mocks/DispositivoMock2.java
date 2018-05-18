@@ -17,4 +17,9 @@ public class DispositivoMock2 extends DispositivoInteligente {
 	
 		return otroAtributo;
 	}
+	
+	public void concatenar(String unString) {
+		
+		this.otroAtributo = this.otroAtributo.concat(unString);
+	}
 }
