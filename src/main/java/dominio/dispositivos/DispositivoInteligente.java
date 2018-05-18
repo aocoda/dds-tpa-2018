@@ -71,4 +71,14 @@ public abstract class DispositivoInteligente {
 
 		return estadoDispositivo.estaApagado();
 	}
+	
+	public EstadoDispositivo getEstadoActual() {
+		
+		return estadoDispositivo;
+	}
+
+	public Collection<Uso> getHistorialUsos() {
+		
+		return historialUsos;
+	}
 }

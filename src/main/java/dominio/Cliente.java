@@ -100,4 +100,9 @@ public class Cliente {
 		
 		dispositivosInteligentes.add(dispositivoInteligente);
 	}
+	
+	public Collection<DispositivoInteligente> getDispositivosInteligentes() {
+		
+		return dispositivosInteligentes;
+	}
 }
