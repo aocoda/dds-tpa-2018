@@ -20,19 +20,9 @@ public class Categoria {
 		this.consumoHasta = consumoHasta;
 	}
 	
-	public double estimadoAPagar(Cliente unCliente) {
-		
-		return  cargoFijoMensual + unCliente.consumoDelMesCorriente() * cargoVariable;
-	}
-
 	public double estimadoAPagar(Cliente unCliente, Periodo unPeriodo) {
 		
 		return  cargoFijoMensual + unCliente.consumoDe(unPeriodo) * cargoVariable;
-	}
-	
-	public boolean leCorresponde(Cliente unCliente) {
-	
-		return unCliente.consumoDelMesCorriente() > consumoDesde && unCliente.consumoDelMesCorriente() <= consumoHasta;
 	}
 	
 	public boolean leCorresponde(Cliente unCliente, Periodo unPeriodo) {

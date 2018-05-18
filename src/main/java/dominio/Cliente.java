@@ -62,13 +62,6 @@ public class Cliente {
 		return dispositivosInteligentes.size() + dispositivosEstandar.size();
 	}
 	
-	public double consumoDelMesCorriente() {
-		
-		Periodo mesCorriente = Periodo.deLosUltimosNMeses(1);
-		
-		return consumoDe(mesCorriente);
-	}
-	
 	public double consumoDe(Periodo unPeriodo) {
 		
 		double consumoDispEstandar = dispositivosEstandar.stream().mapToDouble(de -> de.consumoEstimadoDe(unPeriodo)).sum();
@@ -87,15 +80,6 @@ public class Cliente {
 		.ifPresent(categoria -> this.categoria = categoria);
 	}
 	
-	public void recategorizar(Collection<Categoria> categorias) {
-		
-		categorias
-		.stream()
-		.filter(categoria -> categoria.leCorresponde(this))
-		.findFirst()
-		.ifPresent(categoria -> this.categoria = categoria);
-	}
-
 	public Categoria getCategoria() {
 		
 		return categoria;
