@@ -16,6 +16,7 @@ public class Cliente {
 	private Categoria categoria;
 	private Collection<DispositivoEstandar> dispositivosEstandar;
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
+	private int puntos;
 	
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
@@ -92,10 +93,24 @@ public class Cliente {
 		dispositivosEstandar.remove(dispositivoEstandar);
 		
 		dispositivosInteligentes.add(dispositivoInteligente);
+		
+		sumarPuntos(10);
 	}
 	
 	public Collection<DispositivoInteligente> getDispositivosInteligentes() {
 		
 		return dispositivosInteligentes;
+	}
+	
+	public void registrarDispositivo(DispositivoInteligente dispositivo) {
+		
+		dispositivosInteligentes.add(dispositivo);
+		
+		sumarPuntos(15);
+	}
+
+	private void sumarPuntos(int puntos) {
+
+		this.puntos  += puntos;
 	}
 }
