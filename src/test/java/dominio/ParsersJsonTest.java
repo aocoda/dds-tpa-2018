@@ -10,6 +10,8 @@ import java.util.Collections;
 import org.junit.Test;
 
 import dominio.dispositivos.*;
+import dominio.dispositivos.inteligentes.estados.Apagado;
+import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
 import dominio.importadorJson.ParserJson;
 import dominio.mocks.DispositivoMock;
@@ -182,5 +184,47 @@ public class ParsersJsonTest {
 		String clienteTest = "{ \"fechaAltaServicio\": \"2017-01-\" }";
 		
 		assertThatThrownBy(() -> parserClientes.parsear(clienteTest)).isInstanceOf(ParserException.class);
+	}
+	
+	
+	
+	
+	//ATRIBUTOS PARTICULARES DE LOS DISPOSITIVOS INTELIGENTES
+	@Test
+	public void SiElDispositivoDeUnClienteJsonVieneSinEstado_SuEstadoPorDefectoDebeSerApagado() {
+		
+		String clienteTest = "{\"dispositivosInteligentes\":"
+				+ "["
+					+ "{"
+						+ "\"tipo\": \"dominio.mocks.DispositivoMock\","
+						+ "\"nombreGenerico\": \"Generico\","
+						+ "\"consumoPorHora\": 100"
+					+ "}"
+				+ "]"
+			+ "}";
+		
+		EstadoDispositivo estadoEsperado = new Apagado();
+		
+		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
+		
+		assertThat(dispositivoObtenido.getEstadoActual()).isEqualToComparingFieldByFieldRecursively(estadoEsperado);
+	}
+	
+	@Test
+	public void SiElDispositivoDeUnClienteJsonVieneSinListaDeUsos_SuListaDeUsosPorDefectoDebeSerUnaListaVacia() {
+		
+		String clienteTest = "{\"dispositivosInteligentes\":"
+				+ "["
+					+ "{"
+						+ "\"tipo\": \"dominio.mocks.DispositivoMock\","
+						+ "\"nombreGenerico\": \"Generico\","
+						+ "\"consumoPorHora\": 100"
+					+ "}"
+				+ "]"
+			+ "}";	
+		
+		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
+		
+		assertThat(dispositivoObtenido.getHistorialUsos()).isEmpty();
 	}
 }

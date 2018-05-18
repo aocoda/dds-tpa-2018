@@ -78,6 +78,15 @@ public class Cliente {
 		return consumoDispEstandar + consumoDispInteligentes;
 	}
 	
+	public void recategorizar(Collection<Categoria> categorias, Periodo unPeriodo) {
+		
+		categorias
+		.stream()
+		.filter(categoria -> categoria.leCorresponde(this, unPeriodo))
+		.findFirst()
+		.ifPresent(categoria -> this.categoria = categoria);
+	}
+	
 	public void recategorizar(Collection<Categoria> categorias) {
 		
 		categorias

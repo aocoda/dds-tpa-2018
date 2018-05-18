@@ -2,6 +2,7 @@ package dominio;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 
 import dominio.dispositivos.DispositivoEstandar;
 import dominio.dispositivos.DispositivoInteligente;
+import dominio.dispositivos.Periodo;
 import dominio.mocks.DispositivoMock;
 
 import org.junit.Test;
@@ -136,9 +138,11 @@ public class ClienteTest {
 
 		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
 
-		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, null);
+		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, dispositivosInteligentes);
 
-		cliente.recategorizar(categorias);
+		Periodo periodoDeUnMes = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0), LocalDateTime.of(2018, 2, 1, 0, 0));
+		
+		cliente.recategorizar(categorias, periodoDeUnMes);
 
 		assertEquals(categoriaVieja, cliente.getCategoria());
 	}
@@ -153,9 +157,11 @@ public class ClienteTest {
 
 		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
 
-		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, null);
+		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, dispositivosInteligentes);
 
-		cliente.recategorizar(categorias);
+		Periodo periodoDeUnMes = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0), LocalDateTime.of(2018, 2, 1, 0, 0));
+		
+		cliente.recategorizar(categorias, periodoDeUnMes);
 
 		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
 	}
