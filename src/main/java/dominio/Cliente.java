@@ -72,9 +72,11 @@ public class Cliente {
 	
 	public double consumoDe(Periodo unPeriodo) {
 		
-		return dispositivosEstandar.stream().mapToDouble(de -> de.consumoEstimadoDe(unPeriodo)).sum() 
-				+
-				dispositivosInteligentes.stream().mapToDouble(di -> di.consumoDe(unPeriodo)).sum();
+		double consumoDispEstandar = dispositivosEstandar.stream().mapToDouble(de -> de.consumoEstimadoDe(unPeriodo)).sum();
+				
+		double consumoDispInteligentes = dispositivosInteligentes.stream().mapToDouble(di -> di.consumoDe(unPeriodo)).sum();
+		
+		return consumoDispEstandar + consumoDispInteligentes;
 	}
 	
 	public void recategorizar(Collection<Categoria> categorias) {

@@ -1,5 +1,7 @@
 package dominio.dispositivos.inteligentes;
 
+import java.time.LocalDateTime;
+
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 
@@ -21,8 +23,11 @@ public class Uso implements Comparable<Uso>, PeriodoUtils {
 
 	public Uso acotarExtremos(Periodo unPeriodo) {
 
-		return new Uso(new Periodo(maximo(periodo.getFechaYHoraDeInicio(), unPeriodo.getFechaYHoraDeInicio()),
-				minimo(periodo.getFechaYHoraDeFin(), unPeriodo.getFechaYHoraDeFin())), estadoDispositivo);
+		LocalDateTime nuevoInicio = maximo(periodo.getFechaYHoraDeInicio(), unPeriodo.getFechaYHoraDeInicio());
+		
+		LocalDateTime nuevoFin = minimo(periodo.getFechaYHoraDeFin(), unPeriodo.getFechaYHoraDeFin());
+		
+		return new Uso(new Periodo(nuevoInicio, nuevoFin), estadoDispositivo);
 	}
 
 	@Override
@@ -34,10 +39,5 @@ public class Uso implements Comparable<Uso>, PeriodoUtils {
 	public Periodo getPeriodo() {
 
 		return periodo;
-	}
-
-	public EstadoDispositivo getModo() {
-
-		return estadoDispositivo;
 	}
 }

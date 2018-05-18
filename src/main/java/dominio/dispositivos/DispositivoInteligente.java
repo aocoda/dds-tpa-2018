@@ -22,17 +22,17 @@ public class DispositivoInteligente {
 
 	public double consumoDe(Periodo unPeriodo) {
 
-		return historialUsos.stream().filter(uso -> unPeriodo.contiene(uso.getPeriodo()))
+		return historialUsos
+				.stream()
+				.filter(uso -> unPeriodo.contiene(uso.getPeriodo()))
 				.map(uso -> uso.acotarExtremos(unPeriodo))
-				.mapToDouble(uso -> uso.consumo(consumoPorHora)).sum();
-	}
-
-	public EstadoDispositivo getModo() {
-		return estadoDispositivo;
+				.mapToDouble(uso -> uso.consumo(consumoPorHora))
+				.sum();
 	}
 
 	public void addUso(Periodo unPeriodo) {
-		historialUsos.add(new Uso(unPeriodo, this.getModo()));
+		
+		historialUsos.add(new Uso(unPeriodo, estadoDispositivo));
 	}
 
 	public double consumoDeLasUltimas(double nHoras) {
