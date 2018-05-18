@@ -6,10 +6,11 @@ import java.time.LocalDateTime;
 import org.junit.Test;
 
 import dominio.dispositivos.*;
+import dominio.mocks.DispositivoMock;
 
 public class DispositivoInteligenteTest {
 
-	private DispositivoInteligente dispositivoTest = new DispositivoInteligente("dispositivoTest", 100);
+	private DispositivoInteligente dispositivoTest = new DispositivoMock("dispositivoTest", 100);
 	private LocalDateTime dia1 = LocalDateTime.of(2018, 4, 1, 0, 0);
 	private LocalDateTime dia2 = LocalDateTime.of(2018, 4, 2, 0, 0);
 	private LocalDateTime dia3 = LocalDateTime.of(2018, 4, 3, 0, 0);
@@ -68,6 +69,7 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void unHistorialConUnConsumoDe24HSQueSeEncuentraTotalmenteDentroDelPeriodoAAnalizar() {
+		
 		dispositivoTest.encender();
 		Periodo dia2a3 = new Periodo(dia2, dia3);
 		Periodo dia1a5 = new Periodo(dia1, dia5);
@@ -78,6 +80,7 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void unHistorialCon2ConsumoDe48HSQueSeEncuentraTotalmenteDentroDelPeriodoAAnalizar() {
+		
 		dispositivoTest.encender();
 		Periodo dia2a3 = new Periodo(dia2, dia3);
 		Periodo dia3a4 = new Periodo(dia3, dia4);
@@ -90,6 +93,7 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void unHistorialConUnConsumoDe72HSQueSeEncuentraSolo48HsSeAnalizan_ComoParticular_TerminanLaMismaFecha() {
+		
 		dispositivoTest.encender();
 		Periodo dia1a3 = new Periodo(dia1, dia3);
 		Periodo dia4a5 = new Periodo(dia4, dia5);
@@ -102,6 +106,7 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void unHistorialConUnConsumoDe72HSQueSeEncuentraSolo48HsSeAnalizan_ComoParticularUsoTerminan1HoraAntesDelPeriodo() {
+		
 		dispositivoTest.encender();
 		Periodo dia1a3 = new Periodo(dia1, dia3);
 		Periodo dia4a5 = new Periodo(dia4, dia5);
@@ -114,6 +119,7 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void unHistorialDondeLosUsosDentroNoCaenDelPeriodoAnalizarDebeDar0() {
+		
 		dispositivoTest.encender();
 		Periodo dia1a3 = new Periodo(dia1, dia3);
 		Periodo dia5a5_1 = new Periodo(dia5, dia5_1);
@@ -124,6 +130,7 @@ public class DispositivoInteligenteTest {
 
 	@Test
 	public void unPeriodoDondeElDispositvoTieneUnaListaVaciaDebeDar0() {
+		
 		dispositivoTest.encender();
 		Periodo dia5a5_1 = new Periodo(dia5, dia5_1);
 

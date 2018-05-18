@@ -6,7 +6,7 @@ import java.util.HashSet;
 import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.*;
 
-public class DispositivoInteligente {
+public abstract class DispositivoInteligente {
 
 	private String nombreGenerico;
 	private double consumoPorHora;

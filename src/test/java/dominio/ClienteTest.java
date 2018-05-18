@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import dominio.dispositivos.DispositivoEstandar;
 import dominio.dispositivos.DispositivoInteligente;
+import dominio.mocks.DispositivoMock;
 
 import org.junit.Test;
 
@@ -17,8 +18,8 @@ public class ClienteTest {
 	private Cliente cliente;
 	private Set<DispositivoEstandar> dispositivosEstandar = new HashSet<DispositivoEstandar>();
 	private Set<DispositivoInteligente> dispositivosInteligentes = new HashSet<DispositivoInteligente>();
-	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100);
-	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 50);
+	private DispositivoInteligente heladera = new DispositivoMock("Heladera", 100);
+	private DispositivoInteligente televisor = new DispositivoMock("Televisor", 50);
 
 	public Cliente construirClienteTest(Categoria categoria, Set<DispositivoEstandar> dispositivosEstandar,
 			Set<DispositivoInteligente> dispositivosInteligentes) {
