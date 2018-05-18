@@ -15,6 +15,7 @@ import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
 import dominio.importadorJson.ParserJson;
 import dominio.mocks.DispositivoMock;
+import dominio.mocks.DispositivoMock2;
 import dominio.importadorJson.ParserCategorias;
 import dominio.importadorJson.ParserClientes;
 import repositorios.RepositorioCategorias;
@@ -144,6 +145,25 @@ public class ParsersJsonTest {
 		assertThat(dispositivoObtenido).isInstanceOf(DispositivoMock.class);
 	}
 		
+	@Test
+	public void tambienParseaBienCuandoElDispositivoTieneAtributosExtraALosDeSuSuperclase() {
+		
+		String clienteTest = "{\"dispositivosInteligentes\":"
+				+ "["
+					+ "{"
+						+ "\"tipo\": \"dominio.mocks.DispositivoMock2\","
+						+ "\"nombreGenerico\": \"Generico\","
+						+ "\"consumoPorHora\": 100,"
+						+ "\"otroAtributo\": \"un Valor\""
+					+ "}"
+				+ "]"
+			+ "}";
+		
+		DispositivoMock2 dispositivoObtenido = (DispositivoMock2) parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
+		
+		assertThat(dispositivoObtenido.getOtroAtributo()).isEqualTo("un Valor");
+	}
+	
 	@Test
 	public void SiElClienteJsonTieneUnaCategoriaInexistenteEnElRepo_SeCreaUnClienteConCategoriaNullYLosDemasValoresPorDefectoCeroONull() {
 		
