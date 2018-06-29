@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 
-public class Uso PeriodoUtils {
+public class Uso implements PeriodoUtils {
 
 	private Periodo periodo;
 	private EstadoDispositivo estadoDispositivo;
