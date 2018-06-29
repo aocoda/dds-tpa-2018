@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 
-public class Uso implements Comparable<Uso>, PeriodoUtils {
+public class Uso implements PeriodoUtils {
 
 	private Periodo periodo;
 	private EstadoDispositivo estadoDispositivo;
@@ -29,13 +29,7 @@ public class Uso implements Comparable<Uso>, PeriodoUtils {
 		
 		return new Uso(new Periodo(nuevoInicio, nuevoFin), estadoDispositivo);
 	}
-
-	@Override
-	public int compareTo(Uso otroUso) {
-
-		return periodo.compareTo(otroUso.getPeriodo());
-	}
-
+	
 	public Periodo getPeriodo() {
 
 		return periodo;

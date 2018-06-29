@@ -3,7 +3,7 @@ package dominio.dispositivos;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class Periodo implements Comparable<Periodo> {
+public class Periodo {
 
 	private LocalDateTime fechaYHoraDeInicio;
 	private LocalDateTime fechaYHoraDeFin;
@@ -46,12 +46,6 @@ public class Periodo implements Comparable<Periodo> {
 		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMonths(nMeses);
 		
 		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
-	}
-	
-	@Override
-	public int compareTo(Periodo otroPeriodo) {
-		
-		return fechaYHoraDeInicio.compareTo(otroPeriodo.getFechaYHoraDeInicio());
 	}
 	
 	public LocalDateTime getFechaYHoraDeFin() {
