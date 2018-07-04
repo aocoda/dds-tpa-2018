@@ -35,7 +35,7 @@ public class Main {
 		por ejemplo X1 = AireAcondicionado, consumoPorHora = 1.613
 					X2 = Microondas, consumoPorHora = 0.64
 		*/
-		LinearConstraint consumoMensual = new LinearConstraint(new double [] {1.613, 0.64}, Relationship.LEQ, 612);
+		LinearConstraint consumoMensual = new LinearConstraint(new double [] {1.613, 0.64}, Relationship.LEQ, 300);
 		
 		//Restriccion tipo b)
 		
@@ -49,7 +49,7 @@ public class Main {
 		LinearConstraint microondasMenor = new LinearConstraint(new double [] {0, 1}, Relationship.LEQ, 15);
 		LinearConstraint microondasMayor = new LinearConstraint(new double [] {0, 1}, Relationship.GEQ, 3);
 		
-		List<LinearConstraint> restricciones = Arrays.asList(aireMenor, aireMayor, microondasMenor, microondasMayor, consumoMensual);
+		LinearConstraintSet restricciones = new LinearConstraintSet(aireMenor, aireMayor, microondasMenor, microondasMayor, consumoMensual);
 		
 		
 		
@@ -72,7 +72,7 @@ public class Main {
 		//PASO 3: SIMPLEX Y RESULTADO
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		double [] resultado = new SimplexSolver()
-				.optimize(funcionEconomica, new LinearConstraintSet(restricciones), GoalType.MAXIMIZE)
+				.optimize(funcionEconomica, restricciones, GoalType.MAXIMIZE)
 				.getPoint();
 		
 		

@@ -81,4 +81,9 @@ public abstract class DispositivoInteligente {
 		
 		return historialUsos;
 	}
+
+	public double getConsumoPorHora() {
+		
+		return consumoPorHora;
+	}
 }
