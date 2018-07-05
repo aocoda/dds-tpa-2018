@@ -4,11 +4,11 @@ import java.util.function.ToDoubleFunction;
 
 import dominio.dispositivos.DispositivoInteligente;
 
-public class Horas implements TipoRestriccion {
+public class HorasDeUso implements TipoRestriccion {
 
 	private DispositivoInteligente dispositivo;
 	
-	public Horas(DispositivoInteligente dispositivo) {
+	public HorasDeUso(DispositivoInteligente dispositivo) {
 		
 		this.dispositivo = dispositivo;
 	}
