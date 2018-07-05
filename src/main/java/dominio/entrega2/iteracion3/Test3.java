@@ -3,8 +3,8 @@ package dominio.entrega2.iteracion3;
 import java.util.Arrays;
 
 import dominio.mocks.DispositivoMock;
-import dominio.reglas.actuadores.Actuador;
-import dominio.reglas.reglas.Regla;
+import dominio.reglas.Actuador;
+import dominio.reglas.Regla;
 
 public class Test3 {
 
@@ -31,6 +31,6 @@ public class Test3 {
 		CondicionSimplex condicion = new CondicionSimplex();
 
 		
-		Regla<DispositivoMock> regla = new Regla<>(Arrays.asList(condicion), Arrays.asList(apagador), dispositivo);
+		Regla<DispositivoMock> regla = new Regla<>(condicion, Arrays.asList(apagador), dispositivo);
 	}
 }
