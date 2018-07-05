@@ -13,11 +13,11 @@ import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.estados.Apagado;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
-import dominio.importadorJson.ParserJson;
+import dominio.importadorJson.parser.ParserCategorias;
+import dominio.importadorJson.parser.ParserClientes;
+import dominio.importadorJson.parser.ParserJson;
 import dominio.mocks.DispositivoMock;
 import dominio.mocks.DispositivoMock2;
-import dominio.importadorJson.ParserCategorias;
-import dominio.importadorJson.ParserClientes;
 import repositorios.RepositorioCategorias;
 
 public class ParsersJsonTest {

@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.reglas.sensores.condiciones.Condicion;
-import dominio.reglas.sensores.sensores.Sensor;
+import dominio.reglas.Sensor;
+import dominio.reglas.condiciones.Condicion;
+import dominio.reglas.condiciones.CondicionSimple;
+import dominio.reglas.condiciones.compuestas.Or;
 
 public class CondicionTest {
 
@@ -18,10 +20,19 @@ public class CondicionTest {
 		}
 	};
 	
-	@Test
-	public void conUnaCondicionDeTemperaturaMenorA30YunSensorQueMide30_LaCondicionNoSeDebeCumplir() {
+	private Sensor sensorQueSiempreMide60PorCientoDeHumedad = new Sensor() {
 		
-		Condicion condicionTemperaturaMenorA30 = new Condicion(sensorQueSiempreMide30Grados) {
+		@Override
+		public double medir() {
+
+			return 0.6;
+		}
+	};
+	
+	@Test
+	public void conUnaCondicionSimpleDeTemperaturaMenorA30YunSensorQueMide30_LaCondicionNoSeDebeCumplir() {
+		
+		Condicion condicionTemperaturaMenorA30 = new CondicionSimple(sensorQueSiempreMide30Grados) {
 			
 			@Override
 			public boolean aplicarCriterio(double medicion) {
@@ -34,9 +45,9 @@ public class CondicionTest {
 	}
 	
 	@Test
-	public void conUnaCondicionDeTemperaturaEntre15Y40YunSensorQueMide30_LaCondicionSeDebeCumplir() {
+	public void conUnaCondicionSimpleDeTemperaturaEntre15Y40YunSensorQueMide30_LaCondicionSeDebeCumplir() {
 		
-		Condicion condicionTemperaturaEntre15Y40 = new Condicion(sensorQueSiempreMide30Grados) {
+		Condicion condicionTemperaturaEntre15Y40 = new CondicionSimple(sensorQueSiempreMide30Grados) {
 			
 			@Override
 			public boolean aplicarCriterio(double medicion) {
@@ -46,5 +57,31 @@ public class CondicionTest {
 		};
 		
 		assertTrue(condicionTemperaturaEntre15Y40.seCumple());
+	}
+	
+	@Test
+	public void conUnaCondicionOrDeTemperaturaMenorA30_o_HumedadIgualA60PorCiento_LaCondicionSeDebeCumplir() {
+		
+		Condicion condicionTemperaturaMenorA30 = new CondicionSimple(sensorQueSiempreMide30Grados) {
+			
+			@Override
+			public boolean aplicarCriterio(double medicion) {
+				
+				return medicion < 30;
+			}
+		};
+		
+		Condicion condicionHumedadIgualA60PorCiento = new CondicionSimple(sensorQueSiempreMide60PorCientoDeHumedad) {
+			
+			@Override
+			public boolean aplicarCriterio(double medicion) {
+				
+				return medicion == 0.6;
+			}
+		};
+		
+		Condicion condicionOr = new Or(condicionTemperaturaMenorA30, condicionHumedadIgualA60PorCiento);
+		
+		assertTrue(condicionOr.seCumple());
 	}
 }

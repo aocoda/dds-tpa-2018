@@ -1,33 +1,27 @@
-package dominio.reglas.reglas;
+package dominio.reglas;
 
 import java.util.Collection;
 
 import dominio.dispositivos.DispositivoInteligente;
-import dominio.reglas.actuadores.Actuador;
-import dominio.reglas.sensores.condiciones.Condicion;
+import dominio.reglas.condiciones.Condicion;
 
 public class Regla<T extends DispositivoInteligente> {
 
-	private Collection<Condicion> condiciones;
+	private Condicion condicion;
 	private Collection<Actuador<T>> actuadores;
 	private T dispositivoInteligente;
 	
-	public Regla(Collection<Condicion> condiciones, Collection<Actuador<T>> actuadores, T dispositivoInteligente) {
+	public Regla(Condicion condicion, Collection<Actuador<T>> actuadores, T dispositivoInteligente) {
 		
-		this.condiciones = condiciones;
+		this.condicion = condicion;
 		this.actuadores = actuadores;
 		this.dispositivoInteligente = dispositivoInteligente;
 	}
-	
+
 	public void ejecutarActuadoresSiCorresponde() {
 		
-		if(seCumplenTodas(condiciones))
+		if(condicion.seCumple())
 			ejecutarTodos(actuadores, dispositivoInteligente);
-	}
-
-	private boolean seCumplenTodas(Collection<Condicion> condiciones) {
-		
-		return condiciones.stream().allMatch(condicion -> condicion.seCumple());
 	}
 	
 	private void ejecutarTodos(Collection<Actuador<T>> actuadores, T dispositivoInteligente) {

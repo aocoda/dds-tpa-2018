@@ -1,4 +1,4 @@
-package dominio.reglas.actuadores;
+package dominio.reglas;
 
 import dominio.dispositivos.DispositivoInteligente;
 

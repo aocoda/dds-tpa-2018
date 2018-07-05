@@ -1,4 +1,4 @@
-package dominio.reglas.sensores.sensores;
+package dominio.reglas;
 
 public interface Sensor {
 
