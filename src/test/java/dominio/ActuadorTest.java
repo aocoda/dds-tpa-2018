@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dominio.mocks.DispositivoMock2;
-import dominio.reglas.actuadores.Actuador;
+import dominio.reglas.Actuador;
 
 public class ActuadorTest {
 
