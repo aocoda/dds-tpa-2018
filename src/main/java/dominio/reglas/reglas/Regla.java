@@ -12,6 +12,13 @@ public class Regla<T extends DispositivoInteligente> {
 	private Collection<Actuador<T>> actuadores;
 	private T dispositivoInteligente;
 	
+	public Regla(Collection<Condicion> condiciones, Collection<Actuador<T>> actuadores, T dispositivoInteligente) {
+		
+		this.condiciones = condiciones;
+		this.actuadores = actuadores;
+		this.dispositivoInteligente = dispositivoInteligente;
+	}
+	
 	public void ejecutarActuadoresSiCorresponde() {
 		
 		if(seCumplenTodas(condiciones))

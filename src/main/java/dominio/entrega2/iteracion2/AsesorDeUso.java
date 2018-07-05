@@ -41,6 +41,11 @@ public class AsesorDeUso {
 				.collect(Collectors.toMap(Entry::getKey, e -> e.getValue() - e.getKey().horasDeUso(unPeriodo)));
 	}
 	
+	public boolean superaHorasOptimas(DispositivoInteligente dispositivo, List<DispositivoInteligente> dispositivos, Periodo unPeriodo) {
+		
+		return recomendacionesPara(dispositivos, unPeriodo).get(dispositivo) < 0;
+	}
+	
 	
 	
 	
