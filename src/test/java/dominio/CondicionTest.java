@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import dominio.reglas.Sensor;
 import dominio.reglas.condiciones.Condicion;
+import dominio.reglas.condiciones.CondicionSimple;
 import dominio.reglas.condiciones.compuestas.Or;
-import dominio.reglas.condiciones.simples.CondicionSimple;
 
 public class CondicionTest {
 

@@ -1,7 +1,6 @@
-package dominio.reglas.condiciones.simples;
+package dominio.reglas.condiciones;
 
 import dominio.reglas.Sensor;
-import dominio.reglas.condiciones.Condicion;
 
 public abstract class CondicionSimple implements Condicion {
 
