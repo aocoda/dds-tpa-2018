@@ -3,6 +3,7 @@ package dominio.importadorJson;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import dominio.importadorJson.parser.ParserJson;
 import repositorios.RepositorioGenerico;
 
 public class ImportadorJson {

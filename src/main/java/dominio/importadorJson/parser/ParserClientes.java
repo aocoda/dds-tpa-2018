@@ -1,4 +1,4 @@
-package dominio.importadorJson;
+package dominio.importadorJson.parser;
 
 import java.time.LocalDate;
 
