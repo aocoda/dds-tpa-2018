@@ -29,6 +29,16 @@ public abstract class DispositivoInteligente {
 				.mapToDouble(uso -> uso.consumo(consumoPorHora))
 				.sum();
 	}
+	
+	public double horasDeUso(Periodo unPeriodo) {
+
+		return historialUsos
+				.stream()
+				.filter(uso -> unPeriodo.contiene(uso.getPeriodo()))
+				.map(uso -> uso.acotarExtremos(unPeriodo))
+				.mapToDouble(uso -> uso.getPeriodo().cantidadDeHoras())
+				.sum();
+	}
 
 	public void addUso(Periodo unPeriodo) {
 		

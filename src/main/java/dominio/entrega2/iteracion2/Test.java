@@ -2,6 +2,7 @@ package dominio.entrega2.iteracion2;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import dominio.dispositivos.DispositivoInteligente;
@@ -16,7 +17,7 @@ public class Test {
 		
 		DispositivoInteligente d2 = new DispositivoMock("microondas", 0.64);
 		
-		Collection<DispositivoInteligente> dispositivos = Arrays.asList(d1, d2);
+		List<DispositivoInteligente> dispositivos = Arrays.asList(d1, d2);
 		
 		
 		
@@ -31,12 +32,12 @@ public class Test {
 		
 		Collection<Restriccion> restricciones = Arrays.asList(r1a, r2a, r1b, r2b, r);
 		
-		SimplexAdapter simplex = new SimplexAdapter(restricciones);
+		AsesorDeUso asesor = new AsesorDeUso(restricciones);
 		
 		
 		
 		//RESULTADO
-		Map<DispositivoInteligente, Double> resultado = simplex.getHorasOptimasDeUso(dispositivos);
+		Map<DispositivoInteligente, Double> resultado = asesor.getHorasOptimas(dispositivos);
 		
 		System.out.println(resultado);
 	}
