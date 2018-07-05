@@ -3,10 +3,27 @@ package dominio.entrega2.iteracion2;
 import java.util.Collection;
 
 import org.apache.commons.math3.optim.linear.LinearConstraint;
+import org.apache.commons.math3.optim.linear.Relationship;
 
 import dominio.dispositivos.DispositivoInteligente;
 
-public abstract class Restriccion {
+public class Restriccion {
 	
-	public abstract LinearConstraint toLinearConstraint(Collection<DispositivoInteligente> dispositivos);
+	private TipoRestriccion tipoRestriccion;
+	private Relationship relacion;
+	private Double valor;
+	
+	public Restriccion(TipoRestriccion tipoRestriccion, Relationship relacion, double valor) {
+
+		this.tipoRestriccion = tipoRestriccion;
+		this.relacion = relacion;
+		this.valor = valor;
+	}
+	
+	public LinearConstraint toLinearConstraint(Collection<DispositivoInteligente> dispositivos) {
+		
+		double [] coeficientes =  dispositivos.stream().mapToDouble(tipoRestriccion.generadorCoeficientes()).toArray();
+		
+		return new LinearConstraint(coeficientes, relacion, valor);
+	}
 }
