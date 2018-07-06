@@ -25,6 +25,17 @@ public class CondicionSimplex implements Condicion {
 	@Override
 	public boolean seCumple() {
 		
+		/*
+		
+		return new MenorA(0)
+				.aplicarCon(asesor.recomendacionesPara(dispositivos, periodo).get(dispositivo));
+		
+		
+		OTRA FORMA DE HACER LO MISMO, MAS COMPLEJA PERO MAS FLEXIBLE:
+			Ya no estoy atado a que la diferencia sea menor a cero
+			si lo subo al cosntructor puedo poner cualquier relacion: menor, mayor, igual, entre, etc
+		*/
+		
 		return asesor.superaHorasOptimas(dispositivo, dispositivos, periodo);
 	}
 }
