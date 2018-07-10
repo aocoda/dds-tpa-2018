@@ -2,6 +2,8 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
+
+import dominio.reglas.Regla;
 import dominio.dispositivos.*;
 import dominio.dispositivos.adaptadores.*;
 
@@ -16,13 +18,15 @@ public class Cliente {
 	private Categoria categoria;
 	private Collection<DispositivoEstandar> dispositivosEstandar;
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
+	private Collection<Regla> reglas;
 	private int puntos;
 	
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
 			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
 			Collection<DispositivoEstandar> dispositivosEstandar,
-			Collection<DispositivoInteligente> dispositivosInteligentes) {
+			Collection<DispositivoInteligente> dispositivosInteligentes,
+			Collection<Regla> reglas) {
 
 		this.nombreCompleto = nombreCompleto;
 		this.tipoDocumento = tipoDocumento;
@@ -33,6 +37,7 @@ public class Cliente {
 		this.categoria = categoria;
 		this.dispositivosEstandar = dispositivosEstandar;
 		this.dispositivosInteligentes = dispositivosInteligentes;
+		this.reglas = reglas;
 	}
 
 	public boolean existeDispositivoEncendido() {
@@ -112,5 +117,13 @@ public class Cliente {
 	private void sumarPuntos(int puntos) {
 
 		this.puntos  += puntos;
+	}
+	
+	private void addRegla(Regla unaRegla) {
+		reglas.add(unaRegla);
+	}
+
+	public Collection<Regla> getReglas() {
+		return reglas;
 	}
 }

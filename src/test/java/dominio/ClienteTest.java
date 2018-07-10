@@ -26,7 +26,7 @@ public class ClienteTest {
 	public Cliente construirClienteTest(Categoria categoria, Set<DispositivoEstandar> dispositivosEstandar,
 			Set<DispositivoInteligente> dispositivosInteligentes) {
 
-		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes);
+		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes, null);
 	}
 
 	// ExisteDispositivoEncendido

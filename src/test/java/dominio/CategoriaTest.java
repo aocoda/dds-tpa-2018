@@ -21,7 +21,7 @@ public class CategoriaTest {
 
 	public Cliente construirClienteTest(Collection<DispositivoEstandar> dispositivosEstandar) {
 
-		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new HashSet<>());
+		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new HashSet<>(), null);
 	}
 
 	@Test

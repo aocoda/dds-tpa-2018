@@ -22,7 +22,7 @@ public class ModuloAdaptadorTest {
 	
 	private Collection<DispositivoInteligente> dispInteligentes = new ArrayList<>();
 	
-	private Cliente cliente = new Cliente(null, null, 0, null, null, null, null, dispEstandar, dispInteligentes);
+	private Cliente cliente = new Cliente(null, null, 0, null, null, null, null, dispEstandar, dispInteligentes, null);
 	
 	
 	@Test
