@@ -24,7 +24,7 @@ public class Transformador {
 		return clientes
 				.stream()
 				.map(cliente -> cliente.consumoDe(unPeriodo))
-				.mapToInt(Double::intValue)
+				.mapToDouble(Double::doubleValue)
 				.sum();
 	}
 }
