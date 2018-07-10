@@ -1,10 +1,11 @@
-package dominio.entrega2.iteracion2;
+package dominio.asesorDeUso.restricciones;
 
 import java.util.Collection;
 
 import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 
+import dominio.asesorDeUso.restricciones.tiposRestriccion.TipoRestriccion;
 import dominio.dispositivos.DispositivoInteligente;
 
 public class Restriccion {

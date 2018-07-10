@@ -1,4 +1,4 @@
-package dominio.entrega2.iteracion2;
+package dominio.asesorDeUso.restricciones;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.apache.commons.math3.optim.linear.Relationship;
 
+import dominio.asesorDeUso.AsesorDeUso;
+import dominio.asesorDeUso.restricciones.tiposRestriccion.ConsumoTotal;
+import dominio.asesorDeUso.restricciones.tiposRestriccion.HorasDeUso;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
 import dominio.mocks.DispositivoMock;

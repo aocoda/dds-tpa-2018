@@ -1,4 +1,4 @@
-package dominio.entrega2;
+package dominio.asesorDeUso;
 
 import java.util.Arrays;
 import java.util.List;

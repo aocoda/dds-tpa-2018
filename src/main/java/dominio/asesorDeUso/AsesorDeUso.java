@@ -1,4 +1,4 @@
-package dominio.entrega2.iteracion2;
+package dominio.asesorDeUso;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,6 +14,7 @@ import org.apache.commons.math3.optim.linear.LinearObjectiveFunction;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
+import dominio.asesorDeUso.restricciones.Restriccion;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
 
@@ -39,11 +40,6 @@ public class AsesorDeUso {
 				.entrySet()
 				.stream()
 				.collect(Collectors.toMap(Entry::getKey, e -> e.getValue() - e.getKey().horasDeUso(unPeriodo)));
-	}
-	
-	public boolean superaHorasOptimas(DispositivoInteligente dispositivo, List<DispositivoInteligente> dispositivos, Periodo unPeriodo) {
-		
-		return recomendacionesPara(dispositivos, unPeriodo).get(dispositivo) < 0;
 	}
 	
 	

@@ -1,11 +1,11 @@
-package dominio.entrega2.iteracion3;
+package dominio.reglas.condiciones;
 
 import java.util.List;
 
+import dominio.asesorDeUso.AsesorDeUso;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
-import dominio.entrega2.iteracion2.AsesorDeUso;
-import dominio.reglas.condiciones.Condicion;
+import dominio.reglas.condiciones.relaciones.MenorA;
 
 public class CondicionSimplex implements Condicion {
 
@@ -25,17 +25,6 @@ public class CondicionSimplex implements Condicion {
 	@Override
 	public boolean seCumple() {
 		
-		/*
-		
-		return new MenorA(0)
-				.aplicarCon(asesor.recomendacionesPara(dispositivos, periodo).get(dispositivo));
-		
-		
-		OTRA FORMA DE HACER LO MISMO, MAS COMPLEJA PERO MAS FLEXIBLE:
-			Ya no estoy atado a que la diferencia sea menor a cero
-			si lo subo al cosntructor puedo poner cualquier relacion: menor, mayor, igual, entre, etc
-		*/
-		
-		return asesor.superaHorasOptimas(dispositivo, dispositivos, periodo);
+		return new MenorA(0).aplicarCon(asesor.recomendacionesPara(dispositivos, periodo).get(dispositivo));
 	}
 }

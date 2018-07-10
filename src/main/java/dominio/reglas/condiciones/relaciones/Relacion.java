@@ -1,4 +1,4 @@
-package dominio.reglas.condiciones.comparaciones;
+package dominio.reglas.condiciones.relaciones;
 
 public interface Relacion {
 

@@ -1,7 +1,7 @@
 package dominio.reglas.condiciones;
 
 import dominio.reglas.Sensor;
-import dominio.reglas.condiciones.comparaciones.Relacion;
+import dominio.reglas.condiciones.relaciones.Relacion;
 
 public class CondicionSensor implements Condicion {
 

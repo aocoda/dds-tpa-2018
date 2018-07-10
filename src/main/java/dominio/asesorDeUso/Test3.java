@@ -1,10 +1,11 @@
-package dominio.entrega2.iteracion3;
+package dominio.asesorDeUso;
 
 import java.util.Arrays;
 
 import dominio.mocks.DispositivoMock;
 import dominio.reglas.Actuador;
 import dominio.reglas.Regla;
+import dominio.reglas.condiciones.CondicionSimplex;
 
 public class Test3 {
 

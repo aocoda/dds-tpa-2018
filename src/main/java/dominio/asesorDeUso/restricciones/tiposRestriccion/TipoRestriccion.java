@@ -1,4 +1,4 @@
-package dominio.entrega2.iteracion2;
+package dominio.asesorDeUso.restricciones.tiposRestriccion;
 
 import java.util.function.ToDoubleFunction;
 
