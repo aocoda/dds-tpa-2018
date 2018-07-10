@@ -126,4 +126,8 @@ public class Cliente {
 	public Collection<Regla> getReglas() {
 		return reglas;
 	}
+
+	public void ejecutarReglasQueCorrespondan() {
+		reglas.forEach(regla -> regla.ejecutarActuadoresSiCorresponde());
+	}
 }
