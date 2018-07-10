@@ -4,29 +4,22 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.mocks.DispositivoMock2;
+import dominio.mocks.DispositivoMock;
 import dominio.reglas.Actuador;
 
 public class ActuadorTest {
 
 	@Test
-	public void usandoUnActuadorQueConcatena_SiConcatenoBarAUnDispositivoQueTieneFoo_ElResultadoDebeSerFooBar() {
+	public void usandoUnActuadorQueApaga_SiLoEjecutoConUnDispositivoEncendido_SeDeberiaApagar() {
 		
-		Actuador<DispositivoMock2> concatenadorDeCadenas = new Actuador<DispositivoMock2>() {
-			
-			private String cadena = "Bar";
-			
-			@Override
-			public void ejecutar(DispositivoMock2 dispositivoInteligente) {
-				
-				dispositivoInteligente.concatenar(cadena);
-			}
-		};
+		Actuador apagador = dispositivo -> dispositivo.apagar();
 		
-		DispositivoMock2 dispositivoMock = new DispositivoMock2(null, 0, "Foo");
+		DispositivoMock dispositivoMock = new DispositivoMock(null, 0);
 		
-		concatenadorDeCadenas.ejecutar(dispositivoMock);
+		dispositivoMock.encender();
 		
-		assertEquals("FooBar", dispositivoMock.getOtroAtributo());
+		apagador.ejecutar(dispositivoMock);
+		
+		assertTrue(dispositivoMock.estaApagado());
 	}
 }

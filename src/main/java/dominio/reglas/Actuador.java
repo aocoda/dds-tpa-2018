@@ -2,7 +2,7 @@ package dominio.reglas;
 
 import dominio.dispositivos.DispositivoInteligente;
 
-public interface Actuador<T extends DispositivoInteligente> {
+public interface Actuador {
 
-	public void ejecutar(T dispositivoInteligente);
+	public void ejecutar(DispositivoInteligente dispositivo);
 }
