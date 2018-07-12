@@ -2,6 +2,7 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 
 import dominio.reglas.Regla;
 import dominio.dispositivos.*;
@@ -18,15 +19,14 @@ public class Cliente {
 	private Categoria categoria;
 	private Collection<DispositivoEstandar> dispositivosEstandar;
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
-	private Collection<Regla> reglas;
+	private Collection<Regla> reglas = new HashSet<>();
 	private int puntos;
 	
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
 			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
 			Collection<DispositivoEstandar> dispositivosEstandar,
-			Collection<DispositivoInteligente> dispositivosInteligentes,
-			Collection<Regla> reglas) {
+			Collection<DispositivoInteligente> dispositivosInteligentes) {
 
 		this.nombreCompleto = nombreCompleto;
 		this.tipoDocumento = tipoDocumento;
@@ -114,20 +114,18 @@ public class Cliente {
 		sumarPuntos(15);
 	}
 
-	private void sumarPuntos(int puntos) {
+	public void sumarPuntos(int puntos) {
 
 		this.puntos  += puntos;
 	}
 	
-	private void addRegla(Regla unaRegla) {
+	public void agregarRegla(Regla unaRegla) {
+		
 		reglas.add(unaRegla);
 	}
 
-	public Collection<Regla> getReglas() {
-		return reglas;
-	}
-
 	public void ejecutarReglasQueCorrespondan() {
-		reglas.forEach(regla -> regla.ejecutarActuadoresSiCorresponde());
+		
+		reglas.forEach(regla -> regla.ejecutarSiCorresponde());
 	}
 }

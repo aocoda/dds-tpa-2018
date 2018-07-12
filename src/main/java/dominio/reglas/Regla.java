@@ -18,7 +18,7 @@ public class Regla {
 		this.dispositivos = dispositivos;
 	}
 
-	public void ejecutarActuadoresSiCorresponde() {
+	public void ejecutarSiCorresponde() {
 		
 		if(condicion.seCumple())
 			dispositivos.forEach(dispositivo -> actuador.ejecutar(dispositivo));

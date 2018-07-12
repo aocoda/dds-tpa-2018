@@ -9,22 +9,20 @@ public class Transformador {
 	private Collection<Cliente> clientes;
 
 	public Transformador(Collection<Cliente> clientes) {
+		
 		this.clientes = clientes;
 	}
 
-	public Collection<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void addCliente(Cliente unCliente) {
+	public void agregarCliente(Cliente unCliente) {
+		
 		clientes.add(unCliente);
 	}
 
 	public double consumoDe(Periodo unPeriodo) {
+		
 		return clientes
 				.stream()
-				.map(cliente -> cliente.consumoDe(unPeriodo))
-				.mapToDouble(Double::doubleValue)
+				.mapToDouble(cliente -> cliente.consumoDe(unPeriodo))
 				.sum();
 	}
 }

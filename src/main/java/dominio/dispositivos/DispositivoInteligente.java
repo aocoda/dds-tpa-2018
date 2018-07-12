@@ -40,7 +40,7 @@ public abstract class DispositivoInteligente {
 				.sum();
 	}
 
-	public void addUso(Periodo unPeriodo) {
+	public void agregarUso(Periodo unPeriodo) {
 		
 		historialUsos.add(new Uso(unPeriodo, estadoDispositivo));
 	}
