@@ -10,6 +10,7 @@ public class Transformador {
 	private Collection<Cliente> clientes;
 
 	public Transformador(String nombre, Collection<Cliente> clientes) {
+		
 		this.nombre = nombre;
 		this.clientes = clientes;
 	}
