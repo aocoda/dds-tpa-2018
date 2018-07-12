@@ -37,7 +37,6 @@ public class Cliente {
 		this.categoria = categoria;
 		this.dispositivosEstandar = dispositivosEstandar;
 		this.dispositivosInteligentes = dispositivosInteligentes;
-		this.reglas = reglas;
 	}
 
 	public boolean existeDispositivoEncendido() {
