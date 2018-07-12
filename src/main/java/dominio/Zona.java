@@ -18,11 +18,6 @@ public class Zona {
 		transformadores.add(transformador);
 	}
 
-	public void eliminarTransformador(Transformador transformador) {
-		
-		transformadores.remove(transformador);
-	}
-
 	public double consumoDe(Periodo unPeriodo) {
 		
 		return transformadores
