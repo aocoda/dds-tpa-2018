@@ -1,6 +1,6 @@
 package dominio.dispositivos;
 
-public class DispositivoEstandar {
+public class DispositivoEstandar implements Dispositivo {
 
 	private String nombreGenerico;
 	private double consumoPorHora;
@@ -13,8 +13,21 @@ public class DispositivoEstandar {
 		this.horasEstimadasDeUsoPorDia = horasEstimadasDeUsoPorDia;
 	}
 	
-	public double consumoEstimadoDe(Periodo unPeriodo) {
+	@Override
+	public double consumoDe(Periodo unPeriodo) {
 		
-		return unPeriodo.cantidadDeDias() * horasEstimadasDeUsoPorDia * consumoPorHora;
+		return horasDeUso(unPeriodo) * consumoPorHora;
+	}
+	
+	@Override
+	public double horasDeUso(Periodo unPeriodo) {
+
+		return unPeriodo.cantidadDeDias() * horasEstimadasDeUsoPorDia;
+	}
+
+	@Override
+	public double getConsumoPorHora() {
+		
+		return consumoPorHora;
 	}
 }

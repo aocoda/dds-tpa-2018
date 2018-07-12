@@ -15,7 +15,7 @@ import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
 import dominio.asesorDeUso.restricciones.Restriccion;
-import dominio.dispositivos.DispositivoInteligente;
+import dominio.dispositivos.Dispositivo;
 import dominio.dispositivos.Periodo;
 
 public class AsesorDeUso {
@@ -27,14 +27,14 @@ public class AsesorDeUso {
 		this.restricciones = restricciones;
 	}
 
-	public Map<DispositivoInteligente, Double> getHorasOptimas(List<DispositivoInteligente> dispositivos) {
+	public Map<Dispositivo, Double> getHorasOptimas(List<Dispositivo> dispositivos) {
 		
 		return dispositivos
 				.stream()
 				.collect(Collectors.toMap(Function.identity(), d -> valoresOptimos(dispositivos).get(dispositivos.indexOf(d))));
 	}
 
-	public Map<DispositivoInteligente, Double> recomendacionesPara(List<DispositivoInteligente> dispositivos, Periodo unPeriodo) {
+	public Map<Dispositivo, Double> recomendacionesPara(List<Dispositivo> dispositivos, Periodo unPeriodo) {
 		
 		return getHorasOptimas(dispositivos)
 				.entrySet()
@@ -46,7 +46,7 @@ public class AsesorDeUso {
 	
 	
 	//AUXILIARES
-	private List<Double> valoresOptimos(List<DispositivoInteligente> dispositivos) {
+	private List<Double> valoresOptimos(List<Dispositivo> dispositivos) {
 		
 		double [] valores = new SimplexSolver()
 				.optimize(funcionEconomica(dispositivos), getRestricciones(restricciones, dispositivos), GoalType.MAXIMIZE)
@@ -55,7 +55,7 @@ public class AsesorDeUso {
 		return Arrays.stream(valores).boxed().collect(Collectors.toList());
 	}
 	
-	private LinearConstraintSet getRestricciones(Collection<Restriccion> restricciones, List<DispositivoInteligente> dispositivos) {
+	private LinearConstraintSet getRestricciones(Collection<Restriccion> restricciones, List<Dispositivo> dispositivos) {
 		
 		Collection<LinearConstraint> linearConstraints = restricciones
 				.stream()
@@ -65,7 +65,7 @@ public class AsesorDeUso {
 		return new LinearConstraintSet(linearConstraints);
 	}
 	
-	private LinearObjectiveFunction funcionEconomica(List<DispositivoInteligente> dispositivos) {
+	private LinearObjectiveFunction funcionEconomica(List<Dispositivo> dispositivos) {
 		
 		double [] coeficientes = dispositivos.stream().mapToDouble(d -> 1).toArray();
 		

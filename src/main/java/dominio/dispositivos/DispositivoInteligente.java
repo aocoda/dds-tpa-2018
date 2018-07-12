@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.*;
 
-public abstract class DispositivoInteligente {
+public abstract class DispositivoInteligente implements Dispositivo {
 
 	private String nombreGenerico;
 	private double consumoPorHora;
@@ -31,6 +31,7 @@ public abstract class DispositivoInteligente {
 				.collect(Collectors.toSet());
 	}
 	
+	@Override
 	public double consumoDe(Periodo unPeriodo) {
 
 		return usosDe(unPeriodo)
@@ -39,6 +40,7 @@ public abstract class DispositivoInteligente {
 				.sum();
 	}
 	
+	@Override
 	public double horasDeUso(Periodo unPeriodo) {
 
 		return usosDe(unPeriodo)

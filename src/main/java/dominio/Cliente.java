@@ -3,6 +3,7 @@ package dominio;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.stream.Stream;
 
 import dominio.reglas.Regla;
 import dominio.dispositivos.*;
@@ -69,11 +70,10 @@ public class Cliente {
 	
 	public double consumoDe(Periodo unPeriodo) {
 		
-		double consumoDispEstandar = dispositivosEstandar.stream().mapToDouble(de -> de.consumoEstimadoDe(unPeriodo)).sum();
-				
-		double consumoDispInteligentes = dispositivosInteligentes.stream().mapToDouble(di -> di.consumoDe(unPeriodo)).sum();
-		
-		return consumoDispEstandar + consumoDispInteligentes;
+		return Stream
+				.concat(dispositivosEstandar.stream(), dispositivosInteligentes.stream())
+				.mapToDouble(dispositivo -> dispositivo.consumoDe(unPeriodo))
+				.sum();
 	}
 	
 	public void recategorizar(Collection<Categoria> categorias, Periodo unPeriodo) {

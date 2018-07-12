@@ -15,6 +15,7 @@ import dominio.asesorDeUso.AsesorDeUso;
 import dominio.asesorDeUso.restricciones.Restriccion;
 import dominio.asesorDeUso.restricciones.tiposRestriccion.ConsumoTotal;
 import dominio.asesorDeUso.restricciones.tiposRestriccion.HorasDeUso;
+import dominio.dispositivos.Dispositivo;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
 import dominio.mocks.DispositivoMock;
@@ -31,7 +32,7 @@ public class AsesorDeUsoTest {
 		
 		DispositivoInteligente d2 = new DispositivoMock("microondas", 0.64);
 		
-		List<DispositivoInteligente> dispositivos = Arrays.asList(d1, d2);
+		List<Dispositivo> dispositivos = Arrays.asList(d1, d2);
 		
 		
 		
@@ -51,7 +52,7 @@ public class AsesorDeUsoTest {
 		
 		
 		//RESULTADO
-		Map<DispositivoInteligente, Double> resultado = asesor.getHorasOptimas(dispositivos);
+		Map<Dispositivo, Double> resultado = asesor.getHorasOptimas(dispositivos);
 		
 		
 		
@@ -68,7 +69,7 @@ public class AsesorDeUsoTest {
 
 		DispositivoInteligente d2 = new DispositivoMock("microondas", 0.64);
 
-		List<DispositivoInteligente> dispositivos = Arrays.asList(d1, d2);
+		List<Dispositivo> dispositivos = Arrays.asList(d1, d2);
 
 		
 		
@@ -101,7 +102,7 @@ public class AsesorDeUsoTest {
 		//RESULTADO
 		Periodo periodo = Periodo.deLosUltimosNMeses(1);
 
-		Map<DispositivoInteligente, Double> resultado = asesor.recomendacionesPara(dispositivos, periodo);
+		Map<Dispositivo, Double> resultado = asesor.recomendacionesPara(dispositivos, periodo);
 		
 		
 		
@@ -121,7 +122,7 @@ public class AsesorDeUsoTest {
 		DispositivoInteligente dispositivo2 = new DispositivoMock("dispositivoTest2", 20);
 		
 		//Total de dispositivos (el asesor los necesita)
-		List<DispositivoInteligente> dispositivos = Arrays.asList(dispositivo1, dispositivo2);
+		List<Dispositivo> dispositivos = Arrays.asList(dispositivo1, dispositivo2);
 		
 		
 		

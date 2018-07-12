@@ -6,7 +6,7 @@ import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 
 import dominio.asesorDeUso.restricciones.tiposRestriccion.TipoRestriccion;
-import dominio.dispositivos.DispositivoInteligente;
+import dominio.dispositivos.Dispositivo;
 
 public class Restriccion {
 	
@@ -21,7 +21,7 @@ public class Restriccion {
 		this.valor = valor;
 	}
 	
-	public LinearConstraint toLinearConstraint(Collection<DispositivoInteligente> dispositivos) {
+	public LinearConstraint toLinearConstraint(Collection<Dispositivo> dispositivos) {
 		
 		double [] coeficientes =  dispositivos.stream().mapToDouble(tipoRestriccion.generadorCoeficientes()).toArray();
 		
