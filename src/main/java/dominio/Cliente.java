@@ -128,4 +128,9 @@ public class Cliente {
 		
 		reglas.forEach(regla -> regla.ejecutarSiCorresponde());
 	}
+
+	public int getNumeroDocumento() {
+		
+		return numeroDocumento;
+	}
 }

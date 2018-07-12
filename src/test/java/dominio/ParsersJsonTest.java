@@ -16,16 +16,20 @@ import dominio.excepciones.ParserException;
 import dominio.importadorJson.parser.ParserCategorias;
 import dominio.importadorJson.parser.ParserClientes;
 import dominio.importadorJson.parser.ParserJson;
+import dominio.importadorJson.parser.ParserZonas;
 import dominio.mocks.DispositivoMock;
 import dominio.mocks.DispositivoMock2;
 import repositorios.RepositorioCategorias;
+import repositorios.RepositorioClientes;
 
 public class ParsersJsonTest {
 
 	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();
+	private RepositorioClientes repositorioClientes = new RepositorioClientes();
 	
 	private ParserJson<Categoria> parserCategorias = new ParserCategorias();
 	private ParserJson<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
+	private ParserJson<Zona> parserZonas = new ParserZonas(repositorioClientes);
 	
 	
 	
@@ -246,5 +250,85 @@ public class ParsersJsonTest {
 		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
 		
 		assertThat(dispositivoObtenido.getHistorialUsos()).isEmpty();
+	}
+	
+	
+	//ZONAS
+	@Test
+	public void unTestParaZona() {
+		
+		String sinTransformadores = "{"
+				+ "\"nombre\": \"zona1\","
+				+ "\"transformadores\": []"
+				+ "}";
+		
+		Zona zonaObtenida = parserZonas.parsear(sinTransformadores);
+		Zona zonaEsperada = new Zona("zona1", Collections.emptyList());
+		
+		assertThat(zonaObtenida).isEqualToComparingFieldByFieldRecursively(zonaEsperada);
+	}
+	
+	@Test
+	public void uotrTest() {
+		
+
+		String sinClientes = "{"
+				+ "\"nombre\": \"zona1\","
+				+ "\"transformadores\":"
+					+ "["
+						+ "{"
+							+ "\"nombre\": \"transformador1\","
+							+ "\"clientes\": []"
+						+ "}"
+					+ "]"
+			+ "}";
+		
+
+		Zona zonaObtenida = parserZonas.parsear(sinClientes);
+		Zona zonaEsperada = new Zona("zona1", Collections.singletonList(new Transformador("transformador1", Collections.emptyList())));
+		
+		assertThat(zonaObtenida).isEqualToComparingFieldByFieldRecursively(zonaEsperada);
+	}
+	
+	@Test
+	public void ootroTest() {
+		
+		String conClienteExistente = "{"
+				+ "\"nombre\": \"zona1\","
+				+ "\"transformadores\":"
+					+ "["
+						+ "{"
+							+ "\"nombre\": \"transformador1\","
+							+ "\"clientes\": [12345678]"
+						+ "}"
+					+ "]"
+			+ "}";
+		
+
+		Cliente unCliente = new Cliente(null, null, 12345678, null, null, null, null, null, null);
+		
+		repositorioClientes.agregar(unCliente);
+		
+		Zona zonaObtenida = parserZonas.parsear(conClienteExistente);
+		Zona zonaEsperada = new Zona("zona1", Collections.singletonList(new Transformador("transformador1", Collections.singletonList(unCliente))));
+		
+		assertThat(zonaObtenida).isEqualToComparingFieldByFieldRecursively(zonaEsperada);
+	}
+	
+	@Test
+	public void ultimo() {
+		
+		String conClienteInexistente = "{"
+				+ "\"nombre\": \"zona1\","
+				+ "\"transformadores\":"
+					+ "["
+						+ "{"
+							+ "\"nombre\": \"transformador1\","
+							+ "\"clientes\": [11111111]"
+						+ "}"
+					+ "]"
+			+ "}";
+
+		assertThatThrownBy(() -> parserZonas.parsear(conClienteInexistente)).isInstanceOfAny(ParserException.class);
 	}
 }

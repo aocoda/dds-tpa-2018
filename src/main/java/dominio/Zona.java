@@ -6,16 +6,13 @@ import dominio.dispositivos.Periodo;
 
 public class Zona {
 	
+	private String nombre;
 	private Collection<Transformador> transformadores;
 
-	public Zona(Collection<Transformador> transformadores) {
+	public Zona(String nombre, Collection<Transformador> transformadores) {
 		
+		this.nombre = nombre;
 		this.transformadores = transformadores;
-	}
-
-	public void agregarTransformador(Transformador transformador) {
-		
-		transformadores.add(transformador);
 	}
 
 	public double consumoDe(Periodo unPeriodo) {

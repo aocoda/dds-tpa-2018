@@ -6,16 +6,12 @@ import dominio.dispositivos.Periodo;
 
 public class Transformador {
 
+	private String nombre;
 	private Collection<Cliente> clientes;
 
-	public Transformador(Collection<Cliente> clientes) {
-		
+	public Transformador(String nombre, Collection<Cliente> clientes) {
+		this.nombre = nombre;
 		this.clientes = clientes;
-	}
-
-	public void agregarCliente(Cliente unCliente) {
-		
-		clientes.add(unCliente);
 	}
 
 	public double consumoDe(Periodo unPeriodo) {

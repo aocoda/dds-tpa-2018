@@ -25,7 +25,7 @@ public class TransformadorTest {
 	private Cliente cliente1 = construirClienteTest(DI1);
 	private Cliente cliente2 = construirClienteTest(DI2);;
 	
-	private Transformador transformador = new Transformador(Arrays.asList(cliente1, cliente2));
+	private Transformador transformador = new Transformador(null, Arrays.asList(cliente1, cliente2));
 	
 	private LocalDateTime dia1 = LocalDateTime.of(2018, 4, 1, 0, 0);
 	private LocalDateTime dia2 = LocalDateTime.of(2018, 4, 2, 0, 0);
@@ -61,7 +61,7 @@ public class TransformadorTest {
 	@Test
 	public void transformadorSinClientesEnUnPeriodo() {
 
-		transformador = new Transformador(Collections.emptySet());
+		transformador = new Transformador(null, Collections.emptySet());
 
 		assertEquals(0, transformador.consumoDe(dia2a3), 0);
 	}
