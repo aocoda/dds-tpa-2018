@@ -23,17 +23,16 @@ public class ClienteTest {
 	private DispositivoInteligente heladera = new DispositivoMock("Heladera", 100);
 	private DispositivoInteligente televisor = new DispositivoMock("Televisor", 50);
 
-	public Cliente construirClienteTest(Categoria categoria, Set<DispositivoEstandar> dispositivosEstandar,
-			Set<DispositivoInteligente> dispositivosInteligentes) {
+	public Cliente construirClienteTest(Categoria categoria) {
 
-		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes, null);
+		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes);
 	}
 
 	// ExisteDispositivoEncendido
 	@Test
 	public void cuandoLaListaDeDispositivosInteligentesEstaVacia_ExisteDispositivoEncendido_DebeDarFalso() {
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertFalse(cliente.existeDispositivoEncendido());
 	}
@@ -45,7 +44,7 @@ public class ClienteTest {
 
 		dispositivosInteligentes.add(heladera);
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertTrue(cliente.existeDispositivoEncendido());
 	}
@@ -57,7 +56,7 @@ public class ClienteTest {
 		dispositivosInteligentes.add(heladera);
 		dispositivosInteligentes.add(televisor);
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertTrue(cliente.existeDispositivoEncendido());
 	}
@@ -69,7 +68,7 @@ public class ClienteTest {
 		dispositivosInteligentes.add(heladera);
 		dispositivosInteligentes.add(televisor);
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertEquals(0, cliente.cantidadDispositivosEncendidos());
 	}
@@ -81,7 +80,7 @@ public class ClienteTest {
 		dispositivosInteligentes.add(heladera);
 		dispositivosInteligentes.add(televisor);
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertEquals(1, cliente.cantidadDispositivosEncendidos());
 	}
@@ -89,7 +88,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoLaListaDeDispositivosInteligentesEstaVacia_CantidadDeDipositivosEncendidos_DebeDarCero() {
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertEquals(0, cliente.cantidadDispositivosEncendidos());
 	}
@@ -103,7 +102,7 @@ public class ClienteTest {
 		dispositivosInteligentes.add(heladera);
 		dispositivosInteligentes.add(televisor);
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertEquals(0, cliente.cantidadDispositivosApagados());
 	}
@@ -115,7 +114,7 @@ public class ClienteTest {
 		dispositivosInteligentes.add(heladera);
 		dispositivosInteligentes.add(televisor);
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertEquals(1, cliente.cantidadDispositivosApagados());
 	}
@@ -123,7 +122,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoLaListaDeDispositivosInteligentesEstaVacia_CantidadDipositivosApagados_DebeDarCero() {
 
-		cliente = construirClienteTest(null, null, dispositivosInteligentes);
+		cliente = construirClienteTest(null);
 
 		assertEquals(0, cliente.cantidadDispositivosApagados());
 	}
@@ -138,7 +137,7 @@ public class ClienteTest {
 
 		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
 
-		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, dispositivosInteligentes);
+		cliente = construirClienteTest(categoriaVieja);
 
 		Periodo periodoDeUnMes = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0), LocalDateTime.of(2018, 2, 1, 0, 0));
 		
@@ -157,7 +156,7 @@ public class ClienteTest {
 
 		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
 
-		cliente = construirClienteTest(categoriaVieja, dispositivosEstandar, dispositivosInteligentes);
+		cliente = construirClienteTest(categoriaVieja);
 
 		Periodo periodoDeUnMes = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0), LocalDateTime.of(2018, 2, 1, 0, 0));
 		

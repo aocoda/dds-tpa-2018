@@ -34,7 +34,7 @@ public class TransformadorTest {
 
 	public Cliente construirClienteTest(Set<DispositivoEstandar> dispositivosEstandar,
 			Set<DispositivoInteligente> dispositivosInteligentes) {
-		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, dispositivosInteligentes, null);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, dispositivosInteligentes);
 	}
 	public Transformador construirTransformadorTest(Set<Cliente> clientes) {
 		return new Transformador(clientes);
@@ -44,8 +44,8 @@ public class TransformadorTest {
 	public void transformadorCon2ClientesConDIEncendidosEnElPeriodo() {
 		heladera.encender();
 		televisor.encender();
-		heladera.addUso(dia1a2);
-		televisor.addUso(dia1a2);
+		heladera.agregarUso(dia1a2);
+		televisor.agregarUso(dia1a2);
 		DI1.add(heladera);
 		DI2.add(televisor);
 		cliente1 = construirClienteTest(DE1, DI1);
@@ -61,8 +61,8 @@ public class TransformadorTest {
 	public void transformadorCon2ClientesConDIEncendidosPeroSoloUnoEnElPeriodo() {
 		heladera.encender();
 		televisor.encender();
-		heladera.addUso(dia1a2);
-		televisor.addUso(dia1a3);
+		heladera.agregarUso(dia1a2);
+		televisor.agregarUso(dia1a3);
 		DI1.add(heladera);
 		DI2.add(televisor);
 		cliente1 = construirClienteTest(DE1, DI1);
@@ -86,8 +86,8 @@ public class TransformadorTest {
 	public void transformadorConClientesPeroNingunoConsumiendoDentroDelPeriodo() {
 		heladera.encender();
 		televisor.encender();
-		heladera.addUso(dia1a2);
-		televisor.addUso(dia1a2);
+		heladera.agregarUso(dia1a2);
+		televisor.agregarUso(dia1a2);
 		DI1.add(heladera);
 		DI2.add(televisor);
 		cliente1 = construirClienteTest(DE1, DI1);

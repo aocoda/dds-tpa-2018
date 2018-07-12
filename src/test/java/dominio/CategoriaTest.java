@@ -19,9 +19,9 @@ public class CategoriaTest {
 	private Periodo unMesDeTreita = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0),
 			LocalDateTime.of(2018, 1, 31, 0, 0));
 
-	public Cliente construirClienteTest(Collection<DispositivoEstandar> dispositivosEstandar) {
+	public Cliente construirClienteTest() {
 
-		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new HashSet<>(), null);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new HashSet<>());
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class CategoriaTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar(null, 100, 1));
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 100, 2, 0, 0);
 
 		// cargoFijo + (cantHoras * consumoPorHora * cantidadDeDiasDelPeriodo *
@@ -42,7 +42,7 @@ public class CategoriaTest {
 	@Test
 	public void conUnClienteDeConsumoIgualA0_SeIgnoraElCargoVariableYElEstimadoDebeSerElCargoFijo() {
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 500, 100, 0, 0);
 
 		assertEquals(500, categoriaTest.estimadoAPagar(clienteTest, unMesDeTreita), 0);
@@ -53,7 +53,7 @@ public class CategoriaTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar(null, 999, 999));
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 100, 0, 0, 0);
 
 		assertEquals(100, categoriaTest.estimadoAPagar(clienteTest, unMesDeTreita), 0);
@@ -64,7 +64,7 @@ public class CategoriaTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1));
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 300, 400);
 
 		assertTrue(!categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
@@ -75,7 +75,7 @@ public class CategoriaTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1));
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 329, 400);
 
 		assertTrue(categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
@@ -86,7 +86,7 @@ public class CategoriaTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1));
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 200, 299);
 
 		assertTrue(!categoriaTest.leCorresponde(clienteTest, unMesDeTreita));
@@ -97,7 +97,7 @@ public class CategoriaTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1));
 
-		clienteTest = construirClienteTest(dispositivosEstandar);
+		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 200, 330);
 
 		assertTrue(categoriaTest.leCorresponde(clienteTest, unMesDeTreita));

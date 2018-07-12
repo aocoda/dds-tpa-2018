@@ -76,11 +76,11 @@ public class AsesorDeUsoTest {
 		//USO DE LOS DISPOSITIVOS
 		Periodo periodo1 = Periodo.deLasUltimasNHoras(200);
 
-		d1.addUso(periodo1);
+		d1.agregarUso(periodo1);
 
 		Periodo periodo2 = Periodo.deLasUltimasNHoras(10);
 
-		d2.addUso(periodo2);
+		d2.agregarUso(periodo2);
 
 		
 		

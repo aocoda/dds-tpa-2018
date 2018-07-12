@@ -73,7 +73,7 @@ public class DispositivoInteligenteTest {
 		dispositivoTest.encender();
 		Periodo dia2a3 = new Periodo(dia2, dia3);
 		Periodo dia1a5 = new Periodo(dia1, dia5);
-		dispositivoTest.addUso(dia2a3);
+		dispositivoTest.agregarUso(dia2a3);
 
 		assertEquals(2400, dispositivoTest.consumoDe(dia1a5), 0);
 	}
@@ -85,8 +85,8 @@ public class DispositivoInteligenteTest {
 		Periodo dia2a3 = new Periodo(dia2, dia3);
 		Periodo dia3a4 = new Periodo(dia3, dia4);
 		Periodo dia1a5 = new Periodo(dia1, dia5);
-		dispositivoTest.addUso(dia2a3);
-		dispositivoTest.addUso(dia3a4);
+		dispositivoTest.agregarUso(dia2a3);
+		dispositivoTest.agregarUso(dia3a4);
 
 		assertEquals(4800, dispositivoTest.consumoDe(dia1a5), 0);
 	}
@@ -98,8 +98,8 @@ public class DispositivoInteligenteTest {
 		Periodo dia1a3 = new Periodo(dia1, dia3);
 		Periodo dia4a5 = new Periodo(dia4, dia5);
 		Periodo dia2a5 = new Periodo(dia2, dia5);
-		dispositivoTest.addUso(dia1a3);
-		dispositivoTest.addUso(dia4a5);
+		dispositivoTest.agregarUso(dia1a3);
+		dispositivoTest.agregarUso(dia4a5);
 
 		assertEquals(4800, dispositivoTest.consumoDe(dia2a5), 0);
 	}
@@ -111,8 +111,8 @@ public class DispositivoInteligenteTest {
 		Periodo dia1a3 = new Periodo(dia1, dia3);
 		Periodo dia4a5 = new Periodo(dia4, dia5);
 		Periodo dia2a5_1 = new Periodo(dia2, dia5_1);
-		dispositivoTest.addUso(dia1a3);
-		dispositivoTest.addUso(dia4a5);
+		dispositivoTest.agregarUso(dia1a3);
+		dispositivoTest.agregarUso(dia4a5);
 
 		assertEquals(4800, dispositivoTest.consumoDe(dia2a5_1), 0);
 	}
@@ -123,7 +123,7 @@ public class DispositivoInteligenteTest {
 		dispositivoTest.encender();
 		Periodo dia1a3 = new Periodo(dia1, dia3);
 		Periodo dia5a5_1 = new Periodo(dia5, dia5_1);
-		dispositivoTest.addUso(dia1a3);
+		dispositivoTest.agregarUso(dia1a3);
 
 		assertEquals(0, dispositivoTest.consumoDe(dia5a5_1), 0);
 	}
