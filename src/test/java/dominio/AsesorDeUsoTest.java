@@ -1,6 +1,7 @@
 package dominio;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,8 +18,6 @@ import dominio.asesorDeUso.restricciones.tiposRestriccion.HorasDeUso;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
 import dominio.mocks.DispositivoMock;
-import dominio.reglas.Actuador;
-import dominio.reglas.Regla;
 import dominio.reglas.condiciones.CondicionSimplex;
 
 
@@ -114,34 +113,43 @@ public class AsesorDeUsoTest {
 	@Test
 	public void condicionSimplex() {
 		
-		// DISPOSITIVOS
-
-		// UNO: Si este excede el consumo recomendado se debe ejecutar la regla
-		DispositivoMock dispositivo = new DispositivoMock("dispositivoTest", 10);
-		// TODOS: Son todos los del cliente, solo los necesita el asesor.
-		List<DispositivoInteligente> todos = Arrays.asList(dispositivo);
-
-		// ASESOR
-
-		// RESTRICCIONES: Son sobre el DISPOSITIVO o sobre TODOS
-		Restriccion restriccion1 = new Restriccion(new HorasDeUso(dispositivo), Relationship.LEQ, 100);
-		Restriccion restriccion2 = new Restriccion(new HorasDeUso(dispositivo), Relationship.GEQ, 0);
-		Restriccion restriccion3 = new Restriccion(new ConsumoTotal(), Relationship.LEQ, 50);
-		// ASESOR: Tiene las RESTRICCIONES
-		AsesorDeUso asesor = new AsesorDeUso(Arrays.asList(restriccion1, restriccion2, restriccion3));
-
-		// PERIODO: Es de 1 mes (se supone)
+		//1)
+		//Dispositivo el cual se quiere saber si excedio el consumo, que fue usado 100 horas
+		DispositivoMock dispositivo1 = new DispositivoMock("dispositivoTest", 10);
+		dispositivo1.agregarUso(Periodo.deLasUltimasNHoras(100));
+		
+		DispositivoInteligente dispositivo2 = new DispositivoMock("dispositivoTest2", 20);
+		
+		//Total de dispositivos (el asesor los necesita)
+		List<DispositivoInteligente> dispositivos = Arrays.asList(dispositivo1, dispositivo2);
+		
+		
+		
+		//2) Asesor y restricciones
+		//El dispositivo1 se deberia usar 50 horas
+		Restriccion restriccion1 = new Restriccion(new HorasDeUso(dispositivo1), Relationship.LEQ, 50);
+		//El dispositivo2 se deberia usar 0 horas
+		Restriccion restriccion2 = new Restriccion(new HorasDeUso(dispositivo2), Relationship.EQ, 0);
+		
+		AsesorDeUso asesor = new AsesorDeUso(Arrays.asList(restriccion1, restriccion2));
+		
+		
+		
+		//3) Periodo de 1 mes de duracion
 		Periodo periodo = Periodo.deLosUltimosNMeses(1);
-
-		// REGLA
-
-		// CONDICION: Necesita el ASESOR, el DISPOSITIVO, TODOS y PERIODO
-		CondicionSimplex condicion = new CondicionSimplex(asesor, dispositivo, todos, periodo);
-
-		// ACTUADOR
-		Actuador apagador = d -> d.apagar();
-
-		// REGLA: Los Dispositivos pueden ser TODOS o un SUBCONJUNTO de 1 o mas
-		Regla regla = new Regla(condicion, apagador, Arrays.asList(dispositivo));
+		
+		
+		
+		//4) Condicion
+		CondicionSimplex condicion = new CondicionSimplex(asesor, dispositivo1, dispositivos, periodo);
+		
+		
+		
+		/*
+		La recomendacion del asesor va a ser usarlo -50 horas (el óptimo era 50 y se usó 100).
+		Por lo tanto la restriccion se excedió y la condicion se cumple
+		*/
+		assertEquals(-50, asesor.recomendacionesPara(dispositivos, periodo).get(dispositivo1), 0.5);
+		assertTrue(condicion.seCumple());
 	}
 }
