@@ -2,6 +2,7 @@ package dominio.dispositivos;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.*;
@@ -20,22 +21,28 @@ public abstract class DispositivoInteligente {
 		this.consumoPorHora = consumoPorHora;
 	}
 
-	public double consumoDe(Periodo unPeriodo) {
-
+	
+	public Collection<Uso> usosDe(Periodo unPeriodo) {
+		
 		return historialUsos
 				.stream()
 				.filter(uso -> unPeriodo.contiene(uso.getPeriodo()))
 				.map(uso -> uso.acotarExtremos(unPeriodo))
+				.collect(Collectors.toSet());
+	}
+	
+	public double consumoDe(Periodo unPeriodo) {
+
+		return usosDe(unPeriodo)
+				.stream()
 				.mapToDouble(uso -> uso.consumo(consumoPorHora))
 				.sum();
 	}
 	
 	public double horasDeUso(Periodo unPeriodo) {
 
-		return historialUsos
+		return usosDe(unPeriodo)
 				.stream()
-				.filter(uso -> unPeriodo.contiene(uso.getPeriodo()))
-				.map(uso -> uso.acotarExtremos(unPeriodo))
 				.mapToDouble(uso -> uso.getPeriodo().cantidadDeHoras())
 				.sum();
 	}
