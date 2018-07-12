@@ -255,7 +255,7 @@ public class ParsersJsonTest {
 	
 	//ZONAS
 	@Test
-	public void unTestParaZona() {
+	public void SiLaZonaJsonNoPoseeTransformadores_DebeCrearUnaZonaConListaDeTrasnformadoresVacia() {
 		
 		String sinTransformadores = "{"
 				+ "\"nombre\": \"zona1\","
@@ -269,7 +269,7 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void uotrTest() {
+	public void SiLaZonaJsonPoseeUnTransformadorSinClientes_DebeCrearUnaZonaConUnTransformadorConUnaListaDeClientesVacia() {
 		
 
 		String sinClientes = "{"
@@ -291,7 +291,7 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void ootroTest() {
+	public void SiLaZonaJsonPoseeUnTransformadorConUnClienteQueExisteEnElRepositorio_DebeCrearUnaZonaConUnTransformadorConUnaListaDeClientesConEseElemento() {
 		
 		String conClienteExistente = "{"
 				+ "\"nombre\": \"zona1\","
@@ -316,7 +316,7 @@ public class ParsersJsonTest {
 	}
 	
 	@Test
-	public void ultimo() {
+	public void SiLaZonaJsonPoseeUnTransformadorConUnClienteQueNoExisteEnElRepositorio_DebeFallarAlParsear() {
 		
 		String conClienteInexistente = "{"
 				+ "\"nombre\": \"zona1\","
