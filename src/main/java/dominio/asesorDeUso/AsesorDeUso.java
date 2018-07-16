@@ -3,21 +3,19 @@ package dominio.asesorDeUso;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.LinearConstraintSet;
 import org.apache.commons.math3.optim.linear.LinearObjectiveFunction;
-import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
 import dominio.dispositivos.Dispositivo;
 import dominio.dispositivos.Periodo;
 
-public class AsesorDeUso {
+public class AsesorDeUso implements RestriccionUtils {
 
 	public Collection<Recomendacion> getHorasOptimas(List<Dispositivo> dispositivos) {
 		
@@ -50,36 +48,26 @@ public class AsesorDeUso {
 	
 	private LinearConstraintSet restricciones(List<Dispositivo> dispositivos) {
 		
-		ToDoubleFunction<Dispositivo> mapper1 = unDispositivo -> unDispositivo.getConsumoPorHora();
-		
-		LinearConstraint restriccionConsumoTotal = new LinearConstraint(dispositivos.stream().mapToDouble(mapper1).toArray(), Relationship.LEQ, 612);
+		LinearConstraint restriccionConsumoTotal = restriccionConsumoMaximo(coeficientes(dispositivos, unDispositivo -> unDispositivo.getConsumoPorHora()));
 		
 		Stream<LinearConstraint> restriccionesDeUso = dispositivos
 				.stream()
 				.flatMap(dispositivo -> {
 					
-					ToDoubleFunction<Dispositivo> mapper2 = unDispositivo -> unDispositivo.equals(dispositivo) ? 1 : 0;
+					double [] coeficientes = coeficientes(dispositivos, unDispositivo -> unDispositivo.equals(dispositivo) ? 1 : 0);
 					
-					double [] coeficientes = dispositivos.stream().mapToDouble(mapper2).toArray();
-					
-					LinearConstraint restriccionUsoMinimo = new LinearConstraint(coeficientes, Relationship.GEQ, dispositivo.horasDeUsoMinimo());
-					
-					LinearConstraint restriccionUsoMaximo = new LinearConstraint(coeficientes, Relationship.LEQ, dispositivo.horasDeUsoMaximo());
-					
-					return Stream.of(restriccionUsoMinimo, restriccionUsoMaximo);
+					return Stream.of(restriccionUsoMinimo(coeficientes, dispositivo), restriccionUsoMaximo(coeficientes, dispositivo));
 				});
 		
-		Collection<LinearConstraint> restricciones = Stream
-				.concat(restriccionesDeUso, Stream.of(restriccionConsumoTotal))
+		Collection<LinearConstraint> restriccionesTotales = Stream
+				.concat(Stream.of(restriccionConsumoTotal), restriccionesDeUso)
 				.collect(Collectors.toList());
 		
-		return new LinearConstraintSet(restricciones);
+		return new LinearConstraintSet(restriccionesTotales);
 	}
 	
 	private LinearObjectiveFunction funcionEconomica(List<Dispositivo> dispositivos) {
 		
-		double [] coeficientes = dispositivos.stream().mapToDouble(d -> 1).toArray();
-		
-		return new LinearObjectiveFunction(coeficientes, 0);
+		return new LinearObjectiveFunction(coeficientes(dispositivos, d -> 1), 0);
 	}
 }
