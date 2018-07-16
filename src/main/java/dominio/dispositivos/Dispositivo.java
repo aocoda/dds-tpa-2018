@@ -7,4 +7,8 @@ public interface Dispositivo {
 	public double horasDeUso(Periodo unPeriodo);
 
 	public double getConsumoPorHora();
+
+	public double horasDeUsoMinimo();
+
+	public double horasDeUsoMaximo();
 }
