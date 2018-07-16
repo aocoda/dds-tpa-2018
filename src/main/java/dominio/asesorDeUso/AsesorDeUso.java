@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.LinearConstraintSet;
 import org.apache.commons.math3.optim.linear.LinearObjectiveFunction;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
@@ -48,22 +46,7 @@ public class AsesorDeUso implements RestriccionUtils {
 	
 	private LinearConstraintSet restricciones(List<Dispositivo> dispositivos) {
 		
-		LinearConstraint restriccionConsumoTotal = restriccionConsumoMaximo(coeficientes(dispositivos, unDispositivo -> unDispositivo.getConsumoPorHora()));
-		
-		Stream<LinearConstraint> restriccionesDeUso = dispositivos
-				.stream()
-				.flatMap(dispositivo -> {
-					
-					double [] coeficientes = coeficientes(dispositivos, unDispositivo -> unDispositivo.equals(dispositivo) ? 1 : 0);
-					
-					return Stream.of(restriccionUsoMinimo(coeficientes, dispositivo), restriccionUsoMaximo(coeficientes, dispositivo));
-				});
-		
-		Collection<LinearConstraint> restriccionesFinales = Stream
-				.concat(Stream.of(restriccionConsumoTotal), restriccionesDeUso)
-				.collect(Collectors.toList());
-		
-		return new LinearConstraintSet(restriccionesFinales);
+		return new LinearConstraintSet(restriccionesTotales(dispositivos));
 	}
 	
 	private LinearObjectiveFunction funcionEconomica(List<Dispositivo> dispositivos) {
