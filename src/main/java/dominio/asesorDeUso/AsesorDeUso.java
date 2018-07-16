@@ -59,11 +59,11 @@ public class AsesorDeUso implements RestriccionUtils {
 					return Stream.of(restriccionUsoMinimo(coeficientes, dispositivo), restriccionUsoMaximo(coeficientes, dispositivo));
 				});
 		
-		Collection<LinearConstraint> restriccionesTotales = Stream
+		Collection<LinearConstraint> restriccionesFinales = Stream
 				.concat(Stream.of(restriccionConsumoTotal), restriccionesDeUso)
 				.collect(Collectors.toList());
 		
-		return new LinearConstraintSet(restriccionesTotales);
+		return new LinearConstraintSet(restriccionesFinales);
 	}
 	
 	private LinearObjectiveFunction funcionEconomica(List<Dispositivo> dispositivos) {
