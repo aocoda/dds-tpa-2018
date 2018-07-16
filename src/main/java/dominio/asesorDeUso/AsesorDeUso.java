@@ -3,9 +3,6 @@ package dominio.asesorDeUso;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,19 +19,20 @@ import dominio.dispositivos.Periodo;
 
 public class AsesorDeUso {
 
-	public Map<Dispositivo, Double> getHorasOptimas(List<Dispositivo> dispositivos) {
+	public Collection<Recomendacion> getHorasOptimas(List<Dispositivo> dispositivos) {
 		
 		return dispositivos
 				.stream()
-				.collect(Collectors.toMap(Function.identity(), d -> valoresOptimos(dispositivos).get(dispositivos.indexOf(d))));
+				.map(dispositivo -> new Recomendacion(dispositivo, valoresOptimos(dispositivos).get(dispositivos.indexOf(dispositivo))))
+				.collect(Collectors.toList());
 	}
 
-	public Map<Dispositivo, Double> recomendacionesPara(List<Dispositivo> dispositivos, Periodo unPeriodo) {
+	public Collection<Recomendacion> recomendacionesPara(List<Dispositivo> dispositivos, Periodo unPeriodo) {
 		
 		return getHorasOptimas(dispositivos)
-				.entrySet()
 				.stream()
-				.collect(Collectors.toMap(Entry::getKey, e -> e.getValue() - e.getKey().horasDeUso(unPeriodo)));
+				.map(recomendacion -> new Recomendacion(recomendacion.getDispositivoDeInteres(), recomendacion.horasDeUsoRestantesDe(unPeriodo)))
+				.collect(Collectors.toList());
 	}
 	
 	

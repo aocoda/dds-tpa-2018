@@ -3,9 +3,11 @@ package dominio.reglas.condiciones;
 import java.util.List;
 
 import dominio.asesorDeUso.AsesorDeUso;
+import dominio.asesorDeUso.Recomendacion;
 import dominio.dispositivos.Dispositivo;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
+import dominio.excepciones.CondicionMalConfiguradaException;
 import dominio.reglas.condiciones.relaciones.MenorA;
 
 public class CondicionSimplex implements Condicion {
@@ -26,6 +28,13 @@ public class CondicionSimplex implements Condicion {
 	@Override
 	public boolean seCumple() {
 		
-		return new MenorA(0).aplicarCon(asesor.recomendacionesPara(dispositivos, periodo).get(dispositivo));
+		Recomendacion recomendacion = asesor
+				.getHorasOptimas(dispositivos)
+				.stream()
+				.filter(r -> r.getDispositivoDeInteres().equals(dispositivo))
+				.findFirst()
+				.orElseThrow(() -> new CondicionMalConfiguradaException("El distpositivo: " + dispositivo + "debe estar incluido en la lista: " + dispositivos));
+		
+		return new MenorA(0).aplicarCon(recomendacion.horasDeUsoRestantesDe(periodo));
 	}
 }
