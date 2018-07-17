@@ -2,10 +2,16 @@ package dominio;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import dominio.reglas.Actuador;
 import dominio.reglas.Regla;
+import dominio.reglas.condiciones.CondicionSimplex;
+import dominio.asesorDeUso.AsesorDeUso;
 import dominio.dispositivos.*;
 import dominio.dispositivos.adaptadores.*;
 
@@ -22,6 +28,7 @@ public class Cliente {
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
 	private Collection<Regla> reglas = new HashSet<>();
 	private int puntos;
+	private boolean apagadoAutomaticoActivado;
 	
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
@@ -70,8 +77,8 @@ public class Cliente {
 	
 	public double consumoDe(Periodo unPeriodo) {
 		
-		return Stream
-				.concat(dispositivosEstandar.stream(), dispositivosInteligentes.stream())
+		return getDispositivos()
+				.stream()
 				.mapToDouble(dispositivo -> dispositivo.consumoDe(unPeriodo))
 				.sum();
 	}
@@ -131,5 +138,33 @@ public class Cliente {
 	public int getNumeroDocumento() {
 		
 		return numeroDocumento;
+	}
+	
+	public void ejecutarApagadoAutomaticoPorConsumo(Periodo unPeriodo) {
+		
+		Actuador actuador = unDispositivo -> unDispositivo.apagar();
+		
+		AsesorDeUso asesor = new AsesorDeUso();
+		
+		List<Dispositivo> dispositivos = getDispositivos().stream().collect(Collectors.toList());
+		
+		if(apagadoAutomaticoActivado)
+			
+			dispositivosInteligentes
+			.stream()
+			.map(dispositivo -> {
+				
+				CondicionSimplex condicion = new CondicionSimplex(asesor, dispositivo, dispositivos, unPeriodo);
+				
+				return new Regla(condicion, actuador, Collections.singletonList(dispositivo));
+			})
+			.forEach(reglaSimplex -> reglaSimplex.ejecutarSiCorresponde());
+	}
+
+	public Collection<Dispositivo> getDispositivos() {
+		
+		return Stream
+				.concat(dispositivosEstandar.stream(), dispositivosInteligentes.stream())
+				.collect(Collectors.toSet());
 	}
 }

@@ -3,6 +3,7 @@ package repositorios;
 import java.util.Optional;
 
 import dominio.Cliente;
+import dominio.dispositivos.Periodo;
 
 public class RepositorioClientes extends RepositorioGenerico<Cliente> {
 
@@ -17,5 +18,10 @@ public class RepositorioClientes extends RepositorioGenerico<Cliente> {
 				.stream()
 				.filter(cliente -> cliente.getNumeroDocumento() == numeroDocumento)
 				.findFirst();
+	}
+	
+	public void ejecutarApagadoAutomaticoPorConsumo(Periodo unPeriodo) {
+		
+		elementos.forEach(cliente -> cliente.ejecutarApagadoAutomaticoPorConsumo(unPeriodo));
 	}
 }
