@@ -124,7 +124,7 @@ public class ParsersJsonTest {
 				+ "]"
 			+ "}";
 		
-		Collection<DispositivoEstandar> dispositivos = Collections.singletonList(new DispositivoEstandar("Heladera", 400,1));
+		Collection<DispositivoEstandar> dispositivos = Collections.singletonList(new DispositivoEstandar("Heladera", 400, 1, 0, 0));
 		
 		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, dispositivos, null);
 		

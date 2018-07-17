@@ -16,7 +16,7 @@ import dominio.mocks.DispositivoMock2;
 
 public class ModuloAdaptadorTest {
 
-	private DispositivoEstandar dispositivoATransformar = new DispositivoEstandar("Estandar", 10, 10);
+	private DispositivoEstandar dispositivoATransformar = new DispositivoEstandar("Estandar", 10, 10, 0, 0);
 	
 	private Collection<DispositivoEstandar> dispEstandar = new ArrayList<DispositivoEstandar>(Arrays.asList(dispositivoATransformar));
 	

@@ -6,6 +6,6 @@ public class DispositivoMock extends DispositivoInteligente {
 
 	public DispositivoMock(String nombreGenerico, double consumoPorHora) {
 		
-		super(nombreGenerico, consumoPorHora);
+		super(nombreGenerico, consumoPorHora, 0, 0);
 	}
 }

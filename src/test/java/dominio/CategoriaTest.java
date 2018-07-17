@@ -27,7 +27,7 @@ public class CategoriaTest {
 	@Test
 	public void conUnMesDe30DiasCargoFijoDe100CargoVariableDe2YClienteConConsumoDe100_ElEstimadoDebeSerDe6100() {
 
-		dispositivosEstandar.add(new DispositivoEstandar(null, 100, 1));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 100, 1, 0, 0));
 
 		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 100, 2, 0, 0);
@@ -51,7 +51,7 @@ public class CategoriaTest {
 	@Test
 	public void conCargoFijoDe100CargoVariableDe0_SeIgnoraElConsumoDelClienteYElEstimadoDebeSerElCargoFijo() {
 
-		dispositivosEstandar.add(new DispositivoEstandar(null, 999, 999));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 999, 999, 0, 0));
 
 		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 100, 0, 0, 0);
@@ -62,7 +62,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoIgualA300_NoLeCorrespondeAUnaCategoriaDe300Hasta400() {
 
-		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1, 0, 0));
 
 		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 300, 400);
@@ -73,7 +73,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoIgualA330_LeCorrespondeAUnaCategoriaDe329Hasta400() {
 
-		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1, 0, 0));
 
 		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 329, 400);
@@ -84,7 +84,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoIgualA300_NoLeCorrespondeAUnaCategoriaDe200Hasta299() {
 
-		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 10, 1, 0, 0));
 
 		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 200, 299);
@@ -95,7 +95,7 @@ public class CategoriaTest {
 	@Test
 	public void unClienteConConsumoIgualA330_LeCorrespondeAUnaCategoriaDe200Hasta330() {
 
-		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1));
+		dispositivosEstandar.add(new DispositivoEstandar(null, 11, 1, 0, 0));
 
 		clienteTest = construirClienteTest();
 		categoriaTest = new Categoria(null, 0, 0, 200, 330);

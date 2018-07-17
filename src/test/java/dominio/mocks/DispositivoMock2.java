@@ -8,7 +8,7 @@ public class DispositivoMock2 extends DispositivoInteligente {
 
 	public DispositivoMock2(String nombreGenerico, double consumoPorHora, String otroAtributo) {
 		
-		super(nombreGenerico, consumoPorHora);
+		super(nombreGenerico, consumoPorHora, 0, 0);
 		
 		this.otroAtributo = otroAtributo;
 	}

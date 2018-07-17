@@ -131,7 +131,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoUnClienteSeIntentaRecategorizarYNoHayNingunaCategoriaQueLeCorrespondaLeQuedaLaCategoriaAnterior() {
 
-		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 400, 10));
+		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 400, 10, 0, 0));
 
 		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
 
@@ -149,7 +149,7 @@ public class ClienteTest {
 	@Test
 	public void cuandoUnClienteSeIntentaRecategorizarYExisteCategoriaQueLeCorrespondaSeRecategorizaConExito() {
 
-		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 3, 4));
+		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 3, 4, 0, 0));
 
 		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
 		Categoria categoriaQueLeCorresponde = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);

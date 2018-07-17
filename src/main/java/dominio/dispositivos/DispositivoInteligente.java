@@ -12,13 +12,17 @@ public abstract class DispositivoInteligente implements Dispositivo {
 	private String nombreGenerico;
 	private double consumoPorHora;
 	private EstadoDispositivo estadoDispositivo = new Apagado();
+	private double horasDeUsoMinimo;
+	private double horasDeUsoMaximo;
 
 	private Collection<Uso> historialUsos = new HashSet<Uso>();
 
-	public DispositivoInteligente(String nombreGenerico, double consumoPorHora) {
+	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
 
 		this.nombreGenerico = nombreGenerico;
 		this.consumoPorHora = consumoPorHora;
+		this.horasDeUsoMinimo = horasDeUsoMinimo;
+		this.horasDeUsoMaximo = horasDeUsoMaximo;
 	}
 
 	
@@ -104,5 +108,17 @@ public abstract class DispositivoInteligente implements Dispositivo {
 	public double getConsumoPorHora() {
 		
 		return consumoPorHora;
+	}
+
+	@Override
+	public double horasDeUsoMinimo() {
+		
+		return horasDeUsoMinimo;
+	}
+
+	@Override
+	public double horasDeUsoMaximo() {
+		
+		return horasDeUsoMaximo;
 	}
 }
