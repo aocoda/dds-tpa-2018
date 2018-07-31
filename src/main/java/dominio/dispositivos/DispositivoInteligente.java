@@ -7,22 +7,17 @@ import java.util.stream.Collectors;
 import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.*;
 
-public abstract class DispositivoInteligente implements Dispositivo {
+public abstract class DispositivoInteligente extends Dispositivo {
 
 	private String nombreGenerico;
-	private double consumoPorHora;
 	private EstadoDispositivo estadoDispositivo = new Apagado();
-	private double horasDeUsoMinimo;
-	private double horasDeUsoMaximo;
-
 	private Collection<Uso> historialUsos = new HashSet<Uso>();
 
 	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
 
+		super(consumoPorHora, horasDeUsoMinimo, horasDeUsoMaximo);
+
 		this.nombreGenerico = nombreGenerico;
-		this.consumoPorHora = consumoPorHora;
-		this.horasDeUsoMinimo = horasDeUsoMinimo;
-		this.horasDeUsoMaximo = horasDeUsoMaximo;
 	}
 
 	
@@ -40,7 +35,7 @@ public abstract class DispositivoInteligente implements Dispositivo {
 
 		return usosDe(unPeriodo)
 				.stream()
-				.mapToDouble(uso -> uso.consumo(consumoPorHora))
+				.mapToDouble(uso -> uso.consumo(getConsumoPorHora()))
 				.sum();
 	}
 	
@@ -103,22 +98,5 @@ public abstract class DispositivoInteligente implements Dispositivo {
 	public Collection<Uso> getHistorialUsos() {
 		
 		return historialUsos;
-	}
-
-	public double getConsumoPorHora() {
-		
-		return consumoPorHora;
-	}
-
-	@Override
-	public double horasDeUsoMinimo() {
-		
-		return horasDeUsoMinimo;
-	}
-
-	@Override
-	public double horasDeUsoMaximo() {
-		
-		return horasDeUsoMaximo;
 	}
 }
