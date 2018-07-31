@@ -22,6 +22,9 @@ public class RepositorioClientes extends RepositorioGenerico<Cliente> {
 	
 	public void ejecutarApagadoAutomaticoPorConsumo(Periodo unPeriodo) {
 		
-		elementos.forEach(cliente -> cliente.ejecutarApagadoAutomaticoPorConsumo(unPeriodo));
+		elementos
+		.stream()
+		.filter(cliente -> cliente.tieneApagadoAutomaticoActivado())
+		.forEach(cliente -> cliente.ejecutarApagadoPorConsumo(unPeriodo));
 	}
 }

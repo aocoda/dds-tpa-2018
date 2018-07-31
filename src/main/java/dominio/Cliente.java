@@ -140,15 +140,13 @@ public class Cliente {
 		return numeroDocumento;
 	}
 	
-	public void ejecutarApagadoAutomaticoPorConsumo(Periodo unPeriodo) {
+	public void ejecutarApagadoPorConsumo(Periodo unPeriodo) {
 		
 		Actuador actuador = unDispositivo -> unDispositivo.apagar();
 		
 		AsesorDeUso asesor = new AsesorDeUso();
 		
 		List<Dispositivo> dispositivos = getDispositivos().stream().collect(Collectors.toList());
-		
-		if(apagadoAutomaticoActivado)
 			
 			dispositivosInteligentes
 			.stream()
@@ -166,5 +164,10 @@ public class Cliente {
 		return Stream
 				.concat(dispositivosEstandar.stream(), dispositivosInteligentes.stream())
 				.collect(Collectors.toSet());
+	}
+
+	public boolean tieneApagadoAutomaticoActivado() {
+		
+		return apagadoAutomaticoActivado;
 	}
 }
