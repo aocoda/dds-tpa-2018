@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.*;
 
-public abstract class DispositivoInteligente extends Dispositivo {
+public class DispositivoInteligente extends Dispositivo {
 
 	private String nombreGenerico;
 	private EstadoDispositivo estadoDispositivo = new Apagado();
