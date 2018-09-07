@@ -2,20 +2,17 @@ package dominio.dispositivos;
 
 public abstract class Dispositivo {
 	
-	private double consumoPorHora;
-	private double horasDeUsoMinimo;
-	private double horasDeUsoMaximo;
+	protected String nombreGenerico;
+	protected double consumoPorHora;
+	protected double horasDeUsoMinimo;
+	protected double horasDeUsoMaximo;
 
-	public Dispositivo(double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
+	public Dispositivo(String nombreGenerico, double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
 		
+		this.nombreGenerico = nombreGenerico;
 		this.consumoPorHora = consumoPorHora;
 		this.horasDeUsoMinimo = horasDeUsoMinimo;
 		this.horasDeUsoMaximo = horasDeUsoMaximo;
-	}
-	
-	public double getConsumoPorHora() {
-		
-		return consumoPorHora;
 	}
 
 	public double horasDeUsoMinimo() {
@@ -26,6 +23,11 @@ public abstract class Dispositivo {
 	public double horasDeUsoMaximo() {
 		
 		return horasDeUsoMaximo;
+	}
+	
+	public double getConsumoPorHora() {
+		
+		return consumoPorHora;
 	}
 	
 	public abstract double consumoDe(Periodo unPeriodo);

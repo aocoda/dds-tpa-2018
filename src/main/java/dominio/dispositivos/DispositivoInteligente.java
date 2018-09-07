@@ -9,15 +9,12 @@ import dominio.dispositivos.inteligentes.estados.*;
 
 public class DispositivoInteligente extends Dispositivo {
 
-	private String nombreGenerico;
 	private EstadoDispositivo estadoDispositivo = new Apagado();
 	private Collection<Uso> historialUsos = new HashSet<Uso>();
 
 	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
 
-		super(consumoPorHora, horasDeUsoMinimo, horasDeUsoMaximo);
-
-		this.nombreGenerico = nombreGenerico;
+		super(nombreGenerico, consumoPorHora, horasDeUsoMinimo, horasDeUsoMaximo);
 	}
 
 	
@@ -35,7 +32,7 @@ public class DispositivoInteligente extends Dispositivo {
 
 		return usosDe(unPeriodo)
 				.stream()
-				.mapToDouble(uso -> uso.consumo(getConsumoPorHora()))
+				.mapToDouble(uso -> uso.consumo(consumoPorHora))
 				.sum();
 	}
 	

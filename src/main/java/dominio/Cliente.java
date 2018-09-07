@@ -13,7 +13,6 @@ import dominio.reglas.Regla;
 import dominio.reglas.condiciones.CondicionSimplex;
 import dominio.asesorDeUso.AsesorDeUso;
 import dominio.dispositivos.*;
-import dominio.dispositivos.adaptadores.*;
 
 public class Cliente {
 	
@@ -97,9 +96,9 @@ public class Cliente {
 		return categoria;
 	}
 	
-	public void transformar(DispositivoEstandar dispositivoEstandar, ModuloAdaptador adaptador) {
+	public void transformar(DispositivoEstandar dispositivoEstandar) {
 		
-		DispositivoInteligente dispositivoInteligente = adaptador.adaptar(dispositivoEstandar);
+		DispositivoInteligente dispositivoInteligente = dispositivoEstandar.adaptar();
 		
 		dispositivosEstandar.remove(dispositivoEstandar);
 		
