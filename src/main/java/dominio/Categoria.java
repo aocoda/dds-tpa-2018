@@ -4,13 +4,13 @@ import dominio.dispositivos.Periodo;
 
 public class Categoria {
 	
-	private SubtipoCategoria subtipoCategoria;
+	private TipoCategoria subtipoCategoria;
 	private double cargoFijoMensual;
 	private double cargoVariable;
 	private double consumoDesde;
 	private double consumoHasta;
 	
-	public Categoria(SubtipoCategoria subtipoCategoria, double cargoFijoMensual, double cargoVariable,
+	public Categoria(TipoCategoria subtipoCategoria, double cargoFijoMensual, double cargoVariable,
 			double consumoDesde, double consumoHasta) {
 		
 		this.subtipoCategoria = subtipoCategoria;
@@ -30,7 +30,7 @@ public class Categoria {
 		return unCliente.consumoDe(unPeriodo) > consumoDesde && unCliente.consumoDe(unPeriodo) <= consumoHasta;
 	}
 	
-	public SubtipoCategoria getSubtipoCategoria() {
+	public TipoCategoria getSubtipoCategoria() {
 		
 		return subtipoCategoria;
 	}
