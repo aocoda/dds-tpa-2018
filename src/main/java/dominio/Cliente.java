@@ -37,7 +37,8 @@ public class Cliente {
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
 			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
 			Collection<DispositivoEstandar> dispositivosEstandar,
-			Collection<DispositivoInteligente> dispositivosInteligentes) {
+			Collection<DispositivoInteligente> dispositivosInteligentes,
+			Coordenada coordenada) {
 
 		this.nombreCompleto = nombreCompleto;
 		this.tipoDocumento = tipoDocumento;
@@ -48,6 +49,7 @@ public class Cliente {
 		this.categoria = categoria;
 		this.dispositivosEstandar = dispositivosEstandar;
 		this.dispositivosInteligentes = dispositivosInteligentes;
+		this.coordenada = coordenada;
 	}
 
 	public boolean existeDispositivoEncendido() {
