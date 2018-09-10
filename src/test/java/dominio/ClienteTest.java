@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 import dominio.dispositivos.DispositivoEstandar;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
-import dominio.mocks.DispositivoMock;
 
 import org.junit.Test;
 
@@ -20,12 +19,12 @@ public class ClienteTest {
 	private Cliente cliente;
 	private Set<DispositivoEstandar> dispositivosEstandar = new HashSet<DispositivoEstandar>();
 	private Set<DispositivoInteligente> dispositivosInteligentes = new HashSet<DispositivoInteligente>();
-	private DispositivoInteligente heladera = new DispositivoMock("Heladera", 100);
-	private DispositivoInteligente televisor = new DispositivoMock("Televisor", 50);
+	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100, 0, 0);
+	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 50, 0, 0);
 
 	public Cliente construirClienteTest(Categoria categoria) {
 
-		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes);
+		return new Cliente(null, null, 0, null, null, null, categoria, dispositivosEstandar, dispositivosInteligentes, null);
 	}
 
 	// ExisteDispositivoEncendido
@@ -163,5 +162,21 @@ public class ClienteTest {
 		cliente.recategorizar(categorias, periodoDeUnMes);
 
 		assertEquals(categoriaQueLeCorresponde, cliente.getCategoria());
+	}
+	
+	// Transformar
+	@Test
+	public void siSeTransformaUnDispositivoEstandarDebeCambiarseDeColeccion() {
+		
+		DispositivoEstandar dispositivoATransformar = new DispositivoEstandar("A", 0, 0, 0, 0);
+		
+		dispositivosEstandar.add(dispositivoATransformar);
+		
+		cliente = construirClienteTest(null);
+		
+		cliente.transformar(dispositivoATransformar);
+		
+		assertEquals(dispositivosEstandar.size(), 0);
+		assertEquals(dispositivosInteligentes.size(), 1);
 	}
 }
