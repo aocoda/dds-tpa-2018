@@ -17,66 +17,14 @@ import dominio.importadorJson.parser.ParserCategorias;
 import dominio.importadorJson.parser.ParserClientes;
 import dominio.importadorJson.parser.ParserJson;
 import dominio.importadorJson.parser.ParserZonas;
-import dominio.mocks.DispositivoMock;
-import dominio.mocks.DispositivoMock2;
 import repositorios.RepositorioCategorias;
 import repositorios.RepositorioClientes;
 
 public class ParsersJsonTest {
 
-	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();
-	private RepositorioClientes repositorioClientes = new RepositorioClientes();
+	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();	
 	
-	private ParserJson<Categoria> parserCategorias = new ParserCategorias();
 	private ParserJson<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
-	
-	
-	
-	//CATEGORIAS
-	@Test
-	public void SiLaCategoriaJsonTieneTodosLosAtributos_SeCreaUnaCategoriaConEsosValores() {
-		
-		String categoriaTest = "{ "
-					+ "\"subtipoCategoria\": \"R1\","
-					+ "\"cargoFijoMensual\" : 100,"
-					+ "\"cargoVariable\" : 100,"
-					+ "\"consumoDesde\": 0,"
-					+ "\"consumoHasta\": 150"
-				+ " }";
-				
-		Categoria categoriaEsperada = new Categoria(TipoCategoria.R1, 100, 100, 0, 150);
-		
-		assertThat(parserCategorias.parsear(categoriaTest)).isEqualToComparingFieldByFieldRecursively(categoriaEsperada);
-	}
-	
-	@Test
-	public void SiLaCategoriaJsonNoTieneAlgunAtributo_SeCreaUnaCategoriaConValoresPorDefectoCeroONull() {
-		
-		String categoriaTest = "{ "
-					+ "\"cargoFijoMensual\" : 100,"
-					+ "\"cargoVariable\" : 100,"
-					+ "\"consumoDesde\": 0"
-				+ " }";
-				
-		Categoria categoriaEsperada = new Categoria(null, 100, 100, 0, 0);
-		
-		assertThat(parserCategorias.parsear(categoriaTest)).isEqualToComparingFieldByFieldRecursively(categoriaEsperada);
-	}
-	
-	@Test
-	public void SiLaCategoriaJsonEstaMalFormadaEntonces_ArrojaParserException() {
-		
-		String categoriaTest = "{ "
-				+ "\"subtipoCategoria\": \"R1\","
-				+ "\"cargoFijoMensual\" : 100,"
-				+ "\"cargoVariable\" : 100,"
-				+ "\"consumoDesde\": 0,"
-				+ "\"consumoHasta\": 150";
-		
-		assertThatThrownBy(() -> parserCategorias.parsear(categoriaTest)).isInstanceOf(ParserException.class);
-	}
-	
-	
 	
 	
 	//CLIENTES
