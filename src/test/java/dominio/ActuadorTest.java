@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.mocks.DispositivoMock;
+import dominio.dispositivos.DispositivoInteligente;
 import dominio.reglas.Actuador;
 
 public class ActuadorTest {
@@ -14,12 +14,12 @@ public class ActuadorTest {
 		
 		Actuador apagador = dispositivo -> dispositivo.apagar();
 		
-		DispositivoMock dispositivoMock = new DispositivoMock(null, 0);
+		DispositivoInteligente dispositivo = new DispositivoInteligente(null, 0, 0, 0);
 		
-		dispositivoMock.encender();
+		dispositivo.encender();
 		
-		apagador.ejecutar(dispositivoMock);
+		apagador.ejecutar(dispositivo);
 		
-		assertTrue(dispositivoMock.estaApagado());
+		assertTrue(dispositivo.estaApagado());
 	}
 }

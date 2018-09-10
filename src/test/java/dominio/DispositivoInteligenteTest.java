@@ -6,11 +6,10 @@ import java.time.LocalDateTime;
 import org.junit.Test;
 
 import dominio.dispositivos.*;
-import dominio.mocks.DispositivoMock;
 
 public class DispositivoInteligenteTest {
 
-	private DispositivoInteligente dispositivoTest = new DispositivoMock("dispositivoTest", 100);
+	private DispositivoInteligente dispositivoTest = new DispositivoInteligente("dispositivoTest", 100, 0, 0);
 	private LocalDateTime dia1 = LocalDateTime.of(2018, 4, 1, 0, 0);
 	private LocalDateTime dia2 = LocalDateTime.of(2018, 4, 2, 0, 0);
 	private LocalDateTime dia3 = LocalDateTime.of(2018, 4, 3, 0, 0);
