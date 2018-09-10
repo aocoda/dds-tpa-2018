@@ -1,25 +1,36 @@
 package dominio;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
+
 import dominio.Transformador;
 import dominio.dispositivos.Periodo;
+import dominio.geoposicionamiento.Area;
 
 public class Zona {
 	
 	private String nombre;
-	private Collection<Transformador> transformadores;
+	private Area area;
 
-	public Zona(String nombre, Collection<Transformador> transformadores) {
+	public Zona(String nombre, Area area) {
 		
 		this.nombre = nombre;
-		this.transformadores = transformadores;
+		this.area = area;
 	}
 
-	public double consumoDe(Periodo unPeriodo) {
+	public Collection<Transformador> transformadoresAsociados(Collection<Transformador> transformadores) {
 		
 		return transformadores
 				.stream()
-				.mapToDouble(transformador -> transformador.consumoDe(unPeriodo))
+				.filter(transformador -> area.contieneA(transformador.getCoordenada()))
+				.collect(Collectors.toSet());
+	}
+	
+	public double consumoDe(Periodo unPeriodo, Collection<Cliente> clientes, Collection<Transformador> transformadores) {
+		
+		return transformadoresAsociados(transformadores)
+				.stream()
+				.mapToDouble(transformador -> transformador.consumoDe(unPeriodo, clientes, transformadores))
 				.sum();
 	}
 }

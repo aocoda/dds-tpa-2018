@@ -3,6 +3,7 @@ package dominio;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +14,8 @@ import dominio.reglas.Regla;
 import dominio.reglas.condiciones.CondicionSimplex;
 import dominio.asesorDeUso.AsesorDeUso;
 import dominio.dispositivos.*;
+import dominio.excepciones.SinTransformadoresCercanosException;
+import dominio.geoposicionamiento.Coordenada;
 
 public class Cliente {
 	
@@ -28,6 +31,7 @@ public class Cliente {
 	private Collection<Regla> reglas = new HashSet<>();
 	private int puntos;
 	private boolean apagadoAutomaticoActivado;
+	private Coordenada coordenada;
 	
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
@@ -168,5 +172,13 @@ public class Cliente {
 	public boolean tieneApagadoAutomaticoActivado() {
 		
 		return apagadoAutomaticoActivado;
+	}
+
+	public Transformador transformadorAsociado(Collection<Transformador> transformadores) {
+		
+		return transformadores
+				.stream()
+				.min(Comparator.comparing(transformador -> transformador.getCoordenada().distanciaA(coordenada)))
+				.orElseThrow(() -> new SinTransformadoresCercanosException("No se pudo asociar ningun transformador"));
 	}
 }
