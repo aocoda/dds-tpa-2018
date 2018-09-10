@@ -3,7 +3,7 @@ package repositorios;
 import java.util.Optional;
 
 import dominio.Categoria;
-import dominio.SubtipoCategoria;
+import dominio.TipoCategoria;
 
 public class RepositorioCategorias extends RepositorioGenerico<Categoria> {
 	
@@ -11,7 +11,7 @@ public class RepositorioCategorias extends RepositorioGenerico<Categoria> {
 		
 		return elementos
 				.stream()
-				.filter(categoria -> categoria.getSubtipoCategoria().equals(SubtipoCategoria.valueOf(subcategoria)))
+				.filter(categoria -> categoria.getSubtipoCategoria().equals(TipoCategoria.valueOf(subcategoria)))
 				.findFirst();
 	}
 }
