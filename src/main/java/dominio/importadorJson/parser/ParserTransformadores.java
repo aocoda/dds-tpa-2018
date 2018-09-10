@@ -2,9 +2,9 @@ package dominio.importadorJson.parser;
 
 import com.google.gson.Gson;
 
-import dominio.Zona;
+import dominio.Transformador;
 
-public class ParserZonas extends ParserJson<Zona> {
+public class ParserTransformadores extends ParserJson<Transformador>{
 
 	private Gson parser = new Gson();
 	
@@ -15,8 +15,8 @@ public class ParserZonas extends ParserJson<Zona> {
 	}
 
 	@Override
-	protected Class<Zona> getParserClass() {
+	protected Class<Transformador> getParserClass() {
 		
-		return Zona.class;
+		return Transformador.class;
 	}
 }
