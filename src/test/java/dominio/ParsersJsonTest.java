@@ -44,7 +44,7 @@ public class ParsersJsonTest {
 					+ "\"consumoHasta\": 150"
 				+ " }";
 				
-		Categoria categoriaEsperada = new Categoria(SubtipoCategoria.R1, 100, 100, 0, 150);
+		Categoria categoriaEsperada = new Categoria(TipoCategoria.R1, 100, 100, 0, 150);
 		
 		assertThat(parserCategorias.parsear(categoriaTest)).isEqualToComparingFieldByFieldRecursively(categoriaEsperada);
 	}
@@ -182,7 +182,7 @@ public class ParsersJsonTest {
 		
 		String clienteTest = "{ \"categoria\": \"R1\" }";
 		
-		Categoria R1 = new Categoria(SubtipoCategoria.R1, 0, 0, 0, 0);
+		Categoria R1 = new Categoria(TipoCategoria.R1, 0, 0, 0, 0);
 		
 		repositorioCategorias.agregar(R1);
 		

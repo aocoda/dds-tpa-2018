@@ -132,7 +132,7 @@ public class ClienteTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 400, 10, 0, 0));
 
-		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
+		Categoria categoriaVieja = new Categoria(TipoCategoria.R1, 18.76, 0.644, 0, 150);
 
 		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
 
@@ -150,8 +150,8 @@ public class ClienteTest {
 
 		dispositivosEstandar.add(new DispositivoEstandar("Heladera", 3, 4, 0, 0));
 
-		Categoria categoriaVieja = new Categoria(SubtipoCategoria.R1, 18.76, 0.644, 0, 150);
-		Categoria categoriaQueLeCorresponde = new Categoria(SubtipoCategoria.R3, 60.71, 0.681, 325, 400);
+		Categoria categoriaVieja = new Categoria(TipoCategoria.R1, 18.76, 0.644, 0, 150);
+		Categoria categoriaQueLeCorresponde = new Categoria(TipoCategoria.R3, 60.71, 0.681, 325, 400);
 
 		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
 
