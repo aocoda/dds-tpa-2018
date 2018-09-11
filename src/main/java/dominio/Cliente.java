@@ -183,4 +183,19 @@ public class Cliente {
 				.min(Comparator.comparing(transformador -> transformador.getCoordenada().distanciaA(coordenada)))
 				.orElseThrow(() -> new SinTransformadoresCercanosException("No se pudo asociar ningun transformador"));
 	}
+	
+	public TipoDocumento getTipoDocumento() {
+		
+		return tipoDocumento;
+	}
+
+	public LocalDate getFechaAltaServicio() {
+		
+		return fechaAltaServicio;
+	}
+	
+	public Collection<DispositivoEstandar> getDispositivosEstandar() {
+		
+		return dispositivosEstandar;
+	}
 }

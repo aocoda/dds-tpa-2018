@@ -10,15 +10,13 @@ import java.util.Collections;
 import org.junit.Test;
 
 import dominio.dispositivos.*;
+import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.Apagado;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
-import dominio.importadorJson.parser.ParserCategorias;
 import dominio.importadorJson.parser.ParserClientes;
 import dominio.importadorJson.parser.ParserJson;
-import dominio.importadorJson.parser.ParserZonas;
 import repositorios.RepositorioCategorias;
-import repositorios.RepositorioClientes;
 
 public class ParsersJsonTest {
 
@@ -29,104 +27,82 @@ public class ParsersJsonTest {
 	
 	//CLIENTES
 	@Test
-	public void SiElClienteJsonTieneElTipoDocumento_SeCreaUnClienteConElTipoCorrespondienteYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneElTipoDocumento_SeCreaUnClienteConElTipoCorrespondiente() {
 		
 		String clienteTest = "{ \"tipoDocumento\": \"LC\" }";
-				
-		Cliente clienteEsperado = new Cliente(null, TipoDocumento.LC, 0, null, null, null, null, null, null);
 		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getTipoDocumento()).isEqualTo(TipoDocumento.LC);
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosEstandarVacia_SeCreaUnClienteConUnaListaDeDispositivosEstandarVaciaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneUnaListaDeDispositivosEstandarVacia_SeCreaUnClienteConUnaListaDeDispositivosEstandarVacia() {
 		
 		String clienteTest = "{ \"dispositivosEstandar\": [ ] }";
-				
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, Collections.emptyList(), null);
 		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getDispositivosEstandar()).isEqualTo(Collections.emptyList());
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesVacia_SeCreaUnClienteConUnaListaDeDispositivosInteligentesVaciaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneUnaListaDeDispositivosInteligentesVacia_SeCreaUnClienteConUnaListaDeDispositivosInteligentesVacia() {
 		
 		String clienteTest = "{ \"dispositivosInteligentes\": [ ] }";
-				
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, Collections.emptyList());
 		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getDispositivosInteligentes()).isEqualTo(Collections.emptyList());
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosEstandarConElementos_SeCreaUnClienteConUnaEsaListaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneUnaListaDeDispositivosEstandarConElementos_SeCreaUnClienteConEsaLista() {
 		
 		String clienteTest = "{\"dispositivosEstandar\":"
 				+ "["
 					+ "{"
 						+ "\"nombreGenerico\": \"Heladera\","
 						+ "\"consumoPorHora\": 400,"
-						+ "\"horasEstimadasDeUsoPorDia\": 1"
+						+ "\"horasEstimadasDeUsoPorDia\": 1,"
+						+ "\"horasDeUsoMinimo\": 0,"
+						+ "\"horasDeUsoMaximo\": 0"
 					+ "}"
 				+ "]"
 			+ "}";
 		
-		Collection<DispositivoEstandar> dispositivos = Collections.singletonList(new DispositivoEstandar("Heladera", 400, 1, 0, 0));
+		DispositivoEstandar dispositivo = new DispositivoEstandar("Heladera", 400, 1, 0, 0);
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, dispositivos, null);
-		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getDispositivosEstandar())
+					.usingRecursiveFieldByFieldElementComparator()
+					.containsExactly(dispositivo);
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaListaDeDispositivosInteligentesConUnElementoDelTipoMock_SeCreaUnClienteConUnaListaConUnElementoDeEseTipo() {
+	public void SiElJsonTieneUnaListaDeDispositivosInteligentesConElementos_SeCreaUnClienteConEsaLista() {
 		
 		String clienteTest = "{\"dispositivosInteligentes\":"
 				+ "["
 					+ "{"
-						+ "\"tipo\": \"dominio.mocks.DispositivoMock\","
-						+ "\"nombreGenerico\": \"Generico\","
-						+ "\"consumoPorHora\": 100"
+						+ "\"nombreGenerico\": \"Cafetera\","
+						+ "\"consumoPorHora\": 300,"
+						+ "\"horasDeUsoMinimo\": 0,"
+						+ "\"horasDeUsoMaximo\": 0"
 					+ "}"
 				+ "]"
 			+ "}";
 		
-		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
+		DispositivoInteligente dispositivo = new DispositivoInteligente("Cafetera", 300, 0, 0);
 		
-		assertThat(dispositivoObtenido).isInstanceOf(DispositivoMock.class);
-	}
-		
-	@Test
-	public void tambienParseaBienCuandoElDispositivoTieneAtributosExtraALosDeSuSuperclase() {
-		
-		String clienteTest = "{\"dispositivosInteligentes\":"
-				+ "["
-					+ "{"
-						+ "\"tipo\": \"dominio.mocks.DispositivoMock2\","
-						+ "\"nombreGenerico\": \"Generico\","
-						+ "\"consumoPorHora\": 100,"
-						+ "\"otroAtributo\": \"un Valor\""
-					+ "}"
-				+ "]"
-			+ "}";
-		
-		DispositivoMock2 dispositivoObtenido = (DispositivoMock2) parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
-		
-		assertThat(dispositivoObtenido.getOtroAtributo()).isEqualTo("un Valor");
+		assertThat(parserClientes.parsear(clienteTest).getDispositivosInteligentes())
+					.usingRecursiveFieldByFieldElementComparator()
+					.containsExactly(dispositivo);
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaCategoriaInexistenteEnElRepo_SeCreaUnClienteConCategoriaNullYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneUnaCategoriaInexistenteEnElRepo_SeCreaUnClienteConCategoriaNull() {
 		
 		String clienteTest = "{ \"categoria\": \"R1\" }";
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, null, null, null);
-		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getCategoria()).isEqualTo(null);
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaCategoriaQueSiExisteEnElRepo_SeCreaUnClienteConSuCategoriaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneUnaCategoriaQueSiExisteEnElRepositorio_SeCreaUnClienteConEsaCategoria() {
 		
 		String clienteTest = "{ \"categoria\": \"R1\" }";
 		
@@ -134,68 +110,74 @@ public class ParsersJsonTest {
 		
 		repositorioCategorias.agregar(R1);
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, null, R1, null, null);
-		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getCategoria()).isEqualTo(R1);
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaFechaDeAltaValida_SeCreaUnClienteConSuFechaYLosDemasValoresPorDefectoCeroONull() {
+	public void SiElJsonTieneUnaFechaDeAltaValida_SeCreaUnClienteConEsaFecha() {
 		
 		String clienteTest = "{ \"fechaAltaServicio\": \"2017-01-01\" }";
 		
-		Cliente clienteEsperado = new Cliente(null, null, 0, null, null, LocalDate.of(2017, 1, 1), null, null, null);
-		
-		assertThat(parserClientes.parsear(clienteTest)).isEqualToComparingFieldByFieldRecursively(clienteEsperado);
+		assertThat(parserClientes.parsear(clienteTest).getFechaAltaServicio()).isEqualTo(LocalDate.of(2017, 1, 1));
 	}
 	
 	@Test
-	public void SiElClienteJsonTieneUnaFechaDeAltaMalFormada_ArrojaParserException() {
+	public void SiElJsonTieneUnaFechaDeAltaMalFormada_ArrojaParserException() {
 		
 		String clienteTest = "{ \"fechaAltaServicio\": \"2017-01-\" }";
 		
 		assertThatThrownBy(() -> parserClientes.parsear(clienteTest)).isInstanceOf(ParserException.class);
 	}
 	
-	
-	
-	
-	//ATRIBUTOS PARTICULARES DE LOS DISPOSITIVOS INTELIGENTES
 	@Test
-	public void SiElDispositivoDeUnClienteJsonVieneSinEstado_SuEstadoPorDefectoDebeSerApagado() {
+	public void SiElDispositivoDeUnJsonVieneSinEstado_SuEstadoPorDefectoDebeSerApagado() {
 		
 		String clienteTest = "{\"dispositivosInteligentes\":"
 				+ "["
 					+ "{"
-						+ "\"tipo\": \"dominio.mocks.DispositivoMock\","
-						+ "\"nombreGenerico\": \"Generico\","
-						+ "\"consumoPorHora\": 100"
+					+ "\"nombreGenerico\": \"Microondas\","
+					+ "\"consumoPorHora\": 50,"
+					+ "\"horasDeUsoMinimo\": 0,"
+					+ "\"horasDeUsoMaximo\": 0"
 					+ "}"
 				+ "]"
 			+ "}";
 		
 		EstadoDispositivo estadoEsperado = new Apagado();
 		
-		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
+		EstadoDispositivo estadoObtenido = parserClientes
+				.parsear(clienteTest)
+				.getDispositivosInteligentes()
+				.stream()
+				.findFirst()
+				.get()
+				.getEstadoActual();
 		
-		assertThat(dispositivoObtenido.getEstadoActual()).isEqualToComparingFieldByFieldRecursively(estadoEsperado);
+		assertThat(estadoObtenido).isEqualToComparingFieldByFieldRecursively(estadoEsperado);
 	}
 	
 	@Test
-	public void SiElDispositivoDeUnClienteJsonVieneSinListaDeUsos_SuListaDeUsosPorDefectoDebeSerUnaListaVacia() {
+	public void SiElDispositivoJsonVieneSinHistorialDeUsos_SuHistorialDeUsosPorDefectoDebeSerUnaListaVacia() {
 		
 		String clienteTest = "{\"dispositivosInteligentes\":"
 				+ "["
 					+ "{"
-						+ "\"tipo\": \"dominio.mocks.DispositivoMock\","
-						+ "\"nombreGenerico\": \"Generico\","
-						+ "\"consumoPorHora\": 100"
+						+ "\"nombreGenerico\": \"Lavarropas\","
+						+ "\"consumoPorHora\": 100,"
+						+ "\"horasDeUsoMinimo\": 0,"
+						+ "\"horasDeUsoMaximo\": 0"
 					+ "}"
 				+ "]"
 			+ "}";	
 		
-		DispositivoInteligente dispositivoObtenido = parserClientes.parsear(clienteTest).getDispositivosInteligentes().stream().findFirst().get();
+		Collection<Uso> historialObtenido = parserClientes
+				.parsear(clienteTest)
+				.getDispositivosInteligentes()
+				.stream()
+				.findFirst()
+				.get()
+				.getHistorialUsos();
 		
-		assertThat(dispositivoObtenido.getHistorialUsos()).isEmpty();
+		assertThat(historialObtenido).isEmpty();
 	}
 }

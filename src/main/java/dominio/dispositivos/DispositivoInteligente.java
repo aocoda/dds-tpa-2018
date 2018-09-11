@@ -16,7 +16,13 @@ public class DispositivoInteligente extends Dispositivo {
 
 		super(nombreGenerico, consumoPorHora, horasDeUsoMinimo, horasDeUsoMaximo);
 	}
-
+	
+	@SuppressWarnings("unused")
+	private DispositivoInteligente() {
+		
+		estadoDispositivo = new Apagado();
+		historialUsos = new HashSet<Uso>();
+	}
 	
 	public Collection<Uso> usosDe(Periodo unPeriodo) {
 		

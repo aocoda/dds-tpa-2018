@@ -15,6 +15,8 @@ public abstract class Dispositivo {
 		this.horasDeUsoMaximo = horasDeUsoMaximo;
 	}
 
+	protected Dispositivo() { }
+
 	public double horasDeUsoMinimo() {
 		
 		return horasDeUsoMinimo;
