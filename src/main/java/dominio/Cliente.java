@@ -51,6 +51,14 @@ public class Cliente {
 		this.dispositivosInteligentes = dispositivosInteligentes;
 		this.coordenada = coordenada;
 	}
+	
+	@SuppressWarnings("unused")
+	private Cliente() {
+		
+		dispositivosEstandar = new HashSet<>();
+		dispositivosInteligentes = new HashSet<>();
+		reglas = new HashSet<>();
+	}
 
 	public boolean existeDispositivoEncendido() {
 		
@@ -197,5 +205,15 @@ public class Cliente {
 	public Collection<DispositivoEstandar> getDispositivosEstandar() {
 		
 		return dispositivosEstandar;
+	}
+
+	public Coordenada getCoordenada() {
+		
+		return coordenada;
+	}
+	
+	public Collection<Regla> getReglas() {
+		
+		return reglas;
 	}
 }

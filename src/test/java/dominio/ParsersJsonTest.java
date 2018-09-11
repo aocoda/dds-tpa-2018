@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.junit.Test;
 
@@ -16,6 +15,7 @@ import dominio.dispositivos.inteligentes.estados.Ahorro;
 import dominio.dispositivos.inteligentes.estados.Apagado;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
+import dominio.geoposicionamiento.Coordenada;
 import dominio.importadorJson.parser.ParserJson;
 import dominio.importadorJson.parser.cliente.ParserClientes;
 import repositorios.RepositorioCategorias;
@@ -32,22 +32,6 @@ public class ParsersJsonTest {
 		String clienteTest = "{ \"tipoDocumento\": \"LC\" }";
 		
 		assertThat(parserClientes.parsear(clienteTest).getTipoDocumento()).isEqualTo(TipoDocumento.LC);
-	}
-	
-	@Test
-	public void SiElJsonTieneUnaListaDeDispositivosEstandarVacia_SeCreaUnClienteConUnaListaDeDispositivosEstandarVacia() {
-		
-		String clienteTest = "{ \"dispositivosEstandar\": [ ] }";
-		
-		assertThat(parserClientes.parsear(clienteTest).getDispositivosEstandar()).isEqualTo(Collections.emptyList());
-	}
-	
-	@Test
-	public void SiElJsonTieneUnaListaDeDispositivosInteligentesVacia_SeCreaUnClienteConUnaListaDeDispositivosInteligentesVacia() {
-		
-		String clienteTest = "{ \"dispositivosInteligentes\": [ ] }";
-		
-		assertThat(parserClientes.parsear(clienteTest).getDispositivosInteligentes()).isEqualTo(Collections.emptyList());
 	}
 	
 	@Test
@@ -211,5 +195,34 @@ public class ParsersJsonTest {
 		assertThat(historialObtenido)
 					.usingRecursiveFieldByFieldElementComparator()
 					.containsExactly(new Uso(new Periodo(LocalDateTime.of(2017, 1, 1, 0, 0), LocalDateTime.of(2017, 1, 1, 5, 30)), new Ahorro()));
+	}
+	
+	@Test
+	public void SiElJsonNoTieneElementos_SeCreaUnClienteConSusRespectivasListasVacias() {
+		
+		String clienteTest = "{ }";	
+		
+		Cliente clienteEsperado = parserClientes.parsear(clienteTest);
+		
+		assertThat(clienteEsperado.getDispositivosEstandar()).isEmpty();
+		assertThat(clienteEsperado.getDispositivosInteligentes()).isEmpty();
+		assertThat(clienteEsperado.getReglas()).isEmpty();
+	}
+	
+	@Test
+	public void parseoDeCoordenadasDeUnCliente() {
+		
+
+		String clienteTest = "{"
+				+ "\"coordenada\":"
+					+ "{"
+						+ "\"latitud\": 2,"
+						+ "\"longitud\": 1"
+					+ "}"
+				+ "}";
+
+		Coordenada coordenadaObtenida = parserClientes.parsear(clienteTest).getCoordenada();
+		
+		assertThat(coordenadaObtenida).isEqualToComparingFieldByFieldRecursively(new Coordenada(2, 1));
 	}
 }
