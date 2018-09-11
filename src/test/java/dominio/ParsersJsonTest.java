@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -11,21 +12,20 @@ import org.junit.Test;
 
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.Uso;
+import dominio.dispositivos.inteligentes.estados.Ahorro;
 import dominio.dispositivos.inteligentes.estados.Apagado;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
-import dominio.importadorJson.parser.ParserClientes;
 import dominio.importadorJson.parser.ParserJson;
+import dominio.importadorJson.parser.cliente.ParserClientes;
 import repositorios.RepositorioCategorias;
 
 public class ParsersJsonTest {
 
 	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();	
-	
 	private ParserJson<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
 	
 	
-	//CLIENTES
 	@Test
 	public void SiElJsonTieneElTipoDocumento_SeCreaUnClienteConElTipoCorrespondiente() {
 		
@@ -179,5 +179,37 @@ public class ParsersJsonTest {
 				.getHistorialUsos();
 		
 		assertThat(historialObtenido).isEmpty();
+	}
+	
+	@Test
+	public void SiElDispositivoJsonVieneConHistorialDeUsos_SeCreaUnDispositivoConEsaLista() {
+		
+		String clienteTest = "{\"dispositivosInteligentes\":"
+				+ "["
+					+ "{"
+						+ "\"historialUsos\": ["
+							+ "{"
+								+ "\"periodo\": {"
+									+ "\"fechaYHoraDeInicio\": \"2017-01-01 00:00\","
+									+ "\"fechaYHoraDeFin\": \"2017-01-01 05:30\""
+								+ "},"
+								+ "\"estadoDispositivo\": \"Ahorro\""
+							+ "}"
+						+ "]"
+					+ "}"
+				+ "]"
+			+ "}";	
+		
+		Collection<Uso> historialObtenido = parserClientes
+				.parsear(clienteTest)
+				.getDispositivosInteligentes()
+				.stream()
+				.findFirst()
+				.get()
+				.getHistorialUsos();
+		
+		assertThat(historialObtenido)
+					.usingRecursiveFieldByFieldElementComparator()
+					.containsExactly(new Uso(new Periodo(LocalDateTime.of(2017, 1, 1, 0, 0), LocalDateTime.of(2017, 1, 1, 5, 30)), new Ahorro()));
 	}
 }
