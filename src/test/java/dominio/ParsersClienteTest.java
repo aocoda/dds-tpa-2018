@@ -20,7 +20,7 @@ import dominio.importadorJson.parser.ParserJson;
 import dominio.importadorJson.parser.cliente.ParserClientes;
 import repositorios.RepositorioCategorias;
 
-public class ParsersJsonTest {
+public class ParsersClienteTest {
 
 	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();	
 	private ParserJson<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
