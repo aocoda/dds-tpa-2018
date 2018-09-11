@@ -1,4 +1,4 @@
-package dominio.importadorJson.parser;
+package dominio.importadorJson.parser.cliente;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;

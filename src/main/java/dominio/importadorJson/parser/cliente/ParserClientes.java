@@ -1,4 +1,4 @@
-package dominio.importadorJson.parser;
+package dominio.importadorJson.parser.cliente;
 
 import java.time.LocalDate;
 
@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import dominio.Categoria;
 import dominio.Cliente;
+import dominio.importadorJson.parser.ParserJson;
 import repositorios.RepositorioCategorias;
 
 public class ParserClientes extends ParserJson<Cliente> {
