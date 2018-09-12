@@ -1,6 +1,11 @@
 package dominio.reglas.condiciones.relaciones;
 
-public class MenorA implements Relacion {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "MENOR_A")
+public class MenorA extends Relacion {
 
 	private double unValor;
 

@@ -1,6 +1,14 @@
 package dominio.reglas.condiciones;
 
-public interface Condicion {
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-	public boolean seCumple();
+import repositorios.EntidadPersistente;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Condicion extends EntidadPersistente {
+
+	public abstract boolean seCumple();
 }

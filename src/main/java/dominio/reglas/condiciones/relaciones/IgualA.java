@@ -1,6 +1,11 @@
 package dominio.reglas.condiciones.relaciones;
 
-public class IgualA implements Relacion {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "IGUAL_A")
+public class IgualA extends Relacion {
 
 	private double unValor;
 

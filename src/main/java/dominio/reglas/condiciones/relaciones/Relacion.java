@@ -1,6 +1,16 @@
 package dominio.reglas.condiciones.relaciones;
 
-public interface Relacion {
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-	public boolean aplicarCon(double valor);
+import repositorios.EntidadPersistente;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_relacion")
+public abstract class Relacion extends EntidadPersistente {
+
+	public abstract boolean aplicarCon(double valor);
 }

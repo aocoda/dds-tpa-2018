@@ -1,6 +1,11 @@
 package dominio.reglas.condiciones.relaciones;
 
-public class Entre implements Relacion {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "ENTRE")
+public class Entre extends Relacion {
 
 	private double unValor;
 	private double otroValor;

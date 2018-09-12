@@ -1,6 +1,11 @@
 package dominio.reglas;
 
-public interface Sensor {
+import javax.persistence.Entity;
 
-	public double medir();
+import repositorios.EntidadPersistente;
+
+@Entity
+public abstract class Sensor extends EntidadPersistente {
+
+	public abstract double medir();
 }
