@@ -10,7 +10,7 @@ import dominio.dispositivos.Periodo;
 import dominio.excepciones.CondicionMalConfiguradaException;
 import dominio.reglas.condiciones.relaciones.MenorA;
 
-public class CondicionSimplex implements Condicion {
+public class CondicionSimplex extends Condicion {
 
 	private AsesorDeUso asesor;
 	private DispositivoInteligente dispositivo;
