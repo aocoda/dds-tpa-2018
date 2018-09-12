@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import dominio.reglas.Actuador;
 import dominio.reglas.Regla;
@@ -36,6 +39,7 @@ public class Cliente extends EntidadPersistente {
 	private int numeroDocumento;
 	private String telefono;
 	private String domicilio;
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fechaAltaServicio;
 	@ManyToOne
 	private Categoria categoria;

@@ -3,12 +3,17 @@ package dominio.dispositivos;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import javax.persistence.Convert;
 import javax.persistence.Embeddable;
+
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 @Embeddable
 public class Periodo {
 
+	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime fechaYHoraDeInicio;
+	@Convert(converter = LocalDateTimeConverter.class)
 	private LocalDateTime fechaYHoraDeFin;
 
 	public Periodo(LocalDateTime fechaYHoraDeInicio, LocalDateTime fechaYHoraDeFin) {
