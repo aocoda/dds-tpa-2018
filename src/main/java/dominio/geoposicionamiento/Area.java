@@ -1,7 +1,12 @@
 package dominio.geoposicionamiento;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class Area {
 
+	@Embedded
 	private Coordenada coordenada;
 	private double radio;
 	

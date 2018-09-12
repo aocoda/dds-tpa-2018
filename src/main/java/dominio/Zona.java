@@ -3,13 +3,19 @@ package dominio;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+
 import dominio.Transformador;
 import dominio.dispositivos.Periodo;
 import dominio.geoposicionamiento.Area;
+import repositorios.EntidadPersistente;
 
-public class Zona {
+@Entity
+public class Zona extends EntidadPersistente {
 	
 	private String nombre;
+	@Embedded
 	private Area area;
 
 	public Zona(String nombre, Area area) {

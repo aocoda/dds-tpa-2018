@@ -4,11 +4,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import dominio.importadorJson.parser.ParserJson;
+import repositorios.EntidadPersistente;
 import repositorios.RepositorioGenerico;
 
 public class ImportadorJson {
 
-	public <T> void importar(String url, ParserJson<T> parser, RepositorioGenerico<T> repositorio) {
+	public <T extends EntidadPersistente> void importar(String url, ParserJson<T> parser, RepositorioGenerico<T> repositorio) {
 		
 		Collection<String> datos = buscarRecurso(url);
 		
@@ -23,12 +24,12 @@ public class ImportadorJson {
 		return new BuscadorJson().buscarRecurso(url);
 	}
 	
-	private <T> Collection<T> parsear(ParserJson<T> parser, Collection<String> datos) {
+	private <T extends EntidadPersistente> Collection<T> parsear(ParserJson<T> parser, Collection<String> datos) {
 		
 		return datos.stream().map(dato -> parser.parsear(dato)).collect(Collectors.toSet());
 	}
 	
-	private <T> void agregar(Collection<T> elementos, RepositorioGenerico<T> repositorio) {
+	private <T extends EntidadPersistente> void agregar(Collection<T> elementos, RepositorioGenerico<T> repositorio) {
 		
 		elementos.forEach(elemento -> repositorio.agregar(elemento));
 	}

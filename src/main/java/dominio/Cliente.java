@@ -9,28 +9,48 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 import dominio.reglas.Actuador;
 import dominio.reglas.Regla;
 import dominio.reglas.condiciones.CondicionSimplex;
+import repositorios.EntidadPersistente;
 import dominio.asesorDeUso.AsesorDeUso;
 import dominio.dispositivos.*;
 import dominio.excepciones.SinTransformadoresCercanosException;
 import dominio.geoposicionamiento.Coordenada;
 
-public class Cliente {
+@Entity
+public class Cliente extends EntidadPersistente {
 	
 	private String nombreCompleto;
+	@Enumerated(value = EnumType.STRING)
 	private TipoDocumento tipoDocumento;
 	private int numeroDocumento;
 	private String telefono;
 	private String domicilio;
 	private LocalDate fechaAltaServicio;
+	@ManyToOne
 	private Categoria categoria;
+	@OneToMany
+	@JoinColumn(name = "cliente_id")
 	private Collection<DispositivoEstandar> dispositivosEstandar;
+	@OneToMany
+	@JoinColumn(name = "cliente_id")
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
+	//@OneToMany
+		@Transient
 	private Collection<Regla> reglas = new HashSet<>();
 	private int puntos;
 	private boolean apagadoAutomaticoActivado;
+	@Embedded
 	private Coordenada coordenada;
 	
 	

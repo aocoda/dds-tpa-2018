@@ -11,8 +11,6 @@ import org.junit.Test;
 
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.Uso;
-import dominio.dispositivos.inteligentes.estados.Ahorro;
-import dominio.dispositivos.inteligentes.estados.Apagado;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
 import dominio.geoposicionamiento.Coordenada;
@@ -127,7 +125,7 @@ public class ParsersClienteTest {
 				+ "]"
 			+ "}";
 		
-		EstadoDispositivo estadoEsperado = new Apagado();
+		EstadoDispositivo estadoEsperado = EstadoDispositivo.APAGADO;
 		
 		EstadoDispositivo estadoObtenido = parserClientes
 				.parsear(clienteTest)
@@ -177,7 +175,7 @@ public class ParsersClienteTest {
 									+ "\"fechaYHoraDeInicio\": \"2017-01-01 00:00\","
 									+ "\"fechaYHoraDeFin\": \"2017-01-01 05:30\""
 								+ "},"
-								+ "\"estadoDispositivo\": \"Ahorro\""
+								+ "\"estadoDispositivo\": \"AHORRO\""
 							+ "}"
 						+ "]"
 					+ "}"
@@ -194,7 +192,7 @@ public class ParsersClienteTest {
 		
 		assertThat(historialObtenido)
 					.usingRecursiveFieldByFieldElementComparator()
-					.containsExactly(new Uso(new Periodo(LocalDateTime.of(2017, 1, 1, 0, 0), LocalDateTime.of(2017, 1, 1, 5, 30)), new Ahorro()));
+					.containsExactly(new Uso(new Periodo(LocalDateTime.of(2017, 1, 1, 0, 0), LocalDateTime.of(2017, 1, 1, 5, 30)), EstadoDispositivo.AHORRO));
 	}
 	
 	@Test

@@ -1,19 +1,26 @@
 package dominio;
 
-import dominio.dispositivos.Periodo;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-public class Categoria {
+import dominio.dispositivos.Periodo;
+import repositorios.EntidadPersistente;
+
+@Entity
+public class Categoria extends EntidadPersistente {
 	
-	private TipoCategoria subtipoCategoria;
+	@Enumerated(value = EnumType.STRING)
+	private TipoCategoria tipoCategoria;
 	private double cargoFijoMensual;
 	private double cargoVariable;
 	private double consumoDesde;
 	private double consumoHasta;
 	
-	public Categoria(TipoCategoria subtipoCategoria, double cargoFijoMensual, double cargoVariable,
+	public Categoria(TipoCategoria tipoCategoria, double cargoFijoMensual, double cargoVariable,
 			double consumoDesde, double consumoHasta) {
 		
-		this.subtipoCategoria = subtipoCategoria;
+		this.tipoCategoria = tipoCategoria;
 		this.cargoFijoMensual = cargoFijoMensual;
 		this.cargoVariable = cargoVariable;
 		this.consumoDesde = consumoDesde;
@@ -32,6 +39,6 @@ public class Categoria {
 	
 	public TipoCategoria getSubtipoCategoria() {
 		
-		return subtipoCategoria;
+		return tipoCategoria;
 	}
 }

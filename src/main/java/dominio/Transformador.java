@@ -3,13 +3,19 @@ package dominio;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+
 import dominio.Cliente;
 import dominio.dispositivos.Periodo;
 import dominio.geoposicionamiento.Coordenada;
+import repositorios.EntidadPersistente;
 
-public class Transformador {
+@Entity
+public class Transformador extends EntidadPersistente {
 
 	private String nombre;
+	@Embedded
 	private Coordenada coordenada;
 
 	public Transformador(String nombre, Coordenada coordenada) {

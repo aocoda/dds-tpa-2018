@@ -3,6 +3,9 @@ package dominio.dispositivos;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Periodo {
 
 	private LocalDateTime fechaYHoraDeInicio;

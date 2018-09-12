@@ -2,12 +2,21 @@ package dominio.dispositivos.inteligentes;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
+import repositorios.EntidadPersistente;
 
-public class Uso implements PeriodoUtils {
+@Entity
+public class Uso extends EntidadPersistente implements PeriodoUtils {
 
+	@Embedded
 	private Periodo periodo;
+	@Enumerated(value = EnumType.STRING)
 	private EstadoDispositivo estadoDispositivo;
 
 	public Uso(Periodo periodo, EstadoDispositivo estadoDispositivo) {

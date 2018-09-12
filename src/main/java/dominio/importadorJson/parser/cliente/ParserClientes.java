@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder;
 
 import dominio.Categoria;
 import dominio.Cliente;
-import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.importadorJson.parser.ParserJson;
 import repositorios.RepositorioCategorias;
 
@@ -22,7 +21,6 @@ public class ParserClientes extends ParserJson<Cliente> {
 				.registerTypeAdapter(LocalDate.class, new DeserializadorFecha())
 				.registerTypeAdapter(Categoria.class, new DeserializadorCategoria(repositorioCategorias))
 				.registerTypeAdapter(LocalDateTime.class, new DeserializadorFechaYHora())
-				.registerTypeAdapter(EstadoDispositivo.class, new DeserializadorEstadoDispositivo())
 				.create();
 	}
 

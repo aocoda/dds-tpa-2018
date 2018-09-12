@@ -4,12 +4,22 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.*;
 
+@Entity
 public class DispositivoInteligente extends Dispositivo {
 
-	private EstadoDispositivo estadoDispositivo = new Apagado();
+	@Enumerated(value = EnumType.STRING)
+	private EstadoDispositivo estadoDispositivo = EstadoDispositivo.APAGADO;
+	@OneToMany
+	@JoinColumn(name = "dispositivo_id")
 	private Collection<Uso> historialUsos = new HashSet<Uso>();
 
 	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
@@ -20,7 +30,7 @@ public class DispositivoInteligente extends Dispositivo {
 	@SuppressWarnings("unused")
 	private DispositivoInteligente() {
 		
-		estadoDispositivo = new Apagado();
+		estadoDispositivo = EstadoDispositivo.APAGADO;
 		historialUsos = new HashSet<Uso>();
 	}
 	

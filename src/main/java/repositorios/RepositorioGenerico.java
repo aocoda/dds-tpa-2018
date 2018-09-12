@@ -3,7 +3,7 @@ package repositorios;
 import java.util.Collection;
 import java.util.HashSet;
 
-public abstract class RepositorioGenerico<E> {
+public abstract class RepositorioGenerico<E extends EntidadPersistente> {
 
 	protected Collection<E> elementos = new HashSet<>();
 	

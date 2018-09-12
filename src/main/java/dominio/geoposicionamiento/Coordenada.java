@@ -2,6 +2,9 @@ package dominio.geoposicionamiento;
 
 import static java.lang.Math.*;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Coordenada {
 
 	public static final double RADIO_DE_LA_TIERRA = 6371;

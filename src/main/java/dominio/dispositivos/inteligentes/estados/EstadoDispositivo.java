@@ -2,21 +2,53 @@ package dominio.dispositivos.inteligentes.estados;
 
 import dominio.dispositivos.DispositivoInteligente;
 
-public abstract class EstadoDispositivo {
+public enum EstadoDispositivo {
+	
+	AHORRO {
+		
+		@Override
+		public void modoAhorro(DispositivoInteligente dispositivo) { }
+	}
+	, 
+	APAGADO {
+		
+		@Override
+		public void apagar(DispositivoInteligente dispositivo) { }
+		
+		@Override
+		public boolean estaApagado() {
+			
+			return true;
+		}
+	}
+	,
+	ENCENDIDO {
+		
+		@Override
+		public void encender(DispositivoInteligente dispositivo) { }
+
+		@Override
+		public boolean estaEncendido() {
+			
+			return true;
+		}
+	}
+	
+	;
 	
 	public void encender(DispositivoInteligente dispositivo) {
 		
-		dispositivo.cambiarEstado(new Encendido());
+		dispositivo.cambiarEstado(ENCENDIDO);
 	}
 
 	public void apagar(DispositivoInteligente dispositivo) {
 		
-		dispositivo.cambiarEstado(new Apagado());
+		dispositivo.cambiarEstado(APAGADO);
 	}
 	
 	public void modoAhorro(DispositivoInteligente dispositivo) {
 		
-		dispositivo.cambiarEstado(new Ahorro());
+		dispositivo.cambiarEstado(AHORRO);
 	}
 
 	public boolean estaEncendido() {

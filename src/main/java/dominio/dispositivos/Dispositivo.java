@@ -1,6 +1,11 @@
 package dominio.dispositivos;
 
-public abstract class Dispositivo {
+import javax.persistence.MappedSuperclass;
+
+import repositorios.EntidadPersistente;
+
+@MappedSuperclass
+public abstract class Dispositivo extends EntidadPersistente {
 	
 	protected String nombreGenerico;
 	protected double consumoPorHora;

@@ -17,7 +17,7 @@ public class ParserCategoriasTest {
 	public void SiLaCategoriaJsonTieneTodosLosAtributos_SeCreaUnaCategoriaConEsosValores() {
 
 		String categoriaTest = "{ " 
-				+ "\"subtipoCategoria\": \"R1\"," 
+				+ "\"tipoCategoria\": \"R1\"," 
 				+ "\"cargoFijoMensual\" : 100,"
 				+ "\"cargoVariable\" : 100," 
 				+ "\"consumoDesde\": 0," 
@@ -49,7 +49,7 @@ public class ParserCategoriasTest {
 	public void SiLaCategoriaJsonEstaMalFormadaEntonces_ArrojaParserException() {
 
 		String categoriaTest = "{ " 
-				+ "\"subtipoCategoria\": \"R1\"," 
+				+ "\"tipoCategoria\": \"R1\"," 
 				+ "\"cargoFijoMensual\" : 100,"
 				+ "\"cargoVariable\" : 100," 
 				+ "\"consumoDesde\": 0," 

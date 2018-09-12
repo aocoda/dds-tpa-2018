@@ -1,5 +1,8 @@
 package dominio.dispositivos;
 
+import javax.persistence.Entity;
+
+@Entity
 public class DispositivoEstandar extends Dispositivo {
 
 	private double horasEstimadasDeUsoPorDia;
