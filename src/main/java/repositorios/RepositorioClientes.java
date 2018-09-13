@@ -7,14 +7,20 @@ public class RepositorioClientes extends RepositorioGenerico<Cliente> {
 
 	public void ejecutarReglasQueCorrespondan() {
 		
-		elementos.forEach(cliente -> cliente.ejecutarReglasQueCorrespondan());
+		getAllInstances().forEach(cliente -> cliente.ejecutarReglasQueCorrespondan());
 	}
 	
 	public void ejecutarApagadoAutomaticoPorConsumo(Periodo unPeriodo) {
 		
-		elementos
+		getAllInstances()
 		.stream()
 		.filter(cliente -> cliente.tieneApagadoAutomaticoActivado())
 		.forEach(cliente -> cliente.ejecutarApagadoPorConsumo(unPeriodo));
+	}
+
+	@Override
+	protected Class<Cliente> getClase() {
+		
+		return Cliente.class;
 	}
 }

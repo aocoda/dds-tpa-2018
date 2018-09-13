@@ -9,9 +9,15 @@ public class RepositorioCategorias extends RepositorioGenerico<Categoria> {
 	
 	public Optional<Categoria> getPorSubcategoria(String subcategoria) {
 		
-		return elementos
+		return getAllInstances()
 				.stream()
 				.filter(categoria -> categoria.getSubtipoCategoria().equals(TipoCategoria.valueOf(subcategoria)))
 				.findFirst();
+	}
+
+	@Override
+	protected Class<Categoria> getClase() {
+		
+		return Categoria.class;
 	}
 }

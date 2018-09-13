@@ -1,24 +1,28 @@
 package repositorios;
 
 import java.util.Collection;
-import java.util.HashSet;
 
-public abstract class RepositorioGenerico<E extends EntidadPersistente> {
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-	protected Collection<E> elementos = new HashSet<>();
+public abstract class RepositorioGenerico<E extends EntidadPersistente> implements WithGlobalEntityManager, TransactionalOps {
 	
 	public Collection<E> getAllInstances() {
 		
-		return elementos;
+		return entityManager()
+				.createQuery("FROM " + getClase().getSimpleName(), getClase())
+				.getResultList();
 	}	
 	
 	public void agregar(E unElemento) {
 		
-		elementos.add(unElemento);
+		withTransaction(() -> entityManager().persist(unElemento));
 	}
 		
 	public void borrar(E unElemento) {
 		
-		elementos.remove(unElemento);
+		withTransaction(() -> entityManager().remove(unElemento));
 	}
+	
+	protected abstract Class<E> getClase();
 }
