@@ -21,8 +21,9 @@ import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
-import dominio.reglas.Actuador;
 import dominio.reglas.Regla;
+import dominio.reglas.actuadores.Actuador;
+import dominio.reglas.actuadores.Apagador;
 import dominio.reglas.condiciones.CondicionSimplex;
 import repositorios.EntidadPersistente;
 import dominio.asesorDeUso.AsesorDeUso;
@@ -179,21 +180,21 @@ public class Cliente extends EntidadPersistente {
 	
 	public void ejecutarApagadoPorConsumo(Periodo unPeriodo) {
 		
-		Actuador actuador = unDispositivo -> unDispositivo.apagar();
+		Actuador actuador = new Apagador();
 		
 		AsesorDeUso asesor = new AsesorDeUso();
 		
 		List<Dispositivo> dispositivos = getDispositivos().stream().collect(Collectors.toList());
 			
-			dispositivosInteligentes
-			.stream()
-			.map(dispositivo -> {
+		dispositivosInteligentes
+		.stream()
+		.map(dispositivo -> {
 				
-				CondicionSimplex condicion = new CondicionSimplex(asesor, dispositivo, dispositivos, unPeriodo);
+			CondicionSimplex condicion = new CondicionSimplex(asesor, dispositivo, dispositivos, unPeriodo);
 				
-				return new Regla(condicion, actuador, Collections.singletonList(dispositivo));
-			})
-			.forEach(reglaSimplex -> reglaSimplex.ejecutarSiCorresponde());
+			return new Regla(condicion, actuador, Collections.singletonList(dispositivo));
+		})
+		.forEach(reglaSimplex -> reglaSimplex.ejecutarSiCorresponde());
 	}
 
 	public Collection<Dispositivo> getDispositivos() {

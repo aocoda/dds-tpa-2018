@@ -3,6 +3,7 @@ package dominio.reglas;
 import java.util.Collection;
 
 import dominio.dispositivos.DispositivoInteligente;
+import dominio.reglas.actuadores.Actuador;
 import dominio.reglas.condiciones.Condicion;
 
 public class Regla {

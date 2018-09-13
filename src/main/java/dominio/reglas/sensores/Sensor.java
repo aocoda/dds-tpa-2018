@@ -1,4 +1,4 @@
-package dominio.reglas;
+package dominio.reglas.sensores;
 
 import javax.persistence.Entity;
 

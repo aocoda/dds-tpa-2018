@@ -4,13 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.reglas.Sensor;
 import dominio.reglas.condiciones.Condicion;
 import dominio.reglas.condiciones.CondicionSensor;
 import dominio.reglas.condiciones.compuestas.Or;
 import dominio.reglas.condiciones.relaciones.Entre;
 import dominio.reglas.condiciones.relaciones.IgualA;
 import dominio.reglas.condiciones.relaciones.MenorA;
+import dominio.reglas.sensores.Sensor;
 
 public class CondicionTest {
 
