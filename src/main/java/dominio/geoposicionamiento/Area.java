@@ -16,6 +16,9 @@ public class Area {
 		this.radio = radio;
 	}
 	
+	@SuppressWarnings("unused")
+	private Area() { }
+	
 	public boolean contieneA(Coordenada unaCoordenada) {
 		
 		return coordenada.distanciaA(unaCoordenada) < radio;

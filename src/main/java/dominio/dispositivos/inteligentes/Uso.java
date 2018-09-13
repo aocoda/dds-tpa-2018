@@ -43,4 +43,9 @@ public class Uso extends EntidadPersistente implements PeriodoUtils {
 
 		return periodo;
 	}
+	
+	public EstadoDispositivo getEstadoDispositivo() {
+		
+		return estadoDispositivo;
+	}
 }

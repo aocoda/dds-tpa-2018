@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,7 +19,7 @@ public class DispositivoInteligente extends Dispositivo {
 
 	@Enumerated(value = EnumType.STRING)
 	private EstadoDispositivo estadoDispositivo = EstadoDispositivo.APAGADO;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dispositivo_id")
 	private Collection<Uso> historialUsos = new HashSet<Uso>();
 

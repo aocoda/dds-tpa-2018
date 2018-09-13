@@ -23,6 +23,9 @@ public class Zona extends EntidadPersistente {
 		this.nombre = nombre;
 		this.area = area;
 	}
+	
+	@SuppressWarnings("unused")
+	private Zona() { }
 
 	public Collection<Transformador> transformadoresAsociados(Collection<Transformador> transformadores) {
 		

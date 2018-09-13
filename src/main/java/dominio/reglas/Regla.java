@@ -2,6 +2,7 @@ package dominio.reglas;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,7 +16,7 @@ import repositorios.EntidadPersistente;
 @Entity
 public class Regla extends EntidadPersistente {
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Condicion condicion;
 	@ManyToOne
 	private Actuador actuador;
@@ -28,6 +29,9 @@ public class Regla extends EntidadPersistente {
 		this.actuador = actuador;
 		this.dispositivos = dispositivos;
 	}
+	
+	@SuppressWarnings("unused")
+	private Regla() { }
 
 	public void ejecutarSiCorresponde() {
 		

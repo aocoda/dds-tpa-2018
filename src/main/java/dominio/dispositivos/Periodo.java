@@ -21,10 +21,13 @@ public class Periodo {
 		this.fechaYHoraDeInicio = fechaYHoraDeInicio;
 		this.fechaYHoraDeFin = fechaYHoraDeFin;
 	}
+	
+	@SuppressWarnings("unused")
+	private Periodo() { }
 
 	public double cantidadDeHoras() {
 		
-		return Duration.between(fechaYHoraDeInicio, fechaYHoraDeFin).toMinutes() / 60;
+		return (double) Duration.between(fechaYHoraDeInicio, fechaYHoraDeFin).toMinutes() / 60;
 	}
 	
 	public double cantidadDeDias() {

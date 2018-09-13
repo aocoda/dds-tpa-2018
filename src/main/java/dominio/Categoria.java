@@ -27,6 +27,9 @@ public class Categoria extends EntidadPersistente {
 		this.consumoHasta = consumoHasta;
 	}
 	
+	@SuppressWarnings("unused")
+	private Categoria() { }
+	
 	public double estimadoAPagar(Cliente unCliente, Periodo unPeriodo) {
 		
 		return  cargoFijoMensual + unCliente.consumoDe(unPeriodo) * cargoVariable;

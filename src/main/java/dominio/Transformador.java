@@ -24,6 +24,9 @@ public class Transformador extends EntidadPersistente {
 		this.coordenada = coordenada;
 	}
 	
+	@SuppressWarnings("unused")
+	private Transformador() { }
+	
 	public Collection<Cliente> clientesAsociados(Collection<Cliente> clientes, Collection<Transformador> transformadores) {
 		
 		return clientes

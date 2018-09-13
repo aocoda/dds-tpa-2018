@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -44,14 +45,13 @@ public class Cliente extends EntidadPersistente {
 	private LocalDate fechaAltaServicio;
 	@ManyToOne
 	private Categoria categoria;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private Collection<DispositivoEstandar> dispositivosEstandar;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
-	//@OneToMany
-		@Transient
+	@OneToMany(cascade = CascadeType.ALL)
 	private Collection<Regla> reglas = new HashSet<>();
 	private int puntos;
 	private boolean apagadoAutomaticoActivado;

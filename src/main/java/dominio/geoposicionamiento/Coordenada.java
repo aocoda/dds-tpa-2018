@@ -18,6 +18,9 @@ public class Coordenada {
 		this.longitud = longitud;
 	}
 	
+	@SuppressWarnings("unused")
+	private Coordenada() { }
+	
 	public double distanciaA(Coordenada otraCoordenada) {
 		
 		double diferenciaLatitud = toRadians(otraCoordenada.getLatitud() - latitud);
