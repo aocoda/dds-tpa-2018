@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import dominio.reglas.Sensor;
 import dominio.reglas.condiciones.relaciones.Relacion;
+import dominio.reglas.sensores.Sensor;
 
 @Entity
 public class CondicionSensor extends Condicion {
