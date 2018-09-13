@@ -2,7 +2,7 @@ package dominio.reglas.condiciones.compuestas;
 
 import dominio.reglas.condiciones.Condicion;
 
-public abstract class CondicionCompuesta implements Condicion {
+public abstract class CondicionCompuesta extends Condicion {
 
 	protected Condicion unaCondicion;
 	protected Condicion otraCondicion;
