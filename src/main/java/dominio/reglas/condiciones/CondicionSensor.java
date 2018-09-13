@@ -1,5 +1,6 @@
 package dominio.reglas.condiciones;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -12,18 +13,18 @@ public class CondicionSensor extends Condicion {
 
 	@ManyToOne
 	private Sensor sensor;
-	@OneToOne
-	private Relacion comparacion;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Relacion relacion;
 
-	public CondicionSensor(Sensor sensor, Relacion comparacion) {
+	public CondicionSensor(Sensor sensor, Relacion relacion) {
 		
 		this.sensor = sensor;
-		this.comparacion = comparacion;
+		this.relacion = relacion;
 	}
 
 	@Override
 	public boolean seCumple() {
 		
-		return comparacion.aplicarCon(sensor.medir());
+		return relacion.aplicarCon(sensor.medir());
 	}
 }
