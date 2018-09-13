@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ import dominio.Categoria;
 import dominio.Cliente;
 import dominio.TipoCategoria;
 import dominio.TipoDocumento;
+import dominio.Transformador;
+import dominio.dispositivos.DispositivoEstandar;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
 import dominio.dispositivos.inteligentes.Uso;
@@ -37,11 +40,13 @@ import repositorios.RepositorioActuadores;
 import repositorios.RepositorioCategorias;
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioSensores;
+import repositorios.RepositorioTransformadores;
 
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
 	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();
 	private RepositorioClientes repositorioclientes = new RepositorioClientes();
+	private RepositorioTransformadores repositorioTransformadores = new RepositorioTransformadores();
 	
 	@Test
 	public void casoDePrueba1() {
@@ -133,4 +138,80 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 //		
 //		assertThat(reglaRecuperada.getCondicion().getRelacion().getUnValor()).isEqualTo(20);
 	}
+	
+	@Test
+	public void casoDePrueba4() {
+		
+		Transformador transformador = new Transformador("transformador1", new Coordenada(1,2));
+		
+		entityManager().persist(transformador);
+		
+		Transformador transformador2 = new Transformador("tranformador2", new Coordenada(3,4)); 
+		
+		entityManager().persist(transformador2);
+		
+		int cantidadInicial = repositorioTransformadores.getAllInstances().size();
+		
+		Transformador transformador3 = new Transformador("transformador3", new Coordenada(5,6));
+		
+		entityManager().persist(transformador3);
+		
+		int cantidadFinal = repositorioTransformadores.getAllInstances().size();
+		
+		assertThat(cantidadInicial = (cantidadFinal-1));
+	}
+	
+	@Test
+	public void casoDePrueba5() {
+		
+		DispositivoInteligente dispositivo = new DispositivoInteligente("Televisor", 10, 0, 0);
+		
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, new HashSet<DispositivoEstandar>(), Collections.singleton(dispositivo), new Coordenada(0, 0));
+	
+		entityManager().persist(cliente);
+		
+		dispositivo.encender();
+		Periodo periodoDe2Hs = new Periodo(LocalDateTime.of(2018, 9, 13, 0, 0), LocalDateTime.of(2018, 9, 13, 2, 0));
+		dispositivo.agregarUso(periodoDe2Hs);
+		
+		double consumoDelHogarEnElPeriodo = repositorioclientes
+				.getAllInstances()
+				.stream()
+				.findFirst()
+				.get()
+				.consumoDe(periodoDe2Hs);
+
+		assertThat(consumoDelHogarEnElPeriodo = 20.0);
+		
+		Transformador transformador = new Transformador("transformador", new Coordenada(1,1));
+		
+		entityManager().persist(transformador);
+		
+		double consumoDelTransformadorEnElPeriodo = repositorioTransformadores
+				.getAllInstances()
+				.stream()
+				.findFirst()
+				.get()
+				.consumoDe(periodoDe2Hs, repositorioclientes.getAllInstances(), repositorioTransformadores.getAllInstances());
+		
+		assertThat(consumoDelTransformadorEnElPeriodo = 20.0);
+		
+		DispositivoInteligente dispositivoRecuperado = repositorioclientes
+				.getAllInstances().stream().findFirst().get()
+				.getDispositivosInteligentes().stream().findFirst().get();
+		
+		double consumoAnterior = dispositivoRecuperado.getConsumoPorHora();
+		dispositivoRecuperado.setConsumoPorHora(consumoAnterior * 11);
+		
+		double nuevoConsumoDelTransformadorEnElPeriodo = repositorioTransformadores
+				.getAllInstances()
+				.stream()
+				.findFirst()
+				.get()
+				.consumoDe(periodoDe2Hs, repositorioclientes.getAllInstances(), repositorioTransformadores.getAllInstances());
+		
+		assertThat(nuevoConsumoDelTransformadorEnElPeriodo = consumoDelTransformadorEnElPeriodo * 11);
+	}
 }
+
+	

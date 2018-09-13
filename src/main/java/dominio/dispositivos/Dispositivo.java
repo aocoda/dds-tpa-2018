@@ -37,6 +37,11 @@ public abstract class Dispositivo extends EntidadPersistente {
 		return consumoPorHora;
 	}
 	
+	public void setConsumoPorHora(double nuevoConsumoPorHora) {
+		
+		this.consumoPorHora = nuevoConsumoPorHora;
+	}
+	
 	public abstract double consumoDe(Periodo unPeriodo);
 	
 	public abstract double horasDeUso(Periodo unPeriodo);
