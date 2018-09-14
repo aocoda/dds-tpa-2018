@@ -38,4 +38,14 @@ public class Regla extends EntidadPersistente {
 		if(condicion.seCumple())
 			dispositivos.forEach(dispositivo -> actuador.ejecutar(dispositivo));
 	}
+
+	public Condicion getCondicion() {
+		
+		return condicion;
+	}
+
+	public void setCondicion(Condicion condicion) {
+		
+		this.condicion = condicion;
+	}
 }

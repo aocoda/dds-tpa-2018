@@ -2,49 +2,36 @@ package db;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.security.cert.CollectionCertStoreParameters;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.assertj.core.api.Assert;
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import dominio.Categoria;
 import dominio.Cliente;
-import dominio.TipoCategoria;
-import dominio.TipoDocumento;
 import dominio.Transformador;
-import dominio.dispositivos.DispositivoEstandar;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
-import dominio.dispositivos.inteligentes.Uso;
 import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.geoposicionamiento.Coordenada;
+import dominio.importadorJson.parser.ParserTransformadores;
 import dominio.reglas.Regla;
 import dominio.reglas.actuadores.Actuador;
 import dominio.reglas.actuadores.Encendedor;
+import dominio.reglas.condiciones.Condicion;
 import dominio.reglas.condiciones.CondicionSensor;
 import dominio.reglas.condiciones.relaciones.MenorA;
 import dominio.reglas.sensores.Sensor;
 import dominio.reglas.sensores.SensorTemperatura;
-import repositorios.RepositorioActuadores;
-import repositorios.RepositorioCategorias;
 import repositorios.RepositorioClientes;
-import repositorios.RepositorioSensores;
 import repositorios.RepositorioTransformadores;
 
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
-	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();
 	private RepositorioClientes repositorioclientes = new RepositorioClientes();
 	private RepositorioTransformadores repositorioTransformadores = new RepositorioTransformadores();
 	
@@ -59,9 +46,9 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		Coordenada ubicacionNueva = new Coordenada(10,10);
 		
-//		clienteRecuperado.setCoordenada(ubicacionNueva);
-//		
-//		assertThat(clienteRecuperado.getCoordenada()).isEqualToComparingFieldByFieldRecursively(ubicacionNueva);
+		clienteRecuperado.setCoordenada(ubicacionNueva);
+		
+		assertThat(clienteRecuperado.getCoordenada()).isEqualToComparingFieldByFieldRecursively(ubicacionNueva);
 	}
 	
 	@Test
@@ -98,9 +85,9 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		String nombreNuevo = "Ya no soy mas heladera";
 		
-//		dispositivoRecuperado.setNombreGenerico(nombreNuevo);
-//		
-//		assertThat(dispositivoRecuperado.getNombreGenerico()).isEqualTo(nombreNuevo);
+		dispositivoRecuperado.setNombreGenerico(nombreNuevo);
+		
+		assertThat(dispositivoRecuperado.getNombreGenerico()).isEqualTo(nombreNuevo);
 	}
 	
 	@Test
@@ -134,9 +121,11 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		Regla reglaRecuperada = cliente.getReglas().stream().findFirst().get();
 		
-//		reglaRecuperada.getCondicion().setRelacion(new MenorA(20));
-//		
-//		assertThat(reglaRecuperada.getCondicion().getRelacion().getUnValor()).isEqualTo(20);
+		Condicion nuevaCondicion = new CondicionSensor(sensor, new MenorA(20));
+		
+		reglaRecuperada.setCondicion(nuevaCondicion);
+		
+		assertThat(reglaRecuperada.getCondicion()).isEqualTo(nuevaCondicion);
 	}
 	
 	@Test
@@ -152,13 +141,22 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		int cantidadInicial = repositorioTransformadores.getAllInstances().size();
 		
-		Transformador transformador3 = new Transformador("transformador3", new Coordenada(5,6));
+		String transformador3Json = "{"
+				+ "\"nombre\": \"transformador3\","
+				+ "\"coordenada\":"
+					+ "{"
+						+ "\"latitud\": 5,"
+						+ "\"longitud\": 6"
+					+ "}"
+				+ "}";
+
+		Transformador transformador3 = new ParserTransformadores().parsear(transformador3Json);
 		
 		entityManager().persist(transformador3);
 		
 		int cantidadFinal = repositorioTransformadores.getAllInstances().size();
 		
-		assertThat(cantidadInicial = (cantidadFinal-1));
+		assertThat(cantidadFinal).isEqualTo(cantidadInicial + 1);
 	}
 	
 	@Test
@@ -166,7 +164,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		DispositivoInteligente dispositivo = new DispositivoInteligente("Televisor", 10, 0, 0);
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, new HashSet<DispositivoEstandar>(), Collections.singleton(dispositivo), new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, Collections.emptySet(), Collections.singleton(dispositivo), new Coordenada(0, 0));
 	
 		entityManager().persist(cliente);
 		
@@ -181,7 +179,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 				.get()
 				.consumoDe(periodoDe2Hs);
 
-		assertThat(consumoDelHogarEnElPeriodo = 20.0);
+		assertThat(consumoDelHogarEnElPeriodo).isEqualTo(20.0);
 		
 		Transformador transformador = new Transformador("transformador", new Coordenada(1,1));
 		
@@ -194,7 +192,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 				.get()
 				.consumoDe(periodoDe2Hs, repositorioclientes.getAllInstances(), repositorioTransformadores.getAllInstances());
 		
-		assertThat(consumoDelTransformadorEnElPeriodo = 20.0);
+		assertThat(consumoDelTransformadorEnElPeriodo).isEqualTo(20.0);
 		
 		DispositivoInteligente dispositivoRecuperado = repositorioclientes
 				.getAllInstances().stream().findFirst().get()
@@ -210,8 +208,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 				.get()
 				.consumoDe(periodoDe2Hs, repositorioclientes.getAllInstances(), repositorioTransformadores.getAllInstances());
 		
-		assertThat(nuevoConsumoDelTransformadorEnElPeriodo = consumoDelTransformadorEnElPeriodo * 11);
+		assertThat(nuevoConsumoDelTransformadorEnElPeriodo).isEqualTo(consumoDelTransformadorEnElPeriodo * 11);
 	}
 }
-
-	

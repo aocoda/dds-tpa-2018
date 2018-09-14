@@ -242,4 +242,9 @@ public class Cliente extends EntidadPersistente {
 		
 		return reglas;
 	}
+
+	public void setCoordenada(Coordenada coordenada) {
+		
+		this.coordenada = coordenada;
+	}
 }
