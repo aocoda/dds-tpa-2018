@@ -45,4 +45,14 @@ public abstract class Dispositivo extends EntidadPersistente {
 	public abstract double consumoDe(Periodo unPeriodo);
 	
 	public abstract double horasDeUso(Periodo unPeriodo);
+	
+	public String getNombreGenerico() {
+		
+		return nombreGenerico;
+	}
+
+	public void setNombreGenerico(String nombreGenerico) {
+		
+		this.nombreGenerico = nombreGenerico;
+	}
 }
