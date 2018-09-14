@@ -1,11 +1,6 @@
 package dominio.dispositivos;
 
-import java.util.HashSet;
-
 import javax.persistence.Entity;
-
-import dominio.dispositivos.inteligentes.Uso;
-import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 
 @Entity
 public class DispositivoEstandar extends Dispositivo {
@@ -19,9 +14,6 @@ public class DispositivoEstandar extends Dispositivo {
 		
 		this.horasEstimadasDeUsoPorDia = horasEstimadasDeUsoPorDia;
 	}
-	
-	@SuppressWarnings("unused")
-	private DispositivoEstandar() { }
 	
 	@Override
 	public double consumoDe(Periodo unPeriodo) {
