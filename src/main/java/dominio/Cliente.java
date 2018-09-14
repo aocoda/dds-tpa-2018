@@ -52,6 +52,7 @@ public class Cliente extends EntidadPersistente {
 	@JoinColumn(name = "cliente_id")
 	private Collection<DispositivoInteligente> dispositivosInteligentes;
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cliente_id")
 	private Collection<Regla> reglas = new HashSet<>();
 	private int puntos;
 	private boolean apagadoAutomaticoActivado;
