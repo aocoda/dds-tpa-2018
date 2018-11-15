@@ -10,8 +10,8 @@ import java.util.Collection;
 import org.junit.Test;
 
 import dominio.dispositivos.*;
+import dominio.dispositivos.inteligentes.EstadoDispositivo;
 import dominio.dispositivos.inteligentes.Uso;
-import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import dominio.excepciones.ParserException;
 import dominio.geoposicionamiento.Coordenada;
 import dominio.importadorJson.parser.ParserJson;

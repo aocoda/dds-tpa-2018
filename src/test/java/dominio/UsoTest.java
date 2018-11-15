@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.time.LocalDateTime;
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.*;
-import dominio.dispositivos.inteligentes.estados.*;
 import org.junit.Test;
 
 public class UsoTest {

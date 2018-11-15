@@ -8,7 +8,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import dominio.dispositivos.*;
-import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
 import repositorios.EntidadPersistente;
 
 @Entity

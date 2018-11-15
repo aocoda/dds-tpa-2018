@@ -11,8 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import dominio.dispositivos.inteligentes.EstadoDispositivo;
 import dominio.dispositivos.inteligentes.Uso;
-import dominio.dispositivos.inteligentes.estados.*;
 
 @Entity
 public class DispositivoInteligente extends Dispositivo {
