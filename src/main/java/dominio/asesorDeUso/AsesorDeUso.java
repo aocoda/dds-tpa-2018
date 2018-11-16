@@ -1,7 +1,6 @@
 package dominio.asesorDeUso;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,7 @@ import dominio.dispositivos.Periodo;
 
 public class AsesorDeUso implements RestriccionUtils {
 
-	public Collection<Recomendacion> getHorasOptimas(List<Dispositivo> dispositivos) {
+	public List<Recomendacion> getHorasOptimas(List<Dispositivo> dispositivos) {
 		
 		return dispositivos
 				.stream()
@@ -23,7 +22,7 @@ public class AsesorDeUso implements RestriccionUtils {
 				.collect(Collectors.toList());
 	}
 
-	public Collection<Recomendacion> recomendacionesPara(List<Dispositivo> dispositivos, Periodo unPeriodo) {
+	public List<Recomendacion> recomendacionesPara(List<Dispositivo> dispositivos, Periodo unPeriodo) {
 		
 		return getHorasOptimas(dispositivos)
 				.stream()

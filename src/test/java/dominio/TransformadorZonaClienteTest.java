@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class TransformadorZonaClienteTest {
 		Transformador transformadorCercano = new Transformador(null, coordenadaCercana);
 		Transformador transformadorLejano = new Transformador(null, coordenadaLejana);
 		
-		Collection<Transformador> transformadores = Arrays.asList(transformadorCercano, transformadorLejano);
+		List<Transformador> transformadores = Arrays.asList(transformadorCercano, transformadorLejano);
 		
 		Cliente cliente = construirCliente(coordenadaCliente);
 
@@ -41,7 +41,7 @@ public class TransformadorZonaClienteTest {
 		
 		Coordenada coordenadaCliente = mock(Coordenada.class);
 		
-		Collection<Transformador> transformadores = Collections.emptyList();
+		List<Transformador> transformadores = Collections.emptyList();
 		
 		Cliente cliente = construirCliente(coordenadaCliente);
 
@@ -59,8 +59,8 @@ public class TransformadorZonaClienteTest {
 		Cliente cliente2 = mock(Cliente.class);
 		Cliente cliente3 = mock(Cliente.class);
 		
-		Collection<Cliente> clientes = Arrays.asList(cliente1, cliente2, cliente3);
-		Collection<Transformador> transformadores = Arrays.asList(transformadorDeInteres, t2, t3);
+		List<Cliente> clientes = Arrays.asList(cliente1, cliente2, cliente3);
+		List<Transformador> transformadores = Arrays.asList(transformadorDeInteres, t2, t3);
 		
 		when(cliente1.transformadorAsociado(transformadores)).thenReturn(transformadorDeInteres);
 		when(cliente2.transformadorAsociado(transformadores)).thenReturn(transformadorDeInteres);
@@ -86,7 +86,7 @@ public class TransformadorZonaClienteTest {
 		when(area.contieneA(t2.getCoordenada())).thenReturn(true);
 		when(area.contieneA(t3.getCoordenada())).thenReturn(false);
 		
-		Collection<Transformador> transformadores = Arrays.asList(t1, t2, t3);
+		List<Transformador> transformadores = Arrays.asList(t1, t2, t3);
 		
 		assertTrue(zona.transformadoresAsociados(transformadores).containsAll(Arrays.asList(t1, t2)));
 	}

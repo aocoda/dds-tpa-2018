@@ -3,8 +3,8 @@ package dominio;
 import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,8 +17,8 @@ import org.junit.Test;
 public class ClienteTest {
 
 	private Cliente cliente;
-	private Set<DispositivoEstandar> dispositivosEstandar = new HashSet<DispositivoEstandar>();
-	private Set<DispositivoInteligente> dispositivosInteligentes = new HashSet<DispositivoInteligente>();
+	private List<DispositivoEstandar> dispositivosEstandar = new ArrayList<>();
+	private List<DispositivoInteligente> dispositivosInteligentes = new ArrayList<>();
 	private DispositivoInteligente heladera = new DispositivoInteligente("Heladera", 100, 0, 0);
 	private DispositivoInteligente televisor = new DispositivoInteligente("Televisor", 50, 0, 0);
 
@@ -134,7 +134,7 @@ public class ClienteTest {
 
 		Categoria categoriaVieja = new Categoria(TipoCategoria.R1, 18.76, 0.644, 0, 150);
 
-		Set<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toSet());
+		List<Categoria> categorias = Stream.of(categoriaVieja).collect(Collectors.toList());
 
 		cliente = construirClienteTest(categoriaVieja);
 
@@ -153,7 +153,7 @@ public class ClienteTest {
 		Categoria categoriaVieja = new Categoria(TipoCategoria.R1, 18.76, 0.644, 0, 150);
 		Categoria categoriaQueLeCorresponde = new Categoria(TipoCategoria.R3, 60.71, 0.681, 325, 400);
 
-		Set<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toSet());
+		List<Categoria> categorias = Stream.of(categoriaQueLeCorresponde).collect(Collectors.toList());
 
 		cliente = construirClienteTest(categoriaVieja);
 

@@ -1,6 +1,6 @@
 package dominio;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Embedded;
@@ -27,15 +27,15 @@ public class Transformador extends EntidadPersistente {
 	@SuppressWarnings("unused")
 	private Transformador() { }
 	
-	public Collection<Cliente> clientesAsociados(Collection<Cliente> clientes, Collection<Transformador> transformadores) {
+	public List<Cliente> clientesAsociados(List<Cliente> clientes, List<Transformador> transformadores) {
 		
 		return clientes
 				.stream()
 				.filter(cliente -> cliente.transformadorAsociado(transformadores).equals(this))
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 
-	public double consumoDe(Periodo unPeriodo, Collection<Cliente> clientes, Collection<Transformador> transformadores) {
+	public double consumoDe(Periodo unPeriodo, List<Cliente> clientes, List<Transformador> transformadores) {
 		
 		return clientesAsociados(clientes, transformadores)
 				.stream()

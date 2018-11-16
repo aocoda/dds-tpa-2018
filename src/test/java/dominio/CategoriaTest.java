@@ -3,8 +3,8 @@ package dominio;
 import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -15,13 +15,13 @@ public class CategoriaTest {
 
 	private Cliente clienteTest;
 	private Categoria categoriaTest;
-	private Collection<DispositivoEstandar> dispositivosEstandar = new HashSet<>();
+	private List<DispositivoEstandar> dispositivosEstandar = new ArrayList<>();
 	private Periodo unMesDeTreita = new Periodo(LocalDateTime.of(2018, 1, 1, 0, 0),
 			LocalDateTime.of(2018, 1, 31, 0, 0));
 
 	public Cliente construirClienteTest() {
 
-		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new HashSet<>(), null);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new ArrayList<>(), null);
 	}
 
 	@Test

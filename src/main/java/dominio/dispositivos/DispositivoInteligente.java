@@ -1,7 +1,7 @@
 package dominio.dispositivos;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -21,7 +21,7 @@ public class DispositivoInteligente extends Dispositivo {
 	private EstadoDispositivo estadoDispositivo = EstadoDispositivo.APAGADO;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dispositivo_id")
-	private Collection<Uso> historialUsos = new HashSet<Uso>();
+	private List<Uso> historialUsos = new ArrayList<>();
 
 	public DispositivoInteligente(String nombreGenerico, double consumoPorHora, double horasDeUsoMinimo, double horasDeUsoMaximo) {
 
@@ -32,16 +32,16 @@ public class DispositivoInteligente extends Dispositivo {
 	private DispositivoInteligente() {
 		
 		estadoDispositivo = EstadoDispositivo.APAGADO;
-		historialUsos = new HashSet<Uso>();
+		historialUsos = new ArrayList<>();
 	}
 	
-	public Collection<Uso> usosDe(Periodo unPeriodo) {
+	public List<Uso> usosDe(Periodo unPeriodo) {
 		
 		return historialUsos
 				.stream()
 				.filter(uso -> unPeriodo.contiene(uso.getPeriodo()))
 				.map(uso -> uso.acotarExtremos(unPeriodo))
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 	
 	@Override
@@ -109,7 +109,7 @@ public class DispositivoInteligente extends Dispositivo {
 		return estadoDispositivo;
 	}
 
-	public Collection<Uso> getHistorialUsos() {
+	public List<Uso> getHistorialUsos() {
 		
 		return historialUsos;
 	}

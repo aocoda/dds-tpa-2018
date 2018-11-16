@@ -3,7 +3,6 @@ package db;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,7 +64,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Periodo periodoDeMediaHs = new Periodo(LocalDateTime.of(2018, 9, 13, 11, 0), LocalDateTime.of(2018, 9, 13, 11, 30));
 		dispositivo.agregarUso(periodoDeMediaHs);
 		
-		Collection<DispositivoInteligente> dispositivos = Collections.singleton(dispositivo);
+		List<DispositivoInteligente> dispositivos = Collections.singletonList(dispositivo);
 		
 		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, dispositivos, new Coordenada(0, 0));
 		
@@ -95,7 +94,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 		DispositivoInteligente dispositivo = new DispositivoInteligente("Estufa", 10, 0, 0);
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, Collections.singleton(dispositivo), new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, Collections.singletonList(dispositivo), new Coordenada(0, 0));
 		
 		entityManager().persist(cliente);
 
@@ -107,7 +106,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		entityManager().persist(actuador);
 		
-		Regla regla = new Regla(new CondicionSensor(sensor, Relacion.MENOR_A, 15), actuador, Collections.singleton(dispositivo));
+		Regla regla = new Regla(new CondicionSensor(sensor, Relacion.MENOR_A, 15), actuador, Collections.singletonList(dispositivo));
 		
 		cliente.agregarRegla(regla);
 		
@@ -164,7 +163,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		DispositivoInteligente dispositivo = new DispositivoInteligente("Televisor", 10, 0, 0);
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, Collections.emptySet(), Collections.singleton(dispositivo), new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, Collections.emptyList(), Collections.singletonList(dispositivo), new Coordenada(0, 0));
 	
 		entityManager().persist(cliente);
 		

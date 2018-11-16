@@ -1,10 +1,9 @@
 package dominio;
 
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +17,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
@@ -47,13 +45,13 @@ public class Cliente extends EntidadPersistente {
 	private Categoria categoria;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
-	private Collection<DispositivoEstandar> dispositivosEstandar;
+	private List<DispositivoEstandar> dispositivosEstandar;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
-	private Collection<DispositivoInteligente> dispositivosInteligentes;
+	private List<DispositivoInteligente> dispositivosInteligentes;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
-	private Collection<Regla> reglas = new HashSet<>();
+	private List<Regla> reglas = new ArrayList<>();
 	private int puntos;
 	private boolean apagadoAutomaticoActivado;
 	@Embedded
@@ -62,8 +60,8 @@ public class Cliente extends EntidadPersistente {
 	
 	public Cliente(String nombreCompleto, TipoDocumento tipoDocumento, int numeroDocumento, String telefono,
 			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
-			Collection<DispositivoEstandar> dispositivosEstandar,
-			Collection<DispositivoInteligente> dispositivosInteligentes,
+			List<DispositivoEstandar> dispositivosEstandar,
+			List<DispositivoInteligente> dispositivosInteligentes,
 			Coordenada coordenada) {
 
 		this.nombreCompleto = nombreCompleto;
@@ -81,9 +79,9 @@ public class Cliente extends EntidadPersistente {
 	@SuppressWarnings("unused")
 	private Cliente() {
 		
-		dispositivosEstandar = new HashSet<>();
-		dispositivosInteligentes = new HashSet<>();
-		reglas = new HashSet<>();
+		dispositivosEstandar = new ArrayList<>();
+		dispositivosInteligentes = new ArrayList<>();
+		reglas = new ArrayList<>();
 	}
 
 	public boolean existeDispositivoEncendido() {
@@ -122,7 +120,7 @@ public class Cliente extends EntidadPersistente {
 				.sum();
 	}
 	
-	public void recategorizar(Collection<Categoria> categorias, Periodo unPeriodo) {
+	public void recategorizar(List<Categoria> categorias, Periodo unPeriodo) {
 		
 		categorias
 		.stream()
@@ -147,7 +145,7 @@ public class Cliente extends EntidadPersistente {
 		sumarPuntos(10);
 	}
 	
-	public Collection<DispositivoInteligente> getDispositivosInteligentes() {
+	public List<DispositivoInteligente> getDispositivosInteligentes() {
 		
 		return dispositivosInteligentes;
 	}
@@ -198,11 +196,11 @@ public class Cliente extends EntidadPersistente {
 		.forEach(reglaSimplex -> reglaSimplex.ejecutarSiCorresponde());
 	}
 
-	public Collection<Dispositivo> getDispositivos() {
+	public List<Dispositivo> getDispositivos() {
 		
 		return Stream
 				.concat(dispositivosEstandar.stream(), dispositivosInteligentes.stream())
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 
 	public boolean tieneApagadoAutomaticoActivado() {
@@ -210,7 +208,7 @@ public class Cliente extends EntidadPersistente {
 		return apagadoAutomaticoActivado;
 	}
 
-	public Transformador transformadorAsociado(Collection<Transformador> transformadores) {
+	public Transformador transformadorAsociado(List<Transformador> transformadores) {
 		
 		return transformadores
 				.stream()
@@ -228,7 +226,7 @@ public class Cliente extends EntidadPersistente {
 		return fechaAltaServicio;
 	}
 	
-	public Collection<DispositivoEstandar> getDispositivosEstandar() {
+	public List<DispositivoEstandar> getDispositivosEstandar() {
 		
 		return dispositivosEstandar;
 	}
@@ -238,7 +236,7 @@ public class Cliente extends EntidadPersistente {
 		return coordenada;
 	}
 	
-	public Collection<Regla> getReglas() {
+	public List<Regla> getReglas() {
 		
 		return reglas;
 	}

@@ -1,13 +1,13 @@
 package repositorios;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 public abstract class RepositorioGenerico<E extends EntidadPersistente> implements WithGlobalEntityManager, TransactionalOps {
 	
-	public Collection<E> getAllInstances() {
+	public List<E> getAllInstances() {
 		
 		return entityManager()
 				.createQuery("FROM " + getClase().getSimpleName(), getClase())

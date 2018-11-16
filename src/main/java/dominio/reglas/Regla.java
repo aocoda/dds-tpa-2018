@@ -1,6 +1,6 @@
 package dominio.reglas;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,9 +21,9 @@ public class Regla extends EntidadPersistente {
 	@ManyToOne
 	private Actuador actuador;
 	@ManyToMany
-	private Collection<DispositivoInteligente> dispositivos;
+	private List<DispositivoInteligente> dispositivos;
 	
-	public Regla(Condicion condicion, Actuador actuador, Collection<DispositivoInteligente> dispositivos) {
+	public Regla(Condicion condicion, Actuador actuador, List<DispositivoInteligente> dispositivos) {
 		
 		this.condicion = condicion;
 		this.actuador = actuador;

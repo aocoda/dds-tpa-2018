@@ -1,6 +1,6 @@
 package dominio;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Embedded;
@@ -27,15 +27,15 @@ public class Zona extends EntidadPersistente {
 	@SuppressWarnings("unused")
 	private Zona() { }
 
-	public Collection<Transformador> transformadoresAsociados(Collection<Transformador> transformadores) {
+	public List<Transformador> transformadoresAsociados(List<Transformador> transformadores) {
 		
 		return transformadores
 				.stream()
 				.filter(transformador -> area.contieneA(transformador.getCoordenada()))
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 	
-	public double consumoDe(Periodo unPeriodo, Collection<Cliente> clientes, Collection<Transformador> transformadores) {
+	public double consumoDe(Periodo unPeriodo, List<Cliente> clientes, List<Transformador> transformadores) {
 		
 		return transformadoresAsociados(transformadores)
 				.stream()
