@@ -1,5 +1,7 @@
 package dominio.reglas.condiciones;
 
+import static dominio.reglas.condiciones.Relacion.MENOR_A;
+
 import java.util.List;
 
 import dominio.asesorDeUso.AsesorDeUso;
@@ -8,7 +10,6 @@ import dominio.dispositivos.Dispositivo;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
 import dominio.excepciones.CondicionMalConfiguradaException;
-import dominio.reglas.condiciones.relaciones.MenorA;
 
 public class CondicionSimplex extends Condicion {
 
@@ -35,6 +36,6 @@ public class CondicionSimplex extends Condicion {
 				.findFirst()
 				.orElseThrow(() -> new CondicionMalConfiguradaException("El distpositivo: " + dispositivo + "debe estar incluido en la lista: " + dispositivos));
 		
-		return new MenorA(0).aplicarCon(recomendacion.horasDeUsoRestantesDe(periodo));
+		return MENOR_A.aplicarCon(0, recomendacion.horasDeUsoRestantesDe(periodo));
 	}
 }

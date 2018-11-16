@@ -16,7 +16,7 @@ import dominio.Cliente;
 import dominio.Transformador;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
-import dominio.dispositivos.inteligentes.estados.EstadoDispositivo;
+import dominio.dispositivos.inteligentes.EstadoDispositivo;
 import dominio.geoposicionamiento.Coordenada;
 import dominio.importadorJson.parser.ParserTransformadores;
 import dominio.reglas.Regla;
@@ -24,7 +24,7 @@ import dominio.reglas.actuadores.Actuador;
 import dominio.reglas.actuadores.Encendedor;
 import dominio.reglas.condiciones.Condicion;
 import dominio.reglas.condiciones.CondicionSensor;
-import dominio.reglas.condiciones.relaciones.MenorA;
+import dominio.reglas.condiciones.Relacion;
 import dominio.reglas.sensores.Sensor;
 import dominio.reglas.sensores.SensorTemperatura;
 import repositorios.RepositorioClientes;
@@ -107,7 +107,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		entityManager().persist(actuador);
 		
-		Regla regla = new Regla(new CondicionSensor(sensor, new MenorA(15)), actuador, Collections.singleton(dispositivo));
+		Regla regla = new Regla(new CondicionSensor(sensor, Relacion.MENOR_A, 15), actuador, Collections.singleton(dispositivo));
 		
 		cliente.agregarRegla(regla);
 		
@@ -121,7 +121,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		Regla reglaRecuperada = cliente.getReglas().stream().findFirst().get();
 		
-		Condicion nuevaCondicion = new CondicionSensor(sensor, new MenorA(20));
+		Condicion nuevaCondicion = new CondicionSensor(sensor, Relacion.MENOR_A, 20);
 		
 		reglaRecuperada.setCondicion(nuevaCondicion);
 		

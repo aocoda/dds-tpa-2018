@@ -6,10 +6,9 @@ import org.junit.Test;
 
 import dominio.reglas.condiciones.Condicion;
 import dominio.reglas.condiciones.CondicionSensor;
+import dominio.reglas.condiciones.Relacion;
+import dominio.reglas.condiciones.compuestas.And;
 import dominio.reglas.condiciones.compuestas.Or;
-import dominio.reglas.condiciones.relaciones.Entre;
-import dominio.reglas.condiciones.relaciones.IgualA;
-import dominio.reglas.condiciones.relaciones.MenorA;
 import dominio.reglas.sensores.Sensor;
 
 public class CondicionTest {
@@ -35,25 +34,29 @@ public class CondicionTest {
 	@Test
 	public void conUnaCondicionSimpleDeTemperaturaMenorA30YunSensorQueMide30_LaCondicionNoSeDebeCumplir() {
 		
-		Condicion condicionTemperaturaMenorA30 = new CondicionSensor(sensorQueSiempreMide30Grados , new MenorA(30));
+		Condicion condicionTemperaturaMenorA30 = new CondicionSensor(sensorQueSiempreMide30Grados , Relacion.MENOR_A, 30);
 		
 		assertTrue(!condicionTemperaturaMenorA30.seCumple());
 	}
 	
 	@Test
-	public void conUnaCondicionSimpleDeTemperaturaEntre15Y40YunSensorQueMide30_LaCondicionSeDebeCumplir() {
+	public void conUnaCondicionAndDeTemperaturaEntre15Y40YunSensorQueMide30_LaCondicionSeDebeCumplir() {
 		
-		Condicion condicionTemperaturaEntre15Y40 = new CondicionSensor(sensorQueSiempreMide30Grados, new Entre(15, 40));
+		Condicion condicionTemperaturaMayorA15 = new CondicionSensor(sensorQueSiempreMide30Grados, Relacion.MAYOR_A, 15);
 		
-		assertTrue(condicionTemperaturaEntre15Y40.seCumple());
+		Condicion condicionTemperaturaMenorA40 = new CondicionSensor(sensorQueSiempreMide30Grados, Relacion.MENOR_A, 40);
+		
+		Condicion condicionAnd = new And(condicionTemperaturaMayorA15, condicionTemperaturaMenorA40);
+		
+		assertTrue(condicionAnd.seCumple());
 	}
 	
 	@Test
 	public void conUnaCondicionOrDeTemperaturaMenorA30_o_HumedadIgualA60PorCiento_LaCondicionSeDebeCumplir() {
 		
-		Condicion condicionTemperaturaMenorA30 = new CondicionSensor(sensorQueSiempreMide30Grados, new MenorA(30));
+		Condicion condicionTemperaturaMenorA30 = new CondicionSensor(sensorQueSiempreMide30Grados, Relacion.MENOR_A, 30);
 		
-		Condicion condicionHumedadIgualA60PorCiento = new CondicionSensor(sensorQueSiempreMide60PorCientoDeHumedad, new IgualA(0.6));
+		Condicion condicionHumedadIgualA60PorCiento = new CondicionSensor(sensorQueSiempreMide60PorCientoDeHumedad, Relacion.IGUAL_A, 0.6);
 		
 		Condicion condicionOr = new Or(condicionTemperaturaMenorA30, condicionHumedadIgualA60PorCiento);
 		

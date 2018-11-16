@@ -1,12 +1,11 @@
 package dominio.reglas.condiciones;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
-import dominio.reglas.condiciones.relaciones.Relacion;
 import dominio.reglas.sensores.Sensor;
 
 @Entity
@@ -15,18 +14,20 @@ public class CondicionSensor extends Condicion {
 
 	@ManyToOne
 	private Sensor sensor;
-	@OneToOne(cascade = CascadeType.ALL)
+	@Enumerated(value = EnumType.STRING)
 	private Relacion relacion;
+	private double valor;
 
-	public CondicionSensor(Sensor sensor, Relacion relacion) {
+	public CondicionSensor(Sensor sensor, Relacion relacion, double valor) {
 		
 		this.sensor = sensor;
 		this.relacion = relacion;
+		this.valor = valor;
 	}
 
 	@Override
 	public boolean seCumple() {
 		
-		return relacion.aplicarCon(sensor.medir());
+		return relacion.aplicarCon(valor, sensor.medir());
 	}
 }
