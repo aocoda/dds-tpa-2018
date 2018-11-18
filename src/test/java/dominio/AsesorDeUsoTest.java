@@ -2,9 +2,13 @@ package dominio;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.Test;
 
 import dominio.asesorDeUso.AsesorDeUso;
@@ -85,5 +89,27 @@ public class AsesorDeUsoTest {
 		
 		
 		assertThat(condicion.seCumple()).isTrue();
+	}
+	
+	@Test
+	public void apagadoAutomaticoPorConsumo() {
+		
+		DispositivoInteligente dispositivo1 = new DispositivoInteligente("dispositivoTest", 0, 0, 10);
+		dispositivo1.encender();
+		dispositivo1.agregarUso(Periodo.deLasUltimasNHoras(11));
+		
+		List<DispositivoInteligente> dispositivosInteligentes = Arrays.asList(dispositivo1);
+		
+		
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, new ArrayList<>(), dispositivosInteligentes, null);
+		
+		
+		Periodo periodo = Periodo.deLosUltimosNMeses(1);
+		
+		
+		cliente.ejecutarApagadoPorConsumo(periodo);
+		
+		
+		assertThat(cliente.getDispositivosInteligentes()).allMatch(d -> d.estaApagado());
 	}
 }
