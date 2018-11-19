@@ -20,18 +20,21 @@ import javax.persistence.OneToMany;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
+import dominio.asesorDeUso.AsesorDeUso;
+import dominio.autenticacion.Usuario;
+import dominio.dispositivos.Dispositivo;
+import dominio.dispositivos.DispositivoEstandar;
+import dominio.dispositivos.DispositivoInteligente;
+import dominio.dispositivos.Periodo;
+import dominio.excepciones.SinTransformadoresCercanosException;
+import dominio.geoposicionamiento.Coordenada;
 import dominio.reglas.Regla;
 import dominio.reglas.actuadores.Actuador;
 import dominio.reglas.actuadores.Apagador;
 import dominio.reglas.condiciones.CondicionSimplex;
-import repositorios.EntidadPersistente;
-import dominio.asesorDeUso.AsesorDeUso;
-import dominio.dispositivos.*;
-import dominio.excepciones.SinTransformadoresCercanosException;
-import dominio.geoposicionamiento.Coordenada;
 
 @Entity
-public class Cliente extends EntidadPersistente {
+public class Cliente extends Usuario {
 	
 	private String nombreCompleto;
 	@Enumerated(value = EnumType.STRING)
@@ -62,7 +65,9 @@ public class Cliente extends EntidadPersistente {
 			String domicilio, LocalDate fechaAltaServicio, Categoria categoria,
 			List<DispositivoEstandar> dispositivosEstandar,
 			List<DispositivoInteligente> dispositivosInteligentes,
-			Coordenada coordenada) {
+			Coordenada coordenada, String nombreUsuario, String contrasenia) {
+		
+		super(nombreUsuario, contrasenia);
 
 		this.nombreCompleto = nombreCompleto;
 		this.tipoDocumento = tipoDocumento;
@@ -244,5 +249,11 @@ public class Cliente extends EntidadPersistente {
 	public void setCoordenada(Coordenada coordenada) {
 		
 		this.coordenada = coordenada;
+	}
+
+	@Override
+	public boolean esAdmin() {
+		
+		return false;
 	}
 }

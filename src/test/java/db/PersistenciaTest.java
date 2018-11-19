@@ -37,7 +37,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 	public void casoDePrueba1() {
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, null, new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, null, new Coordenada(0, 0), null, null);
 		
 		entityManager().persist(cliente);
 		
@@ -66,7 +66,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		List<DispositivoInteligente> dispositivos = Collections.singletonList(dispositivo);
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, dispositivos, new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, dispositivos, new Coordenada(0, 0), null, null);
 		
 		entityManager().persist(cliente);
 		
@@ -94,7 +94,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 		DispositivoInteligente dispositivo = new DispositivoInteligente("Estufa", 10, 0, 0);
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, Collections.singletonList(dispositivo), new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, null, Collections.singletonList(dispositivo), new Coordenada(0, 0), null, null);
 		
 		entityManager().persist(cliente);
 
@@ -163,7 +163,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		
 		DispositivoInteligente dispositivo = new DispositivoInteligente("Televisor", 10, 0, 0);
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, Collections.emptyList(), Collections.singletonList(dispositivo), new Coordenada(0, 0));
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, Collections.emptyList(), Collections.singletonList(dispositivo), new Coordenada(0, 0), null, null);
 	
 		entityManager().persist(cliente);
 		

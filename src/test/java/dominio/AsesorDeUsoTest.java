@@ -101,7 +101,7 @@ public class AsesorDeUsoTest {
 		List<DispositivoInteligente> dispositivosInteligentes = Arrays.asList(dispositivo1);
 		
 		
-		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, new ArrayList<>(), dispositivosInteligentes, null);
+		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, new ArrayList<>(), dispositivosInteligentes, null, null, null);
 		
 		
 		Periodo periodo = Periodo.deLosUltimosNMeses(1);

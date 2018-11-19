@@ -93,6 +93,6 @@ public class TransformadorZonaClienteTest {
 
 	private Cliente construirCliente(Coordenada coordenada) {
 		
-		return new Cliente(null, null, 0, null, null, null, null, null, null, coordenada);
+		return new Cliente(null, null, 0, null, null, null, null, null, null, coordenada, null, null);
 	}
 }

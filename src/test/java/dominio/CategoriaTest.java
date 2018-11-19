@@ -21,7 +21,7 @@ public class CategoriaTest {
 
 	public Cliente construirClienteTest() {
 
-		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new ArrayList<>(), null);
+		return new Cliente(null, null, 0, null, null, null, null, dispositivosEstandar, new ArrayList<>(), null, null, null);
 	}
 
 	@Test
