@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import dominio.autenticacion.Usuario;
 
@@ -14,7 +14,7 @@ public class Administrador extends Usuario {
 	
 	private String nombreCompleto;
 	private String domicilio;
-	@Convert(converter = LocalDateTimeConverter.class)
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fechaAltaSistema; 
 	
 	public Administrador(String nombreCompleto, String domicilio, LocalDate fechaAltaSistema, String nombreUsuario, String contrasenia) {
