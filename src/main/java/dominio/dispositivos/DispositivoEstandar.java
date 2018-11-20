@@ -15,6 +15,9 @@ public class DispositivoEstandar extends Dispositivo {
 		this.horasEstimadasDeUsoPorDia = horasEstimadasDeUsoPorDia;
 	}
 	
+	@SuppressWarnings("unused")
+	private DispositivoEstandar() { }
+	
 	@Override
 	public double consumoDe(Periodo unPeriodo) {
 		

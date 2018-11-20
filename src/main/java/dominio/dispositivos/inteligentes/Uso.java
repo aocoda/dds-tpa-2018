@@ -23,6 +23,9 @@ public class Uso extends EntidadPersistente implements PeriodoUtils {
 		this.periodo = periodo;
 		this.estadoDispositivo = estadoDispositivo;
 	}
+	
+	@SuppressWarnings("unused")
+	private Uso() { }
 
 	public double consumo(double consumoPorHoraDelDispositivo) {
 

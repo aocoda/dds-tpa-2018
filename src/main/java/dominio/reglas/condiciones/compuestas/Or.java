@@ -14,6 +14,9 @@ public class Or extends CondicionCompuesta {
 		super(unaCondicion, otraCondicion);
 	}
 
+	@SuppressWarnings("unused")
+	private Or() { }
+	
 	@Override
 	public boolean seCumple() {
 		

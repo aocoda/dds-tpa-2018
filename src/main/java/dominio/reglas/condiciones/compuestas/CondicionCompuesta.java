@@ -19,4 +19,6 @@ public abstract class CondicionCompuesta extends Condicion {
 		this.unaCondicion = unaCondicion;
 		this.otraCondicion = otraCondicion;
 	}
+	
+	protected CondicionCompuesta() { }
 }

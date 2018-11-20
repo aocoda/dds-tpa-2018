@@ -26,6 +26,9 @@ public class Administrador extends Usuario {
 		this.fechaAltaSistema = fechaAltaSistema;
 	}
 	
+	@SuppressWarnings("unused")
+	private Administrador() { }
+	
 	public int antiguedad() {
 		
 		return fechaAltaSistema.until(LocalDate.now()).getMonths();

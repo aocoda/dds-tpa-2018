@@ -24,6 +24,9 @@ public class CondicionSensor extends Condicion {
 		this.relacion = relacion;
 		this.valor = valor;
 	}
+	
+	@SuppressWarnings("unused")
+	private CondicionSensor() { }
 
 	@Override
 	public boolean seCumple() {

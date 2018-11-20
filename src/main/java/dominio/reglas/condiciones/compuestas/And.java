@@ -13,6 +13,9 @@ public class And extends CondicionCompuesta {
 		
 		super(unaCondicion, otraCondicion);
 	}
+	
+	@SuppressWarnings("unused")
+	private And() { }
 
 	@Override
 	public boolean seCumple() {
