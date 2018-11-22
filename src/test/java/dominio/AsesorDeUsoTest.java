@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -16,6 +14,7 @@ import dominio.asesorDeUso.Recomendacion;
 import dominio.dispositivos.Dispositivo;
 import dominio.dispositivos.DispositivoInteligente;
 import dominio.dispositivos.Periodo;
+import dominio.dispositivos.PeriodoUtils;
 import dominio.reglas.condiciones.CondicionSimplex;
 
 
@@ -48,18 +47,18 @@ public class AsesorDeUsoTest {
 		
 		List<Dispositivo> dispositivos = Arrays.asList(d1, d2);
 
-		Periodo periodo1 = Periodo.deLasUltimasNHoras(200);
+		Periodo periodo1 = PeriodoUtils.deLasUltimasNHoras(200);
 
 		d1.agregarUso(periodo1);
 
-		Periodo periodo2 = Periodo.deLasUltimasNHoras(10);
+		Periodo periodo2 = PeriodoUtils.deLasUltimasNHoras(10);
 
 		d2.agregarUso(periodo2);
 		
 		
 		AsesorDeUso asesor = new AsesorDeUso();
 		
-		Periodo periodo = Periodo.deLosUltimosNMeses(1);
+		Periodo periodo = PeriodoUtils.deLosUltimosNMeses(1);
 
 		Collection<Recomendacion> resultado = asesor.recomendacionesPara(dispositivos, periodo);
 		
@@ -74,7 +73,7 @@ public class AsesorDeUsoTest {
 		
 		DispositivoInteligente dispositivo1 = new DispositivoInteligente("dispositivoTest", 10, 0, 50);
 		
-		dispositivo1.agregarUso(Periodo.deLasUltimasNHoras(100));
+		dispositivo1.agregarUso(PeriodoUtils.deLasUltimasNHoras(100));
 		
 		DispositivoInteligente dispositivo2 = new DispositivoInteligente("dispositivoTest2", 20, 0, 0);
 		
@@ -83,7 +82,7 @@ public class AsesorDeUsoTest {
 		
 		AsesorDeUso asesor = new AsesorDeUso();
 		
-		Periodo periodo = Periodo.deLosUltimosNMeses(1);
+		Periodo periodo = PeriodoUtils.deLosUltimosNMeses(1);
 		
 		CondicionSimplex condicion = new CondicionSimplex(asesor, dispositivo1, dispositivos, periodo);
 		
@@ -96,7 +95,7 @@ public class AsesorDeUsoTest {
 		
 		DispositivoInteligente dispositivo1 = new DispositivoInteligente("dispositivoTest", 0, 0, 10);
 		dispositivo1.encender();
-		dispositivo1.agregarUso(Periodo.deLasUltimasNHoras(11));
+		dispositivo1.agregarUso(PeriodoUtils.deLasUltimasNHoras(11));
 		
 		List<DispositivoInteligente> dispositivosInteligentes = Arrays.asList(dispositivo1);
 		
@@ -104,7 +103,7 @@ public class AsesorDeUsoTest {
 		Cliente cliente = new Cliente(null, null, 0, null, null, null, null, new ArrayList<>(), dispositivosInteligentes, null, null, null);
 		
 		
-		Periodo periodo = Periodo.deLosUltimosNMeses(1);
+		Periodo periodo = PeriodoUtils.deLosUltimosNMeses(1);
 		
 		
 		cliente.ejecutarApagadoPorConsumo(periodo);

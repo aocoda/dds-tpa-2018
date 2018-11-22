@@ -69,7 +69,7 @@ public class DispositivoInteligente extends Dispositivo {
 
 	public double consumoDeLasUltimas(double nHoras) {
 
-		Periodo unPeriodo = Periodo.deLasUltimasNHoras(nHoras);
+		Periodo unPeriodo = PeriodoUtils.deLasUltimasNHoras(nHoras);
 
 		return consumoDe(unPeriodo);
 	}

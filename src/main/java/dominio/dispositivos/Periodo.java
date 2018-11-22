@@ -40,24 +40,6 @@ public class Periodo {
 		return otroPeriodo.getFechaYHoraDeInicio().isBefore(fechaYHoraDeFin) 
 				&& otroPeriodo.getFechaYHoraDeFin().isAfter(fechaYHoraDeInicio);
 	}
-
-	public static Periodo deLasUltimasNHoras(double nHoras) {
-		
-		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
-		
-		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMinutes(Double.valueOf(nHoras * 60).longValue());
-		
-		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
-	}
-	
-	public static Periodo deLosUltimosNMeses(int nMeses) {
-		
-		LocalDateTime fechaYHoraDeFin = LocalDateTime.now();
-		
-		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMonths(nMeses);
-		
-		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
-	}
 	
 	public LocalDateTime getFechaYHoraDeFin() {
 		

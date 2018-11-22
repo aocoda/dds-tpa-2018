@@ -11,7 +11,7 @@ import dominio.dispositivos.*;
 import repositorios.EntidadPersistente;
 
 @Entity
-public class Uso extends EntidadPersistente implements PeriodoUtils {
+public class Uso extends EntidadPersistente {
 
 	@Embedded
 	private Periodo periodo;
@@ -34,9 +34,9 @@ public class Uso extends EntidadPersistente implements PeriodoUtils {
 
 	public Uso acotarExtremos(Periodo unPeriodo) {
 
-		LocalDateTime nuevoInicio = maximo(periodo.getFechaYHoraDeInicio(), unPeriodo.getFechaYHoraDeInicio());
+		LocalDateTime nuevoInicio = PeriodoUtils.maximo(periodo.getFechaYHoraDeInicio(), unPeriodo.getFechaYHoraDeInicio());
 		
-		LocalDateTime nuevoFin = minimo(periodo.getFechaYHoraDeFin(), unPeriodo.getFechaYHoraDeFin());
+		LocalDateTime nuevoFin = PeriodoUtils.minimo(periodo.getFechaYHoraDeFin(), unPeriodo.getFechaYHoraDeFin());
 		
 		return new Uso(new Periodo(nuevoInicio, nuevoFin), estadoDispositivo);
 	}
