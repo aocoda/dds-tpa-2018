@@ -45,5 +45,5 @@ public abstract class Usuario extends EntidadPersistente {
 		return salt;
 	}
 	
-	public abstract boolean esAdmin();
+	public abstract boolean esAdministrador();
 }
