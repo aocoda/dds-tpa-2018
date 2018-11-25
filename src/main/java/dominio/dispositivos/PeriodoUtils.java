@@ -1,6 +1,9 @@
 package dominio.dispositivos;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Year;
+import java.time.YearMonth;
 
 public interface PeriodoUtils {
 
@@ -30,5 +33,28 @@ public interface PeriodoUtils {
 		LocalDateTime fechaYHoraDeInicio = fechaYHoraDeFin.minusMonths(nMeses);
 		
 		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
+	}
+
+	public static Periodo delMesYAnio(int mes, int anio) {
+		
+		LocalDateTime fechaYHoraDeInicio = YearMonth.of(anio, mes).atDay(1).atTime(LocalTime.MIN);
+		
+		LocalDateTime fechaYHoraDeFin = YearMonth.of(anio, mes).atEndOfMonth().atTime(LocalTime.MAX);
+		
+		return new Periodo(fechaYHoraDeInicio, fechaYHoraDeFin);
+	}
+
+	public static Periodo delMes(int mes) {
+		
+		int anioActual = Year.now().getValue();
+		
+		return delMesYAnio(mes, anioActual);
+	}
+	
+	public static Periodo delMesActual() {
+		
+		int mesActual = YearMonth.now().getMonthValue();
+		
+		return delMes(mesActual);
 	}
 }

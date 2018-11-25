@@ -161,6 +161,11 @@ public class Cliente extends Usuario {
 		
 		sumarPuntos(15);
 	}
+	
+	public void registrarDispositivo(DispositivoEstandar dispositivo) {
+		
+		dispositivosEstandar.add(dispositivo);
+	}
 
 	public void sumarPuntos(int puntos) {
 
@@ -252,8 +257,18 @@ public class Cliente extends Usuario {
 	}
 
 	@Override
-	public boolean esAdmin() {
+	public boolean esAdministrador() {
 		
 		return false;
+	}
+
+	public String getNombreCompleto() {
+		
+		return nombreCompleto;
+	}
+
+	public boolean tieneHogarEficiente(Periodo unPeriodo) {
+		
+		return consumoDe(unPeriodo) < 612;
 	}
 }

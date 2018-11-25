@@ -35,7 +35,7 @@ public class Administrador extends Usuario {
 	}
 
 	@Override
-	public boolean esAdmin() {
+	public boolean esAdministrador() {
 		
 		return true;
 	}
