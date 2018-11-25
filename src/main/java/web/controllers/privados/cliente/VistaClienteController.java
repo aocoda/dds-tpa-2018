@@ -1,7 +1,6 @@
 package web.controllers.privados.cliente;
 
 import java.util.Map;
-import java.util.Optional;
 
 import dominio.Cliente;
 import dominio.autenticacion.Usuario;
@@ -39,12 +38,9 @@ public abstract class VistaClienteController extends VistaUsuariosController {
 		
 		long idCliente = usuarioActual.esAdministrador() ? Long.valueOf(request.params("id")) : usuarioActual.getId();
 		
-		Optional<Cliente> optCliente = repositorioClientes.getPorId(idCliente);
-		
-		if(!optCliente.isPresent())
-			throw new NotFoundException("No existe cliente con id: " + idCliente);
-		
-		return optCliente.get();
+		return repositorioClientes
+				.getPorId(idCliente)
+				.orElseThrow(() -> new NotFoundException("No existe cliente con id: " + idCliente));
 	}
 	
 	protected abstract void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request, Response response);

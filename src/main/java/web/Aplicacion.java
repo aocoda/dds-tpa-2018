@@ -2,11 +2,13 @@ package web;
 
 import static spark.Spark.*;
 
+import org.eclipse.jetty.http.HttpStatus;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioUsuarios;
+import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import web.controllers.privados.PerfilController;
 import web.controllers.privados.administrador.ClientesController;
@@ -18,7 +20,6 @@ import web.controllers.privados.cliente.RecomendacionesController;
 import web.controllers.publicos.HomeController;
 import web.controllers.publicos.LoginController;
 import web.extras.NotFoundException;
-import web.extras.NotFoundUtils;
 
 public class Aplicacion {
 
@@ -73,8 +74,18 @@ public class Aplicacion {
 		
 		
 		//Extras
-		get("*", (request, response) -> NotFoundUtils.generarVista(response));
-		exception(NotFoundException.class, (exception, request, response) -> NotFoundUtils.generarVista(response));
+		get("*", (request, response) -> {
+			
+			response.status(HttpStatus.NOT_FOUND_404);
+			
+			return new ModelAndView(null, "/vistas/publicas/notFound.hbs");
+		}, templateEngine);
+		exception(NotFoundException.class, (exception, request, response) -> {
+			
+			String vistaRenderizada = templateEngine.render(new ModelAndView(null, "/vistas/publicas/notFound.hbs"));
+			
+			notFound(vistaRenderizada);
+		});
 		after((request, response) -> PerThreadEntityManagers.getEntityManager().close());
 	}
 }

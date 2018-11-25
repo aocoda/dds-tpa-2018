@@ -8,6 +8,7 @@ import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import web.extras.NotFoundException;
 
 public abstract class VistaUsuariosController {
 
@@ -37,12 +38,9 @@ public abstract class VistaUsuariosController {
 		
 		String nombreUsuario = request.session().attribute("usuarioActual");
 		
-		if(nombreUsuario == null) {
-			
-			response.redirect("/login");
-		}
-		
-		return repositorioUsuarios.getPorNombreDeUsuario(nombreUsuario).get();
+		return repositorioUsuarios
+				.getPorNombreDeUsuario(nombreUsuario)
+				.orElseThrow(() -> new NotFoundException("No existe usuario logueado"));
 	}
 	
 	protected abstract void agregarDatos(Map<String, Object> viewModel, Request request, Response response);
