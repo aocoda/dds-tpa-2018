@@ -1,0 +1,65 @@
+{{#partial "contenido-cliente"}}
+
+<div class="container">
+    <label style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</label>
+    <b style="padding-bottom: 25px; display:block; ">Información de Dispositivos</b>
+    <b style="padding-bottom: 15px; display:block">Ingrese Período</b>
+
+    <div style="display:inline-block; align-content:center">
+       <form>
+            <label style="display:block"><b>Mes a recomendar</b></label>
+            <input type="month" name="periodo" value={{periodo}} required />
+            <button class="btn btn-info"> Recomendarr </button>
+        </form>
+    </div>
+    <div style="display:inline-block">
+        <a href="{{url_formulario_dispositivoNuevo}}" class="btn btn-info" style="margin-bottom:10px">Agregar Dispositivo</a>
+        <table style="width:70%" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre Generico</th>
+                    <th scope="col">Consumo Por Hora</th>
+                    <th scope="col">Estado Actual</th>
+                    <th scope="col">Horas de Uso</th>
+                    <th scope="col">Consumo</th>
+                    <th scope="col">Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each dispositivos}}
+                <tr>
+                	<td>{{id}}</td>
+                   	<td>{{nombreGenerico}}</td>
+                    <td>{{consumoPorHora}}</td>
+                	{{#with dispositivo}}
+                    	{{#if estadoActual}}
+							<td>{{estadoActual}}</td>
+						{{else}}
+							<td>No aplica</td>
+						{{/if}}
+                	{{/with}}
+                    <td>{{horasDeUso}}</td>
+                    <td>{{consumo}}</td>
+                    <td style="text-align:center">
+                        <a href="Editar Dispositivos">
+                            <span class="fas fa-pencil-alt" style="padding-right:20px"></span>
+                        </a>
+                        <a href="Borrar dispositivo">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div style="text-align:right; margin-right:90px;">
+            <label>
+                Total de consumo: {{consumoTotal}} KWh
+            </label>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{>layouts/layoutCliente.hbs}}

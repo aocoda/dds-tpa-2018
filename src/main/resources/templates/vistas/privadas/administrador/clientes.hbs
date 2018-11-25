@@ -1,0 +1,34 @@
+{{#partial "contenido-administrador"}}
+
+<table style="width:70%" class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Numero de cliente</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo De Documento</th>
+            <th scope="col">Numero Documento</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Domicilio</th>
+            <th scope="col">Ver detalles</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {{#each clientes}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{nombreCompleto}}</td>
+            <td>{{tipoDocumento}}</td>
+            <td>{{numeroDocumento}}</td>
+            <td>{{telefono}}</td>
+            <td>{{domicilio}}</td>
+            <td style="text-align:center">
+                <a href="Ver detalle cliente">Ver detalles </a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{/partial}}
+{{>layouts/layoutAdministrador.hbs}}

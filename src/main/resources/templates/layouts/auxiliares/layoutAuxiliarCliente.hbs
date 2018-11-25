@@ -1,0 +1,13 @@
+{{#if esAdministrador}}
+	{{#partial "administracion-cliente"}}
+        {{#block "cliente"}}
+		{{/block}}
+	{{/partial}}
+    {{>layouts/layoutAdministracionCliente.hbs}}
+{{else}}
+	{{#partial "fondo-admin-cliente"}}
+        {{#block "cliente"}}
+	    {{/block}}
+	{{/partial}}
+	{{>layouts/layoutGeneral.hbs}}
+{{/if}}

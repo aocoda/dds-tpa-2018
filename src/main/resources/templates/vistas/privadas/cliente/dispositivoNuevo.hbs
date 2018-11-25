@@ -1,0 +1,48 @@
+{{#partial "contenido-cliente"}}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nuevo Dispositivo</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+</head>
+<body>
+
+    <label style="padding-bottom: 15px; display:block">{{Dni}} - {{NombreCompleto}}</label>
+    <b style="padding-bottom: 1%; display:block; ">Alta de Dispositivo</b>
+        
+    <form action="{{url_agregar_dispositivo}}" method="post">
+
+        <label>Tipo de dispositivo</label>
+        <select name="tipoDispositivo">
+            <option value="dispositivoInteligente">Dispositivo Inteligente</option>
+            <option value="dispositivoEstandar">Dispositivo Estandar</option>
+        </select>
+
+        <label>Nombre Generico</label>
+        <input type="text" name="nombreGenerico" required>
+        <label>Consumo por hora</label>
+        <input type="number" name="consumoPorHora" required>
+        <label>Horas estimadas de uso por dia</label>
+        <input type="number" name="horasEstimadasDeUsoPorDia" required>
+        <label>Horas de uso minimo</label>
+        <input type="number" name="horasDeUsoMinimo" required>
+        <label>Horas de uso maximo</label>
+        <input type="number" name="horasDeUsoMaximo" required>
+
+        <button>Agregar Dispositivo</button>
+    
+    </form>
+
+</body>
+
+</html>
+
+
+{{/partial}}
+{{>layouts/layoutCliente.hbs}}

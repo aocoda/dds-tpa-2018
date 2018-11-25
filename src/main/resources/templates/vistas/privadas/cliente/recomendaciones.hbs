@@ -1,0 +1,45 @@
+{{#partial "contenido-cliente"}}
+
+    <label style="padding-bottom: 15px; display:block">{{Dni}} - {{NombreCompleto}}</label>
+    <b style="padding-bottom: 25px; display:block; ">Eficiencia de los dispositivos</b>
+    <b style="padding-bottom: 15px; display:block">Ingrese Periodo</b>
+
+    <div style="display:inline-block; align-content:center">
+       <form>
+            <label style="display:block"><b>Mes a recomendar</b></label>
+            <input type="month" name="periodo" value={{periodo}} required />
+            <button class="btn btn-info"> Recomendarr </button>
+        </form>
+    </div>
+    <div>
+        <table style="width:70%" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre Generico</th>
+                    <th scope="col">Horas optimas</th>
+                    <th scope="col">Horas usadas</th>
+                    <th scope="col">Horas restantes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each recomendaciones}}
+                <tr>
+                	<td>{{id}}</td>
+                    <td>{{nombreGenerico}}</td>
+                    <td>{{horasDeUsoRecomendadas}}</td>
+                    <td>{{horasDeUso}}</td>
+                    <td>{{horasDeUsoRestantes}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+            {{#if fueEficiente}}
+				UN MENSAJITO LINDO PORQUE FUE EFICIENTE: {{consumoTotal}}
+			{{else}}
+				UN MENSAJE BIEN FEO PORQUE NO FUE EFICIENTE: {{consumoTotal}}
+			{{/if}}
+    </div>
+
+ {{/partial}}
+ {{>layouts/layoutCliente.hbs}}
