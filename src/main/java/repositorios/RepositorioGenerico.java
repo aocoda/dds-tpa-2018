@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public abstract class RepositorioGenerico<E extends EntidadPersistente> implements WithGlobalEntityManager, TransactionalOps {
+public abstract class RepositorioGenerico<E extends EntidadPersistente> implements WithGlobalEntityManager {
 	
 	public List<E> getAllInstances() {
 		
@@ -22,12 +21,12 @@ public abstract class RepositorioGenerico<E extends EntidadPersistente> implemen
 	
 	public void agregar(E unElemento) {
 		
-		withTransaction(() -> entityManager().persist(unElemento));
+		entityManager().persist(unElemento);
 	}
 		
 	public void borrar(E unElemento) {
 		
-		withTransaction(() -> entityManager().remove(unElemento));
+		entityManager().remove(unElemento);
 	}
 	
 	protected abstract Class<E> getClase();
