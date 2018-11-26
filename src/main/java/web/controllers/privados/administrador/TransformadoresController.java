@@ -10,10 +10,11 @@ import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
 import spark.Response;
+import web.controllers.privados.VistaUsuariosController;
 import web.extras.ParserPeriodos;
 import web.viewModels.TransformadorVM;
 
-public class TransformadoresController extends VistaAdministradorController {
+public class TransformadoresController extends VistaUsuariosController {
 
 	private RepositorioClientes repositorioClientes;
 	private RepositorioTransformadores repositorioTransformadores;
@@ -28,7 +29,7 @@ public class TransformadoresController extends VistaAdministradorController {
 	}
 
 	@Override
-	protected void agregarDatosDelAdministrador(Map<String, Object> viewModel, Request request, Response response) {
+	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
 		
 		String periodo = request.queryParams("periodo");
 		

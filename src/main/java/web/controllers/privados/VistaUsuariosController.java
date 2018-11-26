@@ -8,21 +8,19 @@ import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import web.extras.NotFoundException;
+import web.extras.BuscadorUsuarios;
 
-public abstract class VistaUsuariosController {
-
-	private RepositorioUsuarios repositorioUsuarios;
+public abstract class VistaUsuariosController extends BuscadorUsuarios {
 
 	public VistaUsuariosController(RepositorioUsuarios repositorioUsuarios) {
 		
-		this.repositorioUsuarios = repositorioUsuarios;
+		super(repositorioUsuarios);
 	}
 
 	
 	public ModelAndView renderizarVista(Request request, Response response) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request, response);
+		Usuario usuarioActual = getUsuarioLogueado(request, response).get();
 		
 		Map<String, Object> viewModel = new HashMap<>();
 		
@@ -32,15 +30,6 @@ public abstract class VistaUsuariosController {
 		agregarDatos(viewModel, request, response);
 		
 		return new ModelAndView(viewModel, getUbicacionDelTemplate());
-	}
-
-	protected Usuario getUsuarioLogueado(Request request, Response response) {
-		
-		String nombreUsuario = request.session().attribute("usuarioActual");
-		
-		return repositorioUsuarios
-				.getPorNombreDeUsuario(nombreUsuario)
-				.orElseThrow(() -> new NotFoundException("No existe usuario logueado"));
 	}
 	
 	protected abstract void agregarDatos(Map<String, Object> viewModel, Request request, Response response);

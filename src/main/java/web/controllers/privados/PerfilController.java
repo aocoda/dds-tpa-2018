@@ -20,7 +20,7 @@ public class PerfilController extends VistaUsuariosController {
 	@Override
 	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request, response);
+		Usuario usuarioActual = getUsuarioLogueado(request, response).get();
 		
 		esAdministrador = usuarioActual.esAdministrador();
 		recursoActual = request.uri();

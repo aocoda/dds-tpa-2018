@@ -20,6 +20,7 @@ import web.controllers.privados.cliente.RecomendacionesController;
 import web.controllers.publicos.HomeController;
 import web.controllers.publicos.LoginController;
 import web.extras.NotFoundException;
+import web.middlewares.AutenticacionMiddleware;
 
 public class Aplicacion {
 
@@ -28,6 +29,8 @@ public class Aplicacion {
 		RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 		RepositorioClientes repositorioClientes = new RepositorioClientes();
 		RepositorioTransformadores repositorioTransformadores = new RepositorioTransformadores();
+		
+		AutenticacionMiddleware autenticacionMidleware = new AutenticacionMiddleware(repositorioUsuarios);
 		
 		HomeController homeController = new HomeController();
 		LoginController loginController = new LoginController(repositorioUsuarios);
@@ -51,26 +54,48 @@ public class Aplicacion {
 		
 		
 		//Administrador-Cliente
-		get("/perfil", perfilController::renderizarVista, templateEngine);
+		path("/perfil", () -> {
+			before("", autenticacionMidleware::asegurarUsuarioLogueado);
+			get("", perfilController::renderizarVista, templateEngine);			
+		});
 		
 		
 		//Administrador
-		get("/transformadores", transformadoresController::renderizarVista, templateEngine);
-		get("/clientes", clientesController::renderizarVista, templateEngine);
-		get("/clientes/:id/perfil", perfilController::renderizarVista, templateEngine);
-		get("/clientes/:id/dispositivos", dispositivosController::renderizarVista, templateEngine);
-		get("/clientes/:id/dispositivos/nuevo", dispositivoNuevoController::renderizarVista, templateEngine);
-		post("/clientes/:id/dispositivos", dispositivosController::agregar);
-		get("/clientes/:id/consumos", consumosController::renderizarVista, templateEngine);	
-		get("/clientes/:id/recomendaciones", recomendacionesController::renderizarVista, templateEngine);
+		path("/clientes", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeAdministrador);
+			before("/*", autenticacionMidleware::asegurarPermisosDeAdministrador);	
+			get("", clientesController::renderizarVista, templateEngine);
+			get("/:id/perfil", perfilController::renderizarVista, templateEngine);
+			path("/:id/dispositivos", () -> {
+				get("", dispositivosController::renderizarVista, templateEngine);
+				get("/nuevo", dispositivoNuevoController::renderizarVista, templateEngine);
+				post("", dispositivosController::agregar);
+			});
+			get("/:id/consumos", consumosController::renderizarVista, templateEngine);	
+			get("/:id/recomendaciones", recomendacionesController::renderizarVista, templateEngine);
+		});
+		path("/transformadores", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeAdministrador);
+			get("", transformadoresController::renderizarVista, templateEngine);
+		});
 		
 		
 		//Cliente
-		get("/dispositivos", dispositivosController::renderizarVista, templateEngine);
-		get("/dispositivos/nuevo", dispositivoNuevoController::renderizarVista, templateEngine);
-		post("/dispositivos", dispositivosController::agregar);
-		get("/consumos", consumosController::renderizarVista, templateEngine);
-		get("/recomendaciones", recomendacionesController::renderizarVista, templateEngine);
+		path("/dispositivos", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeCliente);
+			before("/*", autenticacionMidleware::asegurarPermisosDeCliente);
+			get("", dispositivosController::renderizarVista, templateEngine);
+			get("/nuevo", dispositivoNuevoController::renderizarVista, templateEngine);
+			post("", dispositivosController::agregar);
+		});
+		path("/consumos", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeCliente);
+			get("", consumosController::renderizarVista, templateEngine);
+		});
+		path("/recomendaciones", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeCliente);
+			get("", recomendacionesController::renderizarVista, templateEngine);
+		});
 		
 		
 		//Extras

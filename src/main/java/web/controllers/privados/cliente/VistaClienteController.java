@@ -34,7 +34,7 @@ public abstract class VistaClienteController extends VistaUsuariosController {
 
 	protected Cliente getCliente(Request request, Response response) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request, response);
+		Usuario usuarioActual = getUsuarioLogueado(request, response).get();
 		
 		long idCliente = usuarioActual.esAdministrador() ? Long.valueOf(request.params("id")) : usuarioActual.getId();
 		
