@@ -6,9 +6,8 @@ import repositorios.RepositorioClientes;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
 import spark.Response;
-import web.controllers.privados.VistaUsuariosController;
 
-public class ClientesController extends VistaUsuariosController {
+public class ClientesController extends VistaAdministradorController {
 
 	private RepositorioClientes repositorioClientes;
 
@@ -20,7 +19,7 @@ public class ClientesController extends VistaUsuariosController {
 	}
 
 	@Override
-	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
+	protected void agregarDatosDelAdministrador(Map<String, Object> viewModel, Request request, Response response) {
 		
 		viewModel.put("clientes", repositorioClientes.getAllInstances());
 	}
