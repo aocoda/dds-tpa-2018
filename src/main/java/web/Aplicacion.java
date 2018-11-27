@@ -32,7 +32,7 @@ public class Aplicacion {
 		
 		AutenticacionMiddleware autenticacionMidleware = new AutenticacionMiddleware(repositorioUsuarios);
 		
-		HomeController homeController = new HomeController();
+		HomeController homeController = new HomeController(repositorioUsuarios);
 		LoginController loginController = new LoginController(repositorioUsuarios);
 		PerfilController perfilController = new PerfilController(repositorioUsuarios);
 		TransformadoresController transformadoresController = new TransformadoresController(repositorioUsuarios, repositorioClientes, repositorioTransformadores);
