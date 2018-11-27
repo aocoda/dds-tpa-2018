@@ -18,8 +18,11 @@ public class BuscadorUsuarios {
 
 	public Optional<Usuario> getUsuarioLogueado(Request request, Response response) {
 		
-		String nombreUsuario = request.session().attribute("usuarioActual");
+		String posibleNombreUsuario = request.session().attribute("usuarioActual");
 		
-		return repositorioUsuarios.getPorNombreDeUsuario(nombreUsuario);
+		return Optional
+				.ofNullable(posibleNombreUsuario)
+				.map(nombreUsuario -> repositorioUsuarios.getPorNombreDeUsuario(nombreUsuario))
+				.orElse(Optional.empty());
 	}
 }
