@@ -47,6 +47,8 @@ public class LoginController {
 		});
 		
 		//Si el usuario no existe mostrar error
+		response.redirect("/login");
+		
 		return null;
 	}
 	
