@@ -1,12 +1,11 @@
 <html>
-    <head>
-        <title>Mi titulo</title>
-        
-         <!-- CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -15,15 +14,66 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <header>
-            <h1>HOME | MAPA               						<a href="/perfil"> {{nombreUsuarioActual}}</a></h1>
-        </header>
-        {{#block "fondo-admin-cliente"}}
-        {{/block}}
-        <footer>
-            <h1>SOY EL FOOTER</h1>
-        </footer>
-    </body>
+        
+    <!-- Customs -->
+    <link type="text/css" rel="stylesheet" href="/css/tablas.css">
+</head>
+
+<body style="margin:0; min-height:100%">
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/home">Home</a></li>
+                    <li><a href="/mapa">Mapa</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {{#if nombreUsuarioActual}}
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">{{nombreUsuarioActual}}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/perfil">Perfil</a></li>
+                                {{#if esAdministrador}}
+                                    <li><a href="/clientes">Clientes</a></li>
+                                    <li><a href="transformadores">Transformadores</a></li>
+                                {{else}}
+                                    <li><a href="/dispositivos">Dispositivos</a></li>
+                                    <li><a href="/consumos">Consumos</a></li>
+                                    <li><a href="/recomendaciones">Recomendaciones</a></li>
+                                {{/if}}
+                                <li style="border-top: 1px solid #ccc"></li>
+                                <li>
+                                    <form action="/logout" method="post">
+                                        <button>Cerrar Sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {{else}}
+                        <li><a href="/login"><span class="fas fa-user"></span>  Iniciar Sesión</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    {{#block "fondo-admin-cliente"}}
+    {{/block}}
+    <footer style="position:absolute; bottom:0; width:100%; height:10%;">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <h1 style="color:#ccc">Sistema de Gestión Energética &copy;</h1>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <h1><a href="https://github.com/dds-utn/2018-vn-group-03"><span class="fab fa-github" style="padding-right:40%"></span></a></h1>
+                    </li>
+                    <li>
+                        <h1><a><span class="fab fa-linkedin"></span></a></h1>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </footer>
+</body>
+
 </html>

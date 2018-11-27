@@ -1,34 +1,41 @@
 {{#partial "contenido-administrador"}}
 
-<table style="width:70%" class="table table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">Numero de cliente</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Tipo De Documento</th>
-            <th scope="col">Numero Documento</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Domicilio</th>
-            <th scope="col">Ver detalles</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        {{#each clientes}}
-        <tr>
-            <td>{{id}}</td>
-            <td>{{nombreCompleto}}</td>
-            <td>{{tipoDocumento}}</td>
-            <td>{{numeroDocumento}}</td>
-            <td>{{telefono}}</td>
-            <td>{{domicilio}}</td>
-            <td style="text-align:center">
-                <a href="Ver detalle cliente">Ver detalles </a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+<div class="container">
+    {{#if clientes}}
+    <table style="width:100%" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Numero de cliente</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo De Documento</th>
+                <th scope="col">Numero Documento</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Domicilio</th>
+                <th scope="col">Ver detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each clientes}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{nombreCompleto}}</td>
+                <td>{{tipoDocumento}}</td>
+                <td>{{numeroDocumento}}</td>
+                <td>{{telefono}}</td>
+                <td>{{domicilio}}</td>
+                <td>
+                    <a class="badge badge-primary" href="/clientes/{{id}}/perfil">Ver detalle</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <div class="alert alert-info" role="alert" style="width:100%">
+        <span>No se encuentran hogares</span>
+    </div>
+    {{/if}}
+</div>
 
 {{/partial}}
 {{>layouts/layoutAdministrador.hbs}}

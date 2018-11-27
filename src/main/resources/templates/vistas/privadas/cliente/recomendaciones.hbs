@@ -1,18 +1,18 @@
 {{#partial "contenido-cliente"}}
 
-    <label style="padding-bottom: 15px; display:block">{{Dni}} - {{NombreCompleto}}</label>
-    <b style="padding-bottom: 25px; display:block; ">Eficiencia de los dispositivos</b>
-    <b style="padding-bottom: 15px; display:block">Ingrese Periodo</b>
+<div class="container">
+
+    <h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4>
 
     <div style="display:inline-block; align-content:center">
-       <form>
-            <label style="display:block"><b>Mes a recomendar</b></label>
+        <form>
+            <label style="display:block">Mes a recomendar</label>
             <input type="month" name="periodo" value={{periodo}} required />
-            <button class="btn btn-info"> Recomendarr </button>
+            <button class="btn btn-info btn-sm" style="margin-bottom:5px">Recomendar</button>
         </form>
     </div>
     <div>
-        <table style="width:70%" class="table table-bordered">
+        <table style="width:100%" class="table table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -25,7 +25,7 @@
             <tbody>
                 {{#each recomendaciones}}
                 <tr>
-                	<td>{{id}}</td>
+                    <td>{{id}}</td>
                     <td>{{nombreGenerico}}</td>
                     <td>{{horasDeUsoRecomendadas}}</td>
                     <td>{{horasDeUso}}</td>
@@ -34,12 +34,17 @@
                 {{/each}}
             </tbody>
         </table>
-            {{#if fueEficiente}}
-				UN MENSAJITO LINDO PORQUE FUE EFICIENTE: {{consumoTotal}}
-			{{else}}
-				UN MENSAJE BIEN FEO PORQUE NO FUE EFICIENTE: {{consumoTotal}}
-			{{/if}}
+        {{#if fueEficiente}}
+        <div class="alert alert-success" role="alert" style="width:40%">
+            <span>Su consumo: {{consumoTotal}} fue eficiente!</span>
+        </div>
+        {{else}}
+        <div class="alert alert-danger" role="alert" style="width:40%">
+            <span>Su consumo: {{consumoTotal}} no fue eficiente</span>
+        </div>
+        {{/if}}
     </div>
+</div>
 
- {{/partial}}
- {{>layouts/layoutCliente.hbs}}
+{{/partial}}
+{{>layouts/layoutCliente.hbs}}

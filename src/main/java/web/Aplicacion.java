@@ -43,6 +43,8 @@ public class Aplicacion {
 		RecomendacionesController recomendacionesController = new RecomendacionesController(repositorioUsuarios, repositorioClientes);
 		
 		HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
+		
+		staticFileLocation("/public");
 
 		port(9000);
 		
