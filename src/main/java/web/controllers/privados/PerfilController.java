@@ -5,7 +5,6 @@ import java.util.Map;
 import dominio.autenticacion.Usuario;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 
 public class PerfilController extends VistaUsuariosController {
 
@@ -18,9 +17,9 @@ public class PerfilController extends VistaUsuariosController {
 	}
 
 	@Override
-	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
+	protected void agregarDatos(Map<String, Object> viewModel, Request request) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request, response).get();
+		Usuario usuarioActual = getUsuarioLogueado(request).get();
 		
 		esAdministrador = usuarioActual.esAdministrador();
 		recursoActual = request.uri();

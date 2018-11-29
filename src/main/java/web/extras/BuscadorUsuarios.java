@@ -5,7 +5,6 @@ import java.util.Optional;
 import dominio.autenticacion.Usuario;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 
 public class BuscadorUsuarios {
 
@@ -16,7 +15,7 @@ public class BuscadorUsuarios {
 		this.repositorioUsuarios = repositorioUsuarios;
 	}
 
-	public Optional<Usuario> getUsuarioLogueado(Request request, Response response) {
+	public Optional<Usuario> getUsuarioLogueado(Request request) {
 		
 		String posibleNombreUsuario = request.session().attribute("usuarioActual");
 		

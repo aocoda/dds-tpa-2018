@@ -11,7 +11,6 @@ import dominio.dispositivos.PeriodoUtils;
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 import web.extras.ParserPeriodos;
 import web.viewModels.periodos.MesVM;
 import web.viewModels.periodos.TrimestreVM;
@@ -24,7 +23,7 @@ public class ConsumosController extends VistaClienteController {
 	}
 
 	@Override
-	protected void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request, Response response) {
+	protected void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request) {
 
 		String periodoString = request.queryParams("periodo");
 		

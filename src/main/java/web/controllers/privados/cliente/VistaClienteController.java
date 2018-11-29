@@ -7,13 +7,12 @@ import dominio.autenticacion.Usuario;
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 import web.controllers.privados.VistaUsuariosController;
 import web.extras.NotFoundException;
 
 public abstract class VistaClienteController extends VistaUsuariosController {
 	
-	protected RepositorioClientes repositorioClientes;
+	private RepositorioClientes repositorioClientes;
 
 	public VistaClienteController(RepositorioUsuarios repositorioUsuarios, RepositorioClientes repositorioClientes) {
 		
@@ -22,26 +21,31 @@ public abstract class VistaClienteController extends VistaUsuariosController {
 		this.repositorioClientes = repositorioClientes;
 	}
 	
-	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
+	protected void agregarDatos(Map<String, Object> viewModel, Request request) {
 		
-		Cliente cliente = getCliente(request, response);
+		Cliente cliente = getCliente(request);
 		
 		viewModel.put("idCliente", cliente.getId());
 		viewModel.put("nombreCliente", cliente.getNombreCompleto());
 		
-		agregarDatosDelCliente(viewModel, cliente, request, response);
+		agregarDatosDelCliente(viewModel, cliente, request);
 	}
 
-	protected Cliente getCliente(Request request, Response response) {
+	protected Cliente getCliente(Request request) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request, response).get();
+		Usuario usuarioActual = getUsuarioLogueado(request).get();
 		
-		long idCliente = usuarioActual.esAdministrador() ? Long.valueOf(request.params("id")) : usuarioActual.getId();
+		if(usuarioActual.esAdministrador()) {
+			
+			long idCliente = Long.valueOf(request.params("id"));
+			
+			return repositorioClientes
+					.getPorId(idCliente)
+					.orElseThrow(() -> new NotFoundException("No existe cliente con id: " + idCliente));
+		}
 		
-		return repositorioClientes
-				.getPorId(idCliente)
-				.orElseThrow(() -> new NotFoundException("No existe cliente con id: " + idCliente));
+		return (Cliente) usuarioActual;
 	}
 	
-	protected abstract void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request, Response response);
+	protected abstract void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request);
 }

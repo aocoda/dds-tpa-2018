@@ -18,7 +18,7 @@ public class AutenticacionMiddleware extends BuscadorUsuarios {
 	
 	public void asegurarPermisosDeAdministrador(Request request, Response response) {
 
-		Optional<Usuario> optUsuario = getUsuarioLogueado(request, response);
+		Optional<Usuario> optUsuario = getUsuarioLogueado(request);
 
 		if (optUsuario.isPresent()) {
 			
@@ -32,7 +32,7 @@ public class AutenticacionMiddleware extends BuscadorUsuarios {
 
 	public void asegurarPermisosDeCliente(Request request, Response response) {
 
-		Optional<Usuario> optUsuario = getUsuarioLogueado(request, response);
+		Optional<Usuario> optUsuario = getUsuarioLogueado(request);
 
 		if (optUsuario.isPresent()) {
 			
@@ -46,7 +46,7 @@ public class AutenticacionMiddleware extends BuscadorUsuarios {
 	
 	public void asegurarUsuarioLogueado(Request request, Response response) {
 
-		Optional<Usuario> optUsuario = getUsuarioLogueado(request, response);
+		Optional<Usuario> optUsuario = getUsuarioLogueado(request);
 
 		if (!optUsuario.isPresent())
 			throw new NotFoundException("No existe usuario logueado");

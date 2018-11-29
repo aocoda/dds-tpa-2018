@@ -71,7 +71,7 @@ public class Aplicacion {
 			path("/:id/dispositivos", () -> {
 				get("", dispositivosController::renderizarVista, templateEngine);
 				get("/nuevo", dispositivoNuevoController::renderizarVista, templateEngine);
-				post("", dispositivosController::agregar);
+				post("", dispositivoNuevoController::agregar);
 			});
 			get("/:id/consumos", consumosController::renderizarVista, templateEngine);	
 			get("/:id/recomendaciones", recomendacionesController::renderizarVista, templateEngine);
@@ -88,7 +88,7 @@ public class Aplicacion {
 			before("/*", autenticacionMidleware::asegurarPermisosDeCliente);
 			get("", dispositivosController::renderizarVista, templateEngine);
 			get("/nuevo", dispositivoNuevoController::renderizarVista, templateEngine);
-			post("", dispositivosController::agregar);
+			post("", dispositivoNuevoController::agregar);
 		});
 		path("/consumos", () -> {
 			before("", autenticacionMidleware::asegurarPermisosDeCliente);

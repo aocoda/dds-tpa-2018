@@ -9,7 +9,6 @@ import repositorios.RepositorioClientes;
 import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 import web.controllers.privados.VistaUsuariosController;
 import web.extras.ParserPeriodos;
 import web.viewModels.TransformadorVM;
@@ -29,19 +28,22 @@ public class TransformadoresController extends VistaUsuariosController {
 	}
 
 	@Override
-	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
+	protected void agregarDatos(Map<String, Object> viewModel, Request request) {
 		
-		String periodo = request.queryParams("periodo");
+		String periodoString = request.queryParams("periodo");
 		
-		Periodo mes = new ParserPeriodos().parsear(periodo);
+		ParserPeriodos parserPeriodos = new ParserPeriodos();
+		
+		Periodo periodo = parserPeriodos.parsear(periodoString);
 		
 		List<TransformadorVM> transformadores = repositorioTransformadores
 				.getAllInstances()
 				.stream()
-				.map(transformador -> new TransformadorVM(transformador, mes, repositorioClientes.getAllInstances(), repositorioTransformadores.getAllInstances()))
+				.map(transformador -> new TransformadorVM(transformador, periodo, repositorioClientes.getAllInstances(), repositorioTransformadores.getAllInstances()))
 				.collect(Collectors.toList());
 		
 		viewModel.put("transformadores", transformadores);
+		viewModel.put("periodo", parserPeriodos.parsear(periodo));
 	}
 
 	@Override

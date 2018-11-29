@@ -20,19 +20,19 @@ public abstract class VistaUsuariosController extends BuscadorUsuarios {
 	
 	public ModelAndView renderizarVista(Request request, Response response) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request, response).get();
+		Usuario usuarioActual = getUsuarioLogueado(request).get();
 		
 		Map<String, Object> viewModel = new HashMap<>();
 		
 		viewModel.put("esAdministrador", usuarioActual.esAdministrador());
 		viewModel.put("nombreUsuarioActual", usuarioActual.getNombreUsuario());
 
-		agregarDatos(viewModel, request, response);
+		agregarDatos(viewModel, request);
 		
 		return new ModelAndView(viewModel, getUbicacionDelTemplate());
 	}
 	
-	protected abstract void agregarDatos(Map<String, Object> viewModel, Request request, Response response);
+	protected abstract void agregarDatos(Map<String, Object> viewModel, Request request);
 	
 	protected abstract String getUbicacionDelTemplate();
 }

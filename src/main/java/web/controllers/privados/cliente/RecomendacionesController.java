@@ -10,7 +10,6 @@ import dominio.dispositivos.Periodo;
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 import web.extras.ParserPeriodos;
 import web.viewModels.RecomendacionVM;
 
@@ -22,7 +21,7 @@ public class RecomendacionesController extends VistaClienteController {
 	}
 
 	@Override
-	protected void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request, Response response) {
+	protected void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request) {
 		
 		String periodoString = request.queryParams("periodo");
 		

@@ -5,7 +5,6 @@ import java.util.Map;
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioUsuarios;
 import spark.Request;
-import spark.Response;
 import web.controllers.privados.VistaUsuariosController;
 
 public class ClientesController extends VistaUsuariosController {
@@ -20,7 +19,7 @@ public class ClientesController extends VistaUsuariosController {
 	}
 
 	@Override
-	protected void agregarDatos(Map<String, Object> viewModel, Request request, Response response) {
+	protected void agregarDatos(Map<String, Object> viewModel, Request request) {
 		
 		viewModel.put("clientes", repositorioClientes.getAllInstances());
 	}

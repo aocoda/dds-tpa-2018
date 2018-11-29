@@ -20,7 +20,7 @@ public class HomeController extends BuscadorUsuarios {
 		
 		Map<String, Object> viewModel = new HashMap<>();
 		
-		getUsuarioLogueado(request, response).ifPresent(usuarioActual -> {
+		getUsuarioLogueado(request).ifPresent(usuarioActual -> {
 			
 			viewModel.put("nombreUsuarioActual", usuarioActual.getNombreUsuario());
 			viewModel.put("esAdministrador", usuarioActual.esAdministrador());	
