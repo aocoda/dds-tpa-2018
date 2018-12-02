@@ -32,11 +32,11 @@
                     {{#if nombreUsuarioActual}}
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">{{nombreUsuarioActual}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/perfil">Perfil</a></li>
                                 {{#if esAdministrador}}
                                     <li><a href="/clientes">Clientes</a></li>
-                                    <li><a href="transformadores">Transformadores</a></li>
+                                    <li><a href="/transformadores">Transformadores</a></li>
                                 {{else}}
+                                	<li><a href="/perfil">Perfil</a></li>
                                     <li><a href="/dispositivos">Dispositivos</a></li>
                                     <li><a href="/consumos">Consumos</a></li>
                                     <li><a href="/recomendaciones">Recomendaciones</a></li>

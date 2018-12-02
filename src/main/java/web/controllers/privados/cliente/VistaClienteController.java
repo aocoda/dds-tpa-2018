@@ -1,18 +1,22 @@
 package web.controllers.privados.cliente;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import dominio.Cliente;
 import dominio.autenticacion.Usuario;
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioUsuarios;
+import spark.ModelAndView;
 import spark.Request;
-import web.controllers.privados.VistaUsuariosController;
+import spark.Response;
+import web.extras.BuscadorUsuarios;
 import web.extras.NotFoundException;
 
-public abstract class VistaClienteController extends VistaUsuariosController {
+public abstract class VistaClienteController extends BuscadorUsuarios {
 	
 	private RepositorioClientes repositorioClientes;
+	private Usuario usuarioActual;
 
 	public VistaClienteController(RepositorioUsuarios repositorioUsuarios, RepositorioClientes repositorioClientes) {
 		
@@ -21,19 +25,26 @@ public abstract class VistaClienteController extends VistaUsuariosController {
 		this.repositorioClientes = repositorioClientes;
 	}
 	
-	protected void agregarDatos(Map<String, Object> viewModel, Request request) {
+	public ModelAndView renderizarVista(Request request, Response response) {
 		
+		usuarioActual = getUsuarioLogueado(request).get();
+		
+		Map<String, Object> viewModel = new HashMap<>();
+		
+		viewModel.put("esAdministrador", usuarioActual.esAdministrador());
+		viewModel.put("nombreUsuarioActual", usuarioActual.getNombreUsuario());
+
 		Cliente cliente = getCliente(request);
 		
 		viewModel.put("idCliente", cliente.getId());
 		viewModel.put("nombreCliente", cliente.getNombreCompleto());
 		
 		agregarDatosDelCliente(viewModel, cliente, request);
-	}
-
-	protected Cliente getCliente(Request request) {
 		
-		Usuario usuarioActual = getUsuarioLogueado(request).get();
+		return new ModelAndView(viewModel, getUbicacionDelTemplate());
+	}
+	
+	protected Cliente getCliente(Request request) {
 		
 		if(usuarioActual.esAdministrador()) {
 			
@@ -48,4 +59,6 @@ public abstract class VistaClienteController extends VistaUsuariosController {
 	}
 	
 	protected abstract void agregarDatosDelCliente(Map<String, Object> viewModel, Cliente cliente, Request request);
+	
+	protected abstract String getUbicacionDelTemplate();
 }

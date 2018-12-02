@@ -43,12 +43,4 @@ public class AutenticacionMiddleware extends BuscadorUsuarios {
 		else
 			throw new NotFoundException("No existe usuario logueado");
 	}
-	
-	public void asegurarUsuarioLogueado(Request request, Response response) {
-
-		Optional<Usuario> optUsuario = getUsuarioLogueado(request);
-
-		if (!optUsuario.isPresent())
-			throw new NotFoundException("No existe usuario logueado");
-	}
 }

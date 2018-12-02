@@ -9,13 +9,12 @@ import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-import web.controllers.privados.PerfilController;
 import web.controllers.privados.administrador.ClientesController;
 import web.controllers.privados.administrador.TransformadoresController;
-import web.controllers.privados.cliente.ApagadoAutomaticoController;
 import web.controllers.privados.cliente.ConsumosController;
 import web.controllers.privados.cliente.DispositivoNuevoController;
 import web.controllers.privados.cliente.DispositivosController;
+import web.controllers.privados.cliente.PerfilController;
 import web.controllers.privados.cliente.RecomendacionesController;
 import web.controllers.publicos.HomeController;
 import web.controllers.publicos.LoginController;
@@ -34,14 +33,13 @@ public class Aplicacion {
 		
 		HomeController homeController = new HomeController(repositorioUsuarios);
 		LoginController loginController = new LoginController(repositorioUsuarios);
-		PerfilController perfilController = new PerfilController(repositorioUsuarios, repositorioTransformadores);
+		PerfilController perfilController = new PerfilController(repositorioUsuarios, repositorioClientes, repositorioTransformadores);
 		TransformadoresController transformadoresController = new TransformadoresController(repositorioUsuarios, repositorioClientes, repositorioTransformadores);
 		ClientesController clientesController = new ClientesController(repositorioUsuarios, repositorioClientes);
 		DispositivosController dispositivosController = new DispositivosController(repositorioUsuarios, repositorioClientes);
 		DispositivoNuevoController dispositivoNuevoController = new DispositivoNuevoController(repositorioUsuarios, repositorioClientes);
 		ConsumosController consumosController = new ConsumosController(repositorioUsuarios, repositorioClientes);
 		RecomendacionesController recomendacionesController = new RecomendacionesController(repositorioUsuarios, repositorioClientes);
-		ApagadoAutomaticoController apagadoAutomaticoController = new ApagadoAutomaticoController(repositorioUsuarios, repositorioClientes);
 		
 		HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
 		
@@ -54,13 +52,6 @@ public class Aplicacion {
 		get("/login", loginController::renderizarVista, templateEngine);
 		post("/login", loginController::login);
 		post("/logout", loginController::logout);
-		
-		
-		//Administrador-Cliente
-		path("/perfil", () -> {
-			before("", autenticacionMidleware::asegurarUsuarioLogueado);
-			get("", perfilController::renderizarVista, templateEngine);			
-		});
 		
 		
 		//Administrador
@@ -76,7 +67,7 @@ public class Aplicacion {
 			});
 			get("/:id/consumos", consumosController::renderizarVista, templateEngine);	
 			get("/:id/recomendaciones", recomendacionesController::renderizarVista, templateEngine);
-			post(":id/apagadoAutomatico", apagadoAutomaticoController::permutar);
+			post(":id/apagadoAutomatico", perfilController::permutarApagadoAutomatico);
 		});
 		path("/transformadores", () -> {
 			before("", autenticacionMidleware::asegurarPermisosDeAdministrador);
@@ -85,6 +76,10 @@ public class Aplicacion {
 		
 		
 		//Cliente
+		path("/perfil", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeCliente);
+			get("", perfilController::renderizarVista, templateEngine);			
+		});
 		path("/dispositivos", () -> {
 			before("", autenticacionMidleware::asegurarPermisosDeCliente);
 			before("/*", autenticacionMidleware::asegurarPermisosDeCliente);
@@ -102,7 +97,7 @@ public class Aplicacion {
 		});
 		path("/apagadoAutomatico", () -> {
 			before("", autenticacionMidleware::asegurarPermisosDeCliente);
-			post("", apagadoAutomaticoController::permutar);
+			post("", perfilController::permutarApagadoAutomatico);
 		});
 		
 		
