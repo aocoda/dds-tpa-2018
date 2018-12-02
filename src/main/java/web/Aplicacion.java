@@ -3,7 +3,6 @@ package web;
 import static spark.Spark.*;
 
 import org.eclipse.jetty.http.HttpStatus;
-import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import repositorios.RepositorioClientes;
 import repositorios.RepositorioTransformadores;

@@ -39,6 +39,9 @@ public class PerfilController extends VistaUsuariosController {
 			
 			Cliente cliente = (Cliente) usuarioActual;
 			
+			viewModel.put("idCliente", cliente.getId());
+			viewModel.put("nombreCliente", cliente.getNombreCompleto());
+			
 			viewModel.put("cliente", cliente);
 			
 			try {
