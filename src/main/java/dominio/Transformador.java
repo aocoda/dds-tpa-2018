@@ -47,4 +47,9 @@ public class Transformador extends EntidadPersistente {
 		
 		return coordenada;
 	}
+
+	public String getNombre() {
+		
+		return nombre;
+	}
 }

@@ -46,6 +46,8 @@ public class DispositivoNuevoController extends VistaClienteController implement
 			}
 		});
 
+		entityManager().close();
+		
 		response.redirect(request.uri());
 
 		return null;

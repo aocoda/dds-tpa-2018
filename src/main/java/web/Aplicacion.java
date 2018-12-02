@@ -13,6 +13,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import web.controllers.privados.PerfilController;
 import web.controllers.privados.administrador.ClientesController;
 import web.controllers.privados.administrador.TransformadoresController;
+import web.controllers.privados.cliente.ApagadoAutomaticoController;
 import web.controllers.privados.cliente.ConsumosController;
 import web.controllers.privados.cliente.DispositivoNuevoController;
 import web.controllers.privados.cliente.DispositivosController;
@@ -34,13 +35,14 @@ public class Aplicacion {
 		
 		HomeController homeController = new HomeController(repositorioUsuarios);
 		LoginController loginController = new LoginController(repositorioUsuarios);
-		PerfilController perfilController = new PerfilController(repositorioUsuarios);
+		PerfilController perfilController = new PerfilController(repositorioUsuarios, repositorioTransformadores);
 		TransformadoresController transformadoresController = new TransformadoresController(repositorioUsuarios, repositorioClientes, repositorioTransformadores);
 		ClientesController clientesController = new ClientesController(repositorioUsuarios, repositorioClientes);
 		DispositivosController dispositivosController = new DispositivosController(repositorioUsuarios, repositorioClientes);
 		DispositivoNuevoController dispositivoNuevoController = new DispositivoNuevoController(repositorioUsuarios, repositorioClientes);
 		ConsumosController consumosController = new ConsumosController(repositorioUsuarios, repositorioClientes);
 		RecomendacionesController recomendacionesController = new RecomendacionesController(repositorioUsuarios, repositorioClientes);
+		ApagadoAutomaticoController apagadoAutomaticoController = new ApagadoAutomaticoController(repositorioUsuarios, repositorioClientes);
 		
 		HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
 		
@@ -75,6 +77,7 @@ public class Aplicacion {
 			});
 			get("/:id/consumos", consumosController::renderizarVista, templateEngine);	
 			get("/:id/recomendaciones", recomendacionesController::renderizarVista, templateEngine);
+			post(":id/apagadoAutomatico", apagadoAutomaticoController::permutar);
 		});
 		path("/transformadores", () -> {
 			before("", autenticacionMidleware::asegurarPermisosDeAdministrador);
@@ -98,6 +101,10 @@ public class Aplicacion {
 			before("", autenticacionMidleware::asegurarPermisosDeCliente);
 			get("", recomendacionesController::renderizarVista, templateEngine);
 		});
+		path("/apagadoAutomatico", () -> {
+			before("", autenticacionMidleware::asegurarPermisosDeCliente);
+			post("", apagadoAutomaticoController::permutar);
+		});
 		
 		
 		//Extras
@@ -113,6 +120,5 @@ public class Aplicacion {
 			
 			notFound(vistaRenderizada);
 		});
-		after((request, response) -> PerThreadEntityManagers.getEntityManager().close());
 	}
 }

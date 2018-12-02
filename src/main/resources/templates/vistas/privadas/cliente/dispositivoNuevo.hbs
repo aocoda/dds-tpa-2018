@@ -1,48 +1,64 @@
 {{#partial "contenido-cliente"}}
 
-<!DOCTYPE html>
-<html>
+<script>
+        $(document).ready(function () {
+            
+            $('#tipoDispositivo').change(function () {
+                
+                const $this = $(this)
+                
+                if ($this.val() == "dispositivoInteligente") {
+                    
+                    $("#horasEstimadasDeUsoPorDia").prop('disabled', true)
+                } 
+                else {
+                    
+                    $("#horasEstimadasDeUsoPorDia").prop('disabled', false)
+                }
+            })
+        })
+</script>
 
-<head>
-    <title>Nuevo Dispositivo</title>
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-
-</head>
-<body>
-
-    <label style="padding-bottom: 15px; display:block">{{Dni}} - {{NombreCompleto}}</label>
-    <b style="padding-bottom: 1%; display:block; ">Alta de Dispositivo</b>
-        
+<div class="container">
+    <h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4>
+    <u style="padding-bottom: 1%; display:block; font-size: 20px">Alta de Dispositivo</u>
     <form action="{{url_agregar_dispositivo}}" method="post">
-
-        <label>Tipo de dispositivo</label>
-        <select name="tipoDispositivo">
-            <option value="dispositivoInteligente">Dispositivo Inteligente</option>
-            <option value="dispositivoEstandar">Dispositivo Estandar</option>
-        </select>
-
-        <label>Nombre Generico</label>
-        <input type="text" name="nombreGenerico" required>
-        <label>Consumo por hora</label>
-        <input type="number" name="consumoPorHora" required>
-        <label>Horas estimadas de uso por dia</label>
-        <input type="number" name="horasEstimadasDeUsoPorDia" required>
-        <label>Horas de uso minimo</label>
-        <input type="number" name="horasDeUsoMinimo" required>
-        <label>Horas de uso maximo</label>
-        <input type="number" name="horasDeUsoMaximo" required>
-
-        <button>Agregar Dispositivo</button>
-    
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="tipoDispositivo">Tipo de dispositivo</label>
+                <select id="tipoDispositivo" name="tipoDispositivo" class="form-control">
+                    <option value="dispositivoInteligente" selected>Dispositivo Inteligente</option>
+                    <option value="dispositivoEstandar">Dispositivo Estándar</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="nombreGenerico">Nombre Genérico</label>
+                <input type="text" class="form-control" name="nombreGenerico" placeholder="Ej: Televisor" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="horasEstimadasDeUsoPorDia">Horas estimadas de uso por día</label>
+                <input id="horasEstimadasDeUsoPorDia" type="number" class="form-control" name="horasEstimadasDeUsoPorDia" placeholder="Ej: 3" disabled required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="consumoPorHora">Consumo Por Hora</label>
+                <input type="number" class="form-control" name="consumoPorHora" placeholder="Ej: 10" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="horasDeUsoMaximo">Horas de uso máximo</label>
+                <input type="number" class="form-control" id="horasDeUsoMaximo" placeholder="Ej: 5" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="horasDeUsoMinimo">Horas de uso mínimo</label>
+                <input type="number" class="form-control" name="horasDeUsoMinimo" placeholder="Ej: 1" required>
+            </div>
+        </div>
+        <button class="btn btn-info" style="float:right">Agregar Dispositivo</button>
     </form>
-
-</body>
-
-</html>
-
+</div>
 
 {{/partial}}
 {{>layouts/layoutCliente.hbs}}

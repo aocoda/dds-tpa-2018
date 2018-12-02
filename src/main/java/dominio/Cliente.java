@@ -271,4 +271,9 @@ public class Cliente extends Usuario {
 		
 		return consumoDe(unPeriodo) < 612;
 	}
+
+	public void permutarApagadoAutomatico() {
+		
+		apagadoAutomaticoActivado = !apagadoAutomaticoActivado;
+	}
 }

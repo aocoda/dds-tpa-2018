@@ -1,6 +1,9 @@
 {{#partial "fondo-admin-cliente"}}
-    <h2>ADMINISTRADOR / <a href=/clientes>Clientes</a> / {{idCliente}}</h2>
+    
+    <h2><a href=/clientes>Clientes</a><span style="color:#AAAAAA; pointer-events: none"> / {{idCliente}}</span></h2>
+    
     {{#block "administracion-cliente"}}
     {{/block}}
+    
 {{/partial}}
 {{>layouts/layoutGeneral.hbs}}
