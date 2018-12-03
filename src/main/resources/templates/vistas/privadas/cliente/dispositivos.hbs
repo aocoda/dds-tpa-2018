@@ -1,6 +1,6 @@
 {{#partial "contenido-cliente"}}
 
-<div class="container">
+<div class="container" style="overflow-y:auto; height:80%">
     <h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4>
     <div style="display:inline-block">
         <div class="float-right">
@@ -8,7 +8,7 @@
         </div>
         <div>
             <form>
-                <label style="display:block">Buscar Mes específico</label>
+                <label style="display:block">Buscar Mes especï¿½fico</label>
                 <input type="month" name="periodo" value={{periodo}} required />
                 <button class="btn btn-info btn-sm" style="margin-bottom:5px"> Consultar </button>
             </form>
@@ -63,6 +63,11 @@
         </table>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#dispositivos-tab').tab('show');
+    });
+</script>
 
 {{/partial}}
 {{>layouts/layoutCliente.hbs}}

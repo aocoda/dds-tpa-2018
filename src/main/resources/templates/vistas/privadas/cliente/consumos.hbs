@@ -1,6 +1,6 @@
- {{#partial "contenido-cliente"}}
+{{#partial "contenido-cliente"}}
 
-<div class="container">
+<div class="container" style="overflow-y:auto; height:80%;">
     <h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4>
     <div style="display: flex; justify-content: space-between; margin-bottom: 10px" class="col-xs-12">
         <div style="display:inline-block; align-content:center">
@@ -11,7 +11,7 @@
             </form>
         </div>
 
-        <div class="alert alert-info" role="alert" style="width:30%; text-align: center; height: 5%; margin-right: 40%; margin-top: 15px">
+        <div class="alert alert-info" role="alert" style="width:30%; text-align: center; height: 5%; margin-right: 40%; margin-top: 15px; height:8%">
             <label style="font-size:13px">Su consumo fue de: {{consumoDelPeriodo}} KWh</label>
         </div>
     </div>
@@ -19,20 +19,20 @@
     {{#each trimestres}}
     <div>
         <div class="card" style="width:60%">
-            <div class="card-header" id="headingOne" style="cursor:pointer; display: flex; justify-content: space-between;"
+            <div class="card-header cardChevron" id="{{@index}}" style="cursor:pointer; display: flex; justify-content: space-between;"
                 data-toggle="collapse" data-target="#detalleTrimestre{{@index}}">
                 <h5 class="mb-0">
                     {{anio}} - Trimestre Nro {{@index}}
                 </h5>
                 <div style="padding-right: 5px">
-                        <label>{{consumo}} KWh</label>
-                        <span class="btn btn-link">
-                                <a class="fa fa-angle-double-down"></a>
-                        </span>
-                    </div>
+                    <label>{{consumo}} KWh</label>
+                    <span class="btn btn-link btnChevron">
+                        <i class="fa fa-angle-double-down"></i>
+                    </span>
+                </div>
             </div>
 
-            <div id="#detalleTrimestre{{@index}}" class="collapse" aria-labelledby="headingOne">
+            <div id="detalleTrimestre{{@index}}" aria-labelledby="{{index}}" class="collapse">
                 <div class="card-body">
                     {{#each meses}}
                     <div style="border: 1px solid; border-radius: 4px; margin-bottom: 3px">
@@ -50,6 +50,14 @@
     </div>
     {{/each}}
 </div>
+<script>
+    $(document).ready(function () {
+        $('#consumos-tab').tab('show');
 
-{{/partial}} 
+        $('.cardChevron').click(function () {
+            $(this).children('div').children('.btnChevron').children('.fa').toggleClass('fa-angle-double-up fa-angle-double-down');
+        });
+    });
+</script>
+{{/partial}}
 {{>layouts/layoutCliente.hbs}}
