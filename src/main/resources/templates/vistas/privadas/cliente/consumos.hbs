@@ -11,14 +11,14 @@
             </form>
         </div>
 
-        <div class="alert alert-info" role="alert" style="width:30%; text-align: center; height: 5%; margin-right: 40%; margin-top: 15px; height:8%">
+        <div class="alert alert-info" role="alert" style="width:30%; text-align: center; height: 5%; margin-top: 15px; height:8%">
             <label style="font-size:13px">Su consumo fue de: {{consumoDelPeriodo}} KWh</label>
         </div>
     </div>
 
     {{#each trimestres}}
     <div>
-        <div class="card" style="width:60%">
+        <div class="card" style="width:100%">
             <div class="card-header cardChevron" id="{{@index}}" style="cursor:pointer; display: flex; justify-content: space-between;"
                 data-toggle="collapse" data-target="#detalleTrimestre{{@index}}">
                 <h5 class="mb-0">
@@ -36,7 +36,7 @@
                 <div class="card-body">
                     {{#each meses}}
                     <div style="border: 1px solid; border-radius: 4px; margin-bottom: 3px">
-                        <label>{{mes}} {{consumo}} KWh </label>
+                        <label style="margin-left:5px">{{mes}} {{consumo}} KWh </label>
                         <span style="float:right">
                             <a class="badge badge-primary" href="/dispositivos?periodo={{periodo}}" style="margin-top:7px; margin-right:5px;">
                                 Ver detalle
