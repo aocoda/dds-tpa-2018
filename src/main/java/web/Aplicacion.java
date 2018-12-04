@@ -54,6 +54,7 @@ public class Aplicacion {
 			
 			return null;
 		});
+		get("/unimplemented", (request, response) -> new ModelAndView(null, "/vistas/publicas/unimplemented.hbs"), templateEngine);
 		get("/home", homeController::renderizarVista, templateEngine);
 		get("/login", loginController::renderizarVista, templateEngine);
 		post("/login", loginController::login);
