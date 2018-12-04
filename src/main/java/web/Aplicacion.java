@@ -45,7 +45,7 @@ public class Aplicacion {
 		
 		staticFileLocation("/public");
 
-		port(9000);
+		port(System.getenv("PORT") == null ? 9000 : Integer.parseInt(System.getenv("PORT")));
 		
 		//Publico
 		get("/", (request, response) -> { 
