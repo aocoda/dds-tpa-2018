@@ -8,6 +8,20 @@
 	<persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
+		<class>dominio.Cliente</class>
+		<class>dominio.Administrador</class>
+		<class>dominio.Categoria</class>
+		<class>dominio.Transformador</class>
+		<class>dominio.Zona</class>
+		<class>dominio.dispositivos.DispositivoInteligente</class>
+		<class>dominio.dispositivos.DispositivoEstandar</class>
+		<class>dominio.dispositivos.inteligentes.Uso</class>
+		<class>dominio.reglas.Regla</class>
+		<class>dominio.reglas.actuadores.Actuador</class>
+		<class>dominio.reglas.actuadores.Encendedor</class>
+		<class>dominio.reglas.condiciones.Condicion</class>
+		<class>dominio.reglas.sensores.SensorTemperatura</class>
+
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class" />
 
