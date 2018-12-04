@@ -3,16 +3,16 @@
 	<div style="margin-top: 1%" class="container">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link active" id="perfil-tab" href="/perfil" role="tab" aria-selected="true">Perfil</a>
+				<a class="nav-link active" id="perfil-tab" href={{#if esAdministrador}} /clientes/{{idCliente}}/perfil {{else}} /perfil {{/if}} role="tab" aria-selected="true">Perfil</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="consumos-tab" href="/consumos" role="tab" aria-selected="false">Consumos</a>
+				<a class="nav-link" id="consumos-tab" href={{#if esAdministrador}} /clientes/{{idCliente}}/consumos {{else}} /consumos {{/if}} role="tab" aria-selected="false">Consumos</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="dispositivos-tab" href="/dispositivos" role="tab" aria-selected="false">Dispositivos</a>
+				<a class="nav-link" id="dispositivos-tab" href={{#if esAdministrador}} /clientes/{{idCliente}}/dispositivos {{else}} /dispositivos {{/if}} role="tab" aria-selected="false">Dispositivos</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="recomendaciones-tab"  href="/recomendaciones" aria-selected="false">Recomendaciones</a>
+				<a class="nav-link" id="recomendaciones-tab"  href={{#if esAdministrador}} /clientes/{{idCliente}}/recomendaciones {{else}} /recomendaciones {{/if}} aria-selected="false">Recomendaciones</a>
 			</li>
 		</ul>
 	</div>
