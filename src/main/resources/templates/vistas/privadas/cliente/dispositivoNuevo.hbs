@@ -1,64 +1,64 @@
 {{#partial "contenido-cliente"}}
+	
+	<div class="container" style="overflow-y:auto; height:70%;">
+	    
+	    <p><h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4></p>
+	    
+	    <p><h5>Alta de dispositivo</h5></p>
+	    
+	    <hr><br>
+	    
+	    <form action="{{url_agregar_dispositivo}}" method="post">
+	        <div class="form-row">
+	            <div class="form-group col-md-6">
+	                <label for="tipoDispositivo">Tipo de dispositivo</label>
+	                <select id="tipoDispositivo" name="tipoDispositivo" class="form-control">
+	                    <option value="dispositivoInteligente" selected>Dispositivo inteligente</option>
+	                    <option value="dispositivoEstandar">Dispositivo estandar</option>
+	                </select>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label>Nombre generico</label>
+	                <input type="text" class="form-control" name="nombreGenerico" placeholder="Ej: Televisor" required>
+	            </div>
+	        </div>
+	        <div class="form-row">
+	            <div class="form-group col-md-6">
+	                <label>Horas de uso maximo</label>
+	                <input type="number" class="form-control" name="horasDeUsoMaximo" placeholder="Ej: 5" required>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label>Horas de uso minimo</label>
+	                <input type="number" class="form-control" name="horasDeUsoMinimo" placeholder="Ej: 1" required>
+	            </div>
+	        </div>
+	        <div class="form-row">
+	            <div class="form-group col-md-6">
+	                <label>Consumo por hora</label>
+	                <input type="number" class="form-control" name="consumoPorHora" placeholder="Ej: 10" required>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label for="horasEstimadasDeUsoPorDia">Horas estimadas de uso por dia</label>
+	                <input id="horasEstimadasDeUsoPorDia" type="number" class="form-control" name="horasEstimadasDeUsoPorDia" placeholder="Ej: 3" disabled required>
+	            </div>
+	        </div>
+	        <button class="btn btn-info" style="float:right">Agregar dispositivo</button>
+	    </form>
+	</div>
 
-<script>
-        $(document).ready(function () {
-            
-            $('#tipoDispositivo').change(function () {
-                
-                const $this = $(this)
-                
-                if ($this.val() == "dispositivoInteligente") {
-                    
-                    $("#horasEstimadasDeUsoPorDia").prop('disabled', true)
-                } 
-                else {
-                    
-                    $("#horasEstimadasDeUsoPorDia").prop('disabled', false)
-                }
-            })
-        })
-</script>
-
-<div class="container">
-    <h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4>
-    <u style="padding-bottom: 1%; display:block; font-size: 20px">Alta de Dispositivo</u>
-    <form action="{{url_agregar_dispositivo}}" method="post">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="tipoDispositivo">Tipo de dispositivo</label>
-                <select id="tipoDispositivo" name="tipoDispositivo" class="form-control">
-                    <option value="dispositivoInteligente" selected>Dispositivo Inteligente</option>
-                    <option value="dispositivoEstandar">Dispositivo Estándar</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Nombre Genérico</label>
-                <input type="text" class="form-control" name="nombreGenerico" placeholder="Ej: Televisor" required>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="horasEstimadasDeUsoPorDia">Horas estimadas de uso por día</label>
-                <input id="horasEstimadasDeUsoPorDia" type="number" class="form-control" name="horasEstimadasDeUsoPorDia" placeholder="Ej: 3" disabled required>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Consumo Por Hora</label>
-                <input type="number" class="form-control" name="consumoPorHora" placeholder="Ej: 10" required>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Horas de uso máximo</label>
-                <input type="number" class="form-control" name="horasDeUsoMaximo" placeholder="Ej: 5" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Horas de uso mínimo</label>
-                <input type="number" class="form-control" name="horasDeUsoMinimo" placeholder="Ej: 1" required>
-            </div>
-        </div>
-        <button class="btn btn-info" style="float:right">Agregar Dispositivo</button>
-    </form>
-</div>
-
+	<script>
+	        $(document).ready(function () {
+	            $('#tipoDispositivo').change(function () {
+	                const $this = $(this)
+	                
+	                if ($this.val() == "dispositivoInteligente") {
+	                    $("#horasEstimadasDeUsoPorDia").prop('disabled', true)
+	                } 
+	                else {
+	                    $("#horasEstimadasDeUsoPorDia").prop('disabled', false)
+	                }
+	            })
+	        })
+	</script>
 {{/partial}}
 {{>layouts/layoutCliente.hbs}}
