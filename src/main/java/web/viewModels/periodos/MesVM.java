@@ -24,7 +24,7 @@ public class MesVM {
 	
 	public String getMes() {
 		
-		return mes.getFechaYHoraDeInicio().getMonth().getDisplayName(TextStyle.FULL, Locale.ROOT);
+		return mes.getFechaYHoraDeInicio().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ARG"));
 	}
 	
 	public double getConsumo() {
