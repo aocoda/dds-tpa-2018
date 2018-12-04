@@ -48,7 +48,13 @@ public class Aplicacion {
 		port(9000);
 		
 		//Publico
-		get("/home", homeController::renderizarVista, templateEngine);	
+		get("/", (request, response) -> { 
+			
+			response.redirect("/home");
+			
+			return null;
+		});
+		get("/home", homeController::renderizarVista, templateEngine);
 		get("/login", loginController::renderizarVista, templateEngine);
 		post("/login", loginController::login);
 		post("/logout", loginController::logout);
