@@ -38,7 +38,7 @@
                     <div style="border: 1px solid; border-radius: 4px; margin-bottom: 3px">
                         <label style="margin-left:5px">{{mes}} {{consumo}} KWh </label>
                         <span style="float:right">
-                            <a class="badge badge-primary" href="/dispositivos?periodo={{periodo}}" style="margin-top:7px; margin-right:5px;">
+                            <a class="badge badge-primary" href= {{#if esAdministrador}} /clientes/{{idCliente}}/dispositivos?periodo={{mesAnio}} {{else}} /dispositivos?periodo={{mesAnio}} {{/if}} style="margin-top:7px; margin-right:5px;">
                                 Ver detalle
                             </a>
                         </span>
