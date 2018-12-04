@@ -1,15 +1,52 @@
 {{#partial "contenido-administrador"}}
-<div class="container" style="overflow-y:auto; height:80%;">
-    <form>
-        <label style="display:block"><b>Mes a recomendar</b></label>
-        <input type="month" name="periodo" value={{periodo}} required />
-        <button class="btn btn-info"> Recomendarr </button>
-    </form>
+
+<div class="container" style="overflow-y:auto; height:80%; margin-top:20px"">
+
+    <div>
+        <form>
+            <label style="display:block">Consultar consumo para el mes:</label>
+            <input type="month" name="periodo" value={{periodo}} required />
+            <button class="btn btn-info btn-sm" style="margin-bottom:5px"> Consultar </button>
+        </form>
+    </div>
+    <div>
+    	{{#if transformadores}}
+        <table style="width:100%" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Cantidad de clientes conectados</th>
+                    <th scope="col">Consumo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transformadores}}
+                <tr>
+                    {{#with transformador}}
+                        <td>{{id}}</td>
+                        <td>{{nombre}}</td>
+                    {{/with}}
+                    <td>{{cantidadClientesConectados}}</td>
+                    <td>{{consumo}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+	    {{else}}
+	    	<div class="alert alert-info" role="alert" style="width:100%">
+	        	<span>No se encuentran transformadores</span>
+	    	</div>
+	    {{/if}}
+    </div>
+    
 </div>
+
 <script>
     $(document).ready(function () {
         $('#transformadores-tab').tab('show');
     });
 </script>
-{{/partial}}
+
+{{/partial}} 
 {{>layouts/layoutAdministrador.hbs}}

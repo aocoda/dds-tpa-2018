@@ -30,4 +30,9 @@ public class TransformadorVM {
 		
 		return transformador.consumoDe(periodo, clientes, transformadores);
 	}
+
+	public Transformador getTransformador() {
+		
+		return transformador;
+	}
 }

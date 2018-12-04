@@ -12,6 +12,7 @@
         </form>
     </div>
     <div>
+    	{{#if recomendaciones}}
         <table style="width:100%" class="table table-striped">
             <thead>
                 <tr>
@@ -43,6 +44,11 @@
             <span>Su consumo: {{consumoTotal}} no fue eficiente</span>
         </div>
         {{/if}}
+       	{{else}}
+	    	<div class="alert alert-info" role="alert" style="width:100%">
+	        	<span>No se encuentran dispositivos</span>
+	    	</div>
+	    {{/if}}
     </div>
 </div>
 <script>
