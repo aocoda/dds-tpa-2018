@@ -49,7 +49,7 @@ public class Cliente extends Usuario {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private List<DispositivoEstandar> dispositivosEstandar;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "cliente_id")
 	private List<DispositivoInteligente> dispositivosInteligentes;
 	@OneToMany(cascade = CascadeType.ALL)
