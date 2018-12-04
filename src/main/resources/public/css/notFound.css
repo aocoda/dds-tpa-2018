@@ -36,7 +36,7 @@ body {
   display: inline-block;
   width: 140px;
   height: 140px;
-  background-image: url('https://cdn1.iconfinder.com/data/icons/emoticon-set-volume-4/512/emoticon-60-512.png');
+  background-image: url('/imagenes/computer.png');
   background-size: cover;
 }
 
