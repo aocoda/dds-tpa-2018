@@ -276,4 +276,19 @@ public class Cliente extends Usuario {
 		
 		apagadoAutomaticoActivado = !apagadoAutomaticoActivado;
 	}
+
+	public String getTelefono() {
+		
+		return telefono;
+	}
+
+	public String getDomicilio() {
+		
+		return domicilio;
+	}
+
+	public int getPuntos() {
+		
+		return puntos;
+	}
 }

@@ -3,32 +3,36 @@
 <link href="slider.css" rel="stylesheet">
 
 <div class="container" style="overflow-y:auto; height:100%">
+<p><h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4></p>
     <div class="form-row">
         <div class="form-group col-md-6">
             <div class="card">
                 <div class="card-header" id="datosGenerales">
                     <h5 class="mb-0">Datos Generales</h5>
                 </div>
-                <div id="cuerpoDatosGenerales" aria-labelledby="datosGenerales" style="height:40%">
+                <div id="cuerpoDatosGenerales" aria-labelledby="datosGenerales" style="height:42%">
                     <div class="card-body ">
                         <div class="container">
                             {{#with cliente}}
                                 <div style="margin-bottom: 5%">
-                                    <label>N�mero de cliente: {{idCliente}} </label>
+                                    <label>Numero de cliente: {{idCliente}} </label>
                                 </div>
                                 <div style="margin-bottom: 5%">
-                                    <label>Nombre Completo: {{nombreCliente}} </label>
+                                    <label>Nombre completo: {{nombreCliente}} </label>
+                                </div>
+                                <div style="margin-bottom: 5%">
+                                    <label>Tipo y numero de documento: {{tipoDocumento}} - {{numeroDocumento}} </label>
                                 </div>
                                 <div style="margin-bottom: 5%">
                                     <label>Domicilio: {{domicilio}} </label>
                                 </div>
                                 <div style="margin-bottom: 5%">
-                                    <label>Categor�a: {{categoria}} </label>
+                                    <label>Telefono: {{telefono}} </label>
+                                </div>
+                                <div style="margin-bottom: 5%">
+                                    <label>Fecha de alta del servicio: {{fechaAltaServicio}} </label>
                                 </div>
                             {{/with}}
-                                <div style="margin-bottom: 5%">
-                                    <label>Transformador asociado: {{transformador}} </label>
-                                </div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +46,7 @@
                     </h5>
                 </div>
                 <div id="cuerpoEstadoHogar" aria-labelledby="estadoHogar">
-                    <div class="card-body" style="height:40%;">
+                    <div class="card-body" style="height:42%;">
                         <div class="container">
                             <div style="margin-bottom: 5%">
                                 <label>Cantidad de Dispositivos: {{cantidadDispositivos}} </label>
@@ -57,6 +61,19 @@
                             <div style="margin-bottom: 5%">
                                 <label>Cantidad de dispositivos inteligentes apagados: {{cantidadApagados}} </label>
                             </div>
+                            {{#with cliente}}
+                                 <div style="margin-bottom: 5%">
+                                    <label>Categoria: {{#if categoria}} {{categoria}} {{else}} Sin asignar, solicite recategorizacion {{/if}}</label>
+                                </div>
+                            {{/with}}
+                            <div style="margin-bottom: 5%">
+                            	<label>Transformador asociado: {{transformador}} </label>
+                            </div>
+                            {{#with cliente}}
+                            	<div style="margin-bottom: 5%">
+                                    <label>Eco-Puntos acumulados: {{puntos}}</label>
+                                </div>
+                            {{/with}}
                         </div>
                     </div>
                 </div>
@@ -64,7 +81,7 @@
         </div>
     </div>
     <div class="form-row">
-        <h5 style="margin-left:1%">Apagado autom�tico activado: </h5>
+        <h5 style="margin-left:1%">Apagado automatico activado: </h5>
         <form action="/apagadoAutomatico" method="post">
             <label class="switch" style="margin-left: 10%">
                 <input type="checkbox" onClick="this.form.submit()" {{#if apagadoAutomaticoActivado}} checked {{/if}}/>

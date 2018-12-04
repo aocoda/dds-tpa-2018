@@ -1,15 +1,15 @@
 {{#partial "contenido-cliente"}}
 
 <div class="container" style="overflow-y:auto; height:80%;">
+    
     <p><h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4></p>
-    <div style="display:inline-block">
+    
         <div class="float-right">
-            <a href="{{url_formulario_dispositivoNuevo}}" class="btn btn-info btn-sm" style="margin-bottom:10px; ">Agregar
-                Dispositivo</a>
+            <a href="{{url_formulario_dispositivoNuevo}}" class="btn btn-info btn-sm" style="margin-bottom:10px; ">Agregar Dispositivo</a>
         </div>
         <div>
             <form>
-                <label style="display:block">Buscar Mes espec�fico</label>
+                <label style="display:block">Buscar mes especifico</label>
                 <input type="month" name="periodo" value={{periodo}} required />
                 <button class="btn btn-info btn-sm" style="margin-bottom:5px"> Consultar </button>
             </form>
@@ -19,10 +19,10 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Nombre Generico</th>
-                    <th scope="col">Estado Actual</th>
-                    <th scope="col">Horas de Uso</th>
-                    <th scope="col">Consumo Por Hora</th>
+                    <th scope="col">Nombre generico</th>
+                    <th scope="col">Estado actual</th>
+                    <th scope="col">Horas de uso</th>
+                    <th scope="col">Consumo por hora</th>
                     <th scope="col">Consumo</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -34,11 +34,11 @@
                     <td>{{id}}</td>
                     <td>{{nombreGenerico}}</td>
                     {{#with dispositivo}}
-                    {{#if estadoActual}}
-                    <td>{{estadoActual}}</td>
-                    {{else}}
-                    <td>No aplica</td>
-                    {{/if}}
+                    	{{#if estadoActual}}
+                    		<td>{{estadoActual}}</td>
+                    	{{else}}
+                    		<td>No aplica</td>
+                    	{{/if}}
                     {{/with}}
                     <td>{{horasDeUso}}</td>
                     <td>{{consumoPorHora}}</td>
@@ -62,7 +62,7 @@
                 Total de consumo: {{consumoTotal}} KWh
             </label>
         </div>
-    </div>
+    
 </div>
 <script>
     $(document).ready(function () {
