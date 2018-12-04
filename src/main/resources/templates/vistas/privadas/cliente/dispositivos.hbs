@@ -1,10 +1,11 @@
 {{#partial "contenido-cliente"}}
 
-<div class="container" style="overflow-y:auto; height:80%">
-    <h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4>
+<div class="container" style="overflow-y:auto; height:80%;">
+    <p><h4 style="padding-bottom: 15px; display:block">{{idCliente}} - {{nombreCliente}}</h4></p>
     <div style="display:inline-block">
         <div class="float-right">
-            <a href="{{url_formulario_dispositivoNuevo}}" class="btn btn-info btn-sm" style="margin-bottom:10px; ">Agregar Dispositivo</a>
+            <a href="{{url_formulario_dispositivoNuevo}}" class="btn btn-info btn-sm" style="margin-bottom:10px; ">Agregar
+                Dispositivo</a>
         </div>
         <div>
             <form>
@@ -18,7 +19,7 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col" >Nombre Generico</th>
+                    <th scope="col">Nombre Generico</th>
                     <th scope="col">Estado Actual</th>
                     <th scope="col">Horas de Uso</th>
                     <th scope="col">Consumo Por Hora</th>
@@ -30,15 +31,15 @@
             <tbody>
                 {{#each dispositivos}}
                 <tr>
-                	<td>{{id}}</td>
-                   	<td>{{nombreGenerico}}</td>
-                	{{#with dispositivo}}
-                    	{{#if estadoActual}}
-							<td>{{estadoActual}}</td>
-						{{else}}
-                            <td>No aplica</td>
-						{{/if}}
-                	{{/with}}
+                    <td>{{id}}</td>
+                    <td>{{nombreGenerico}}</td>
+                    {{#with dispositivo}}
+                    {{#if estadoActual}}
+                    <td>{{estadoActual}}</td>
+                    {{else}}
+                    <td>No aplica</td>
+                    {{/if}}
+                    {{/with}}
                     <td>{{horasDeUso}}</td>
                     <td>{{consumoPorHora}}</td>
                     <td>{{consumo}}</td>
@@ -54,13 +55,13 @@
                     </td>
                 </tr>
                 {{/each}}
-                <tr style="text-align:right">
-                    <label>
-                        Total de consumo: {{consumoTotal}} KWh
-                    </label>
-                </tr>
             </tbody>
         </table>
+        <div class="float-right">
+            <label>
+                Total de consumo: {{consumoTotal}} KWh
+            </label>
+        </div>
     </div>
 </div>
 <script>
