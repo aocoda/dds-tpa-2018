@@ -12,9 +12,9 @@
 			<property name="hibernate.archive.autodetection" value="class" />
 
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/prueba" />
-			<property name="hibernate.connection.username" value="root" />
-			<property name="hibernate.connection.password" value="jug4t3l4" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-iron-east-01.cleardb.net/heroku_b9f9c70858e31d6?reconnect=true" />
+			<property name="hibernate.connection.username" value="bc7902d457b925" />
+			<property name="hibernate.connection.password" value="d7eea455" />
 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
@@ -24,4 +24,4 @@
 
 	</persistence-unit>
 
-</persistence> 
+</persistence>
