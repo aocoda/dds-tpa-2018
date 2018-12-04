@@ -2,6 +2,7 @@ package web.controllers.privados.cliente;
 
 import java.util.Map;
 
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
@@ -14,7 +15,7 @@ import repositorios.RepositorioUsuarios;
 import spark.Request;
 import spark.Response;
 
-public class PerfilController extends VistaClienteController implements TransactionalOps, WithGlobalEntityManager {
+public class PerfilController extends VistaClienteController implements WithGlobalEntityManager, TransactionalOps {
 
 	private RepositorioTransformadores repositorioTransformadores;
 
@@ -55,7 +56,7 @@ public class PerfilController extends VistaClienteController implements Transact
 		
 		withTransaction(() -> cliente.permutarApagadoAutomatico());
 		
-		entityManager().close();
+		PerThreadEntityManagers.closeEntityManager();
 		
 		response.redirect("/perfil");
 		

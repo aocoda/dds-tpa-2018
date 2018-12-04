@@ -2,6 +2,7 @@ package web.controllers.privados.cliente;
 
 import java.util.Map;
 
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
@@ -14,7 +15,7 @@ import spark.Request;
 import spark.Response;
 
 
-public class DispositivoNuevoController extends VistaClienteController implements TransactionalOps, WithGlobalEntityManager {
+public class DispositivoNuevoController extends VistaClienteController implements WithGlobalEntityManager, TransactionalOps{
 
 	public DispositivoNuevoController(RepositorioUsuarios repositorioUsuarios, RepositorioClientes repositorioClientes) {
 		
@@ -29,24 +30,23 @@ public class DispositivoNuevoController extends VistaClienteController implement
 		double horasDeUsoMinimo = Double.parseDouble(request.queryParams("horasDeUsoMinimo"));
 		double horasDeUsoMaximo = Double.parseDouble(request.queryParams("horasDeUsoMaximo"));
 		
-		
 		Cliente cliente = getCliente(request);
 			
-		withTransaction(() -> {
-
-			if (tipoDispositivo.equals("dispositivoInteligente")) {
+		withTransaction( () -> {
 			
+			if (tipoDispositivo.equals("dispositivoInteligente")) {
+				
 				cliente.registrarDispositivo(new DispositivoInteligente(nombreGenerico, consumoPorHora, horasDeUsoMinimo, horasDeUsoMaximo));
-			}
+			} 
 			else {
-
+				
 				double horasEstimadasDeUsoPorDia = Double.parseDouble(request.queryParams("horasEstimadasDeUsoPorDia"));
 				
-				cliente.registrarDispositivo(new DispositivoEstandar(nombreGenerico, consumoPorHora, horasEstimadasDeUsoPorDia, horasDeUsoMinimo, horasDeUsoMaximo));
+				cliente.registrarDispositivo(new DispositivoEstandar(nombreGenerico, consumoPorHora,horasEstimadasDeUsoPorDia, horasDeUsoMinimo, horasDeUsoMaximo));
 			}
 		});
-
-		entityManager().close();
+		
+		PerThreadEntityManagers.closeEntityManager();
 		
 		response.redirect(request.uri());
 
