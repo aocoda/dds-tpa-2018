@@ -21,7 +21,6 @@ public class BuscadorUsuarios {
 		
 		return Optional
 				.ofNullable(posibleNombreUsuario)
-				.map(nombreUsuario -> repositorioUsuarios.getPorNombreDeUsuario(nombreUsuario))
-				.orElse(Optional.empty());
+				.flatMap(nombreUsuario -> repositorioUsuarios.getPorNombreDeUsuario(nombreUsuario));
 	}
 }
