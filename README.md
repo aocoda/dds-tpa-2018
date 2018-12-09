@@ -2,12 +2,12 @@
 
 ## TP Diseño de Sistemas - Sistema de Gestion Energetica
 
-**> Curso: K3153**
-**> Grupo: 3**
-**> Profesor: Prieto, Gaston**
-**> Ayudante: Caputo, Rodolfo**
+* Curso: K3153
+* Grupo: 3
+* Profesor: Prieto, Gaston
+* Ayudante: Caputo, Rodolfo
 
-Integrantes:
+## Integrantes:
 
 * Gallici, German - 153.091-4
 * Coda, Agustin - 155.974-6
