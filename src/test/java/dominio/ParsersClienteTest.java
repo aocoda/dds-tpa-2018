@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import dominio.dispositivos.*;
 import dominio.dispositivos.inteligentes.EstadoDispositivo;
@@ -18,7 +20,7 @@ import dominio.importadorJson.parser.ParserJson;
 import dominio.importadorJson.parser.cliente.ParserClientes;
 import repositorios.RepositorioCategorias;
 
-public class ParsersClienteTest {
+public class ParsersClienteTest implements WithGlobalEntityManager, TransactionalOps {
 
 	private RepositorioCategorias repositorioCategorias = new RepositorioCategorias();	
 	private ParserJson<Cliente> parserClientes = new ParserClientes(repositorioCategorias);
@@ -83,19 +85,17 @@ public class ParsersClienteTest {
 		assertThat(parserClientes.parsear(clienteTest).getCategoria()).isEqualTo(null);
 	}
 	
-// Se deberia haber mockeado el repositorio para que trabaje en memoria
-	
-//	@Test
-//	public void SiElJsonTieneUnaCategoriaQueSiExisteEnElRepositorio_SeCreaUnClienteConEsaCategoria() {
-//		
-//		String clienteTest = "{ \"categoria\": \"R1\" }";
-//		
-//		Categoria R1 = new Categoria(TipoCategoria.R1, 0, 0, 0, 0);
-//		
-//		repositorioCategorias.agregar(R1);
-//		
-//		assertThat(parserClientes.parsear(clienteTest).getCategoria()).isEqualTo(R1);
-//	}
+	@Test
+	public void SiElJsonTieneUnaCategoriaQueSiExisteEnElRepositorio_SeCreaUnClienteConEsaCategoria() {
+		
+		String clienteTest = "{ \"categoria\": \"R1\" }";
+		
+		Categoria R1 = new Categoria(TipoCategoria.R1, 0, 0, 0, 0);
+		
+		withTransaction(() -> repositorioCategorias.agregar(R1));
+		
+		assertThat(parserClientes.parsear(clienteTest).getCategoria()).isEqualTo(R1);
+	}
 	
 	@Test
 	public void SiElJsonTieneUnaFechaDeAltaValida_SeCreaUnClienteConEsaFecha() {
